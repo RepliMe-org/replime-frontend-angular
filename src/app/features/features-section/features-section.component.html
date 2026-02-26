@@ -1,0 +1,32 @@
+<div class="section-container">
+  <div class="text-center mb-16">
+    <h2 class="section-title">
+      Everything You Need to <span class="gradient-text">Connect</span>
+    </h2>
+
+    <p class="section-description">
+      RepliMe bridges the gap between content consumption and real interaction,
+      creating meaningful connections at scale.
+    </p>
+  </div>
+
+  <div
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch"
+  >
+    <app-card *ngFor="let feature of features" variant="feature">
+      <div class="flex flex-col gap-3">
+        <div class="icon-box">
+          <i class="fa-solid text-cyan" [ngClass]="feature.icon"></i>
+        </div>
+
+        <h3 class="text-md font-semibold">
+          {{ feature.title }}
+        </h3>
+
+        <p class="text-subtle-text text-sm">
+          {{ feature.description }}
+        </p>
+      </div>
+    </app-card>
+  </div>
+</div>

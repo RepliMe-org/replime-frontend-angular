@@ -1,0 +1,22 @@
+<div class="login-page">
+  <app-card class="login-card">
+
+    <app-button variant="glass" size="lg" (click)="loginWithGoogle()">
+      <i class="fa-brands fa-google"></i>
+      Continue with Google
+    </app-button>
+
+    <div class="divider">
+      <span class="divider-line"></span>
+      <span class="divider-label">
+        OR
+      </span>
+    </div>
+
+    <app-auth-form
+      [isLoading]="isLoading"
+      (formSubmit)="onFormSubmit($event)"
+    />
+
+  </app-card>
+</div>

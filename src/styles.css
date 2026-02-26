@@ -1,0 +1,168 @@
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+  @import "@fortawesome/fontawesome-free/css/all.min.css";
+
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+
+  @layer base {
+    :root {
+      --page-bg: #070a13;
+      --page-bg-rgb: 7 10 19;
+      --page-text: #f8fafc;
+      --page-text-rgb: 248 250 252;
+
+      --card-bg: #0b111e;
+      --card-bg-rgb: 11 17 30;
+      --card-text: #f8fafc;
+      --card-text-rgb: 248 250 252;
+
+      --dropdown-bg: #0b111e;
+      --dropdown-bg-rgb: 11 17 30;
+      --dropdown-text: #f8fafc;
+      --dropdown-text-rgb: 248 250 252;
+
+      --cyan: #21d5ed;
+      --cyan-rgb: 33 213 237;
+      --cyan-text: #070a13;
+      --cyan-text-rgb: 7 10 19;
+
+      --purple: #7c3bed;
+      --purple-rgb: 124 59 237;
+      --purple-text: #f8fafc;
+      --purple-text-rgb: 248 250 252;
+
+      --subtle-bg: #1b2232;
+      --subtle-bg-rgb: 27 34 50;
+      --subtle-text: #7588a3;
+      --subtle-text-rgb: 117 136 163;
+
+      --danger: #ef4343;
+      --danger-rgb: 239 67 67;
+      --danger-text: #f8fafc;
+      --danger-text-rgb: 248 250 252;
+
+      --border-color: #20283c;
+      --border-color-rgb: 32 40 60;
+      --input-bg: #1b2232;
+      --input-bg-rgb: 27 34 50;
+      --input-border-color: #3b82f6;
+      --input-border-color-rgb: 32 40 60;
+      --focus-ring: #21d5ed;
+      --focus-ring-rgb: 33 213 237;
+
+      --radius: 0.75rem;
+
+      --sidebar-bg: #080c16;
+      --sidebar-bg-rgb: 8 12 22;
+      --sidebar-text: #f8fafc;
+      --sidebar-text-rgb: 248 250 252;
+      --sidebar-cyan: #21d5ed;
+      --sidebar-cyan-rgb: 33 213 237;
+      --sidebar-cyan-text: #070a13;
+      --sidebar-cyan-text-rgb: 7 10 19;
+      --sidebar-subtle-bg: #1b2232;
+      --sidebar-subtle-bg-rgb: 27 34 50;
+      --sidebar-subtle-text: #f8fafc;
+      --sidebar-subtle-text-rgb: 248 250 252;
+      --sidebar-border: #20283c;
+      --sidebar-border-rgb: 32 40 60;
+      --sidebar-ring: #21d5ed;
+      --sidebar-ring-rgb: 33 213 237;
+
+      --gradient-primary: linear-gradient(135deg, #21d5ed 0%, #7c3bed 100%);
+      --gradient-hero: linear-gradient(135deg, #070a13 0%, #211339 50%, #070a13 100%);
+      --gradient-card: linear-gradient(135deg, rgba(14, 21, 37, 0.8) 0%, rgba(11, 17, 30, 0.6) 100%);
+      --gradient-glow: radial-gradient(ellipse at center, rgba(33, 213, 237, 0.15) 0%, transparent 70%);
+
+      --shadow-glow: 0 0 60px rgba(33, 213, 237, 0.2);
+      --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.3);
+      --shadow-elevated: 0 20px 60px rgba(0, 0, 0, 0.4);
+
+      --glass-background: rgba(14, 21, 37, 0.6);
+      --glass-border: rgba(45, 56, 83, 0.5);
+    }
+
+    .dark {
+      --page-bg: #070a13;
+      --page-text: #f8fafc;
+    }
+
+    * {
+      @apply border-border-color;
+    }
+
+    body {
+      @apply bg-page-bg text-page-text antialiased;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+  }
+
+  @layer components {
+    .glass-card {
+      background: var(--glass-background);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-card);
+    }
+
+    .gradient-text {
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    input {
+      @apply h-11 px-4 text-sm bg-input-bg border-border-color text-page-text placeholder-subtle-text focus:border-border-color w-full rounded-[8px] transition-all duration-300 outline-none border border-solid border-[#ddd] focus:ring-2 focus:ring-focus-ring/40;
+    }
+
+    .hero-gradient {
+      background: var(--gradient-hero);
+    }
+
+    .sidebar {
+      @apply bg-sidebar-bg text-sidebar-text w-60 min-h-screen border-r border-sidebar-border p-4;
+    }
+
+    .sidebar-item {
+      @apply px-3 py-2.5 rounded-lg cursor-pointer transition-colors duration-200;
+    }
+
+    .sidebar-item:hover {
+      @apply bg-sidebar-subtle-bg;
+    }
+
+    .sidebar-item.active {
+      @apply bg-sidebar-cyan text-sidebar-cyan-text;
+    }
+
+    .animate-fade-up {
+      animation: fade-up 0.6s ease-out forwards;
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--subtle-bg);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+    transition: background 0.2s ease;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--subtle-text);
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-color) var(--subtle-bg);
+  }

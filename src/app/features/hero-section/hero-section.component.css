@@ -1,0 +1,39 @@
+.hero-section {
+    @apply relative min-h-screen flex items-center justify-center overflow-hidden;
+}
+
+.hero-container {
+    @apply container mx-auto px-4 relative z-10;
+}
+
+.hero-content {
+    @apply max-w-4xl mx-auto text-center;
+}
+
+.hero-badge {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8;
+}
+
+.hero-title {
+    @apply text-4xl sm:text-5xl md:text-7xl font-bold mb-6;
+}
+
+.hero-description {
+    @apply text-lg sm:text-xl text-subtle-text max-w-2xl mx-auto mb-10 text-balance;
+}
+
+.hero-actions {
+    @apply flex flex-col sm:flex-row items-center justify-center gap-4;
+}
+
+.hero-stats {
+    @apply grid grid-cols-3 gap-8 mt-16 max-w-lg mx-auto;
+}
+
+.hero-stat-number {
+    @apply text-2xl sm:text-3xl font-bold;
+}
+
+.hero-stat-label {
+    @apply text-sm text-subtle-text;
+}

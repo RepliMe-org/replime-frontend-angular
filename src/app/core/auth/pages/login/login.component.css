@@ -1,0 +1,19 @@
+.login-page {
+  @apply min-h-screen flex items-center justify-center px-6;
+}
+
+.login-card {
+  @apply w-full max-w-2xl p-10;
+}
+
+.divider {
+  @apply relative mt-10;
+}
+
+.divider-line {
+  @apply flex w-full border-b border-border-color mb-6;
+}
+
+.divider-label {
+  @apply absolute -top-[13px] left-1/2 -translate-x-1/2 bg-page-bg text-subtle-text px-4;
+}
