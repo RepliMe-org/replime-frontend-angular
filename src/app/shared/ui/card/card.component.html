@@ -1,0 +1,9 @@
+<div
+  [ngClass]="{
+    'bg-card-bg h-full border border-border-color/50 rounded-2xl p-6 transition-all': true,
+    'hover:scale-105 hover:shadow-lg': variant === 'creator' || variant === 'feature',
+    'text-center bg-gradient-to-r from-cyan to-purple text-white p-10': variant === 'cta'
+  }"
+>
+  <ng-content></ng-content>
+</div>

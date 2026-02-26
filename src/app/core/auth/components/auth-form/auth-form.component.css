@@ -1,0 +1,43 @@
+.message {
+  @apply mb-4 p-3 rounded text-sm border;
+}
+
+.message-success {
+  @apply bg-green-500/10 border-green-500 text-green-500;
+}
+
+.message-error {
+  @apply bg-red-500/10 border-red-500 text-red-500;
+}
+
+.form-group {
+  @apply mb-4;
+}
+
+.form-label {
+  @apply text-base font-medium text-page-text block mb-1;
+}
+
+.input-wrapper {
+  @apply relative mb-1;
+}
+
+.input-icon {
+  @apply absolute left-3 top-1/2 -translate-y-1/2 text-subtle-text text-sm pointer-events-none;
+}
+
+.input-error {
+  @apply border-red-500;
+}
+
+.validation-error {
+  @apply text-red-500 text-xs mt-1 block mb-3;
+}
+
+.switch-text {
+  @apply text-center mt-6 text-subtle-text text-sm;
+}
+
+.switch-btn {
+  @apply text-blue-500 hover:underline ml-1;
+}

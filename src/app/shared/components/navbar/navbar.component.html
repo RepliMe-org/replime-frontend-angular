@@ -1,0 +1,66 @@
+<nav class="navbar glass-card">
+  <div class="navbar-container">
+    <div class="navbar-content">
+      <div class="navbar-logo gradient-text">
+        <i class="fa-solid fa-message"></i>
+        RepliMe
+      </div>
+      <div class="navbar-links">
+        <a class="navbar-link">
+          <app-button variant="ghost" size="sm">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            Explore
+          </app-button>
+        </a>
+        <a class="navbar-link">
+          <app-button variant="ghost" size="sm">
+            <i class="material-icons"></i>
+            Creator Dashboard
+          </app-button>
+        </a>
+      </div>
+
+      <a *ngIf="!isAuthenticated" class="navbar-link" routerLink="auth">
+        <app-button variant="default" size="default">
+          <span class="text-cyan-text"> Get Started </span>
+        </app-button>
+      </a>
+
+      <div *ngIf="isAuthenticated">
+        <button class="user-menu-button" (click)="toggleUserMenu()">
+          <div class="user-avatar">
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <span class="username">{{ username }}</span>
+          <i
+            class="fa-solid fa-chevron-down chevron-icon"
+            [class.rotate]="showUserMenu"
+          ></i>
+        </button>
+
+        <div
+          *ngIf="showUserMenu"
+          class="user-dropdown glass-card"
+          (click)="$event.stopPropagation()"
+        >
+          <div class="dropdown-header">
+            <div class="dropdown-username">{{ username }}</div>
+            <div class="dropdown-role">{{ role }}</div>
+          </div>
+
+          <div class="dropdown-divider"></div>
+
+          <button
+            class="dropdown-item logout"
+            (click)="logout(); $event.stopPropagation()"
+          >
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div *ngIf="showUserMenu" class="menu-backdrop" (click)="closeUserMenu()"></div>

@@ -1,0 +1,46 @@
+.btn {
+      @apply flex w-full items-center justify-center rounded-lg font-medium transition-all duration-300 gap-2 disabled:opacity-50;
+    }
+    .btn-default {
+      @apply bg-gradient-to-r from-cyan to-purple text-white;
+    }
+
+    .btn-active {
+      @apply bg-cyan text-cyan-text hover:bg-cyan/90;
+    }
+
+    .btn-danger {
+      @apply bg-red-500 text-white hover:bg-red-600;
+    }
+
+    .btn-outline {
+      @apply border border-border-color bg-transparent hover:bg-subtle-bg;
+    }
+
+    .btn-ghost {
+      @apply hover:bg-subtle-bg;
+    }
+
+    .btn-glass {
+      @apply glass-card text-page-text hover:bg-subtle-bg/80 border border-border-color/50;
+    }
+
+    .btn-default-size {
+      @apply h-10 px-4 py-2;
+    }
+
+    .btn-sm {
+      @apply h-9 rounded-md px-3;
+    }
+
+    .btn-lg {
+      @apply h-12 rounded-xl px-8 text-base;
+    }
+
+    .btn-xl {
+      @apply h-14 rounded-xl px-10 text-lg;
+    }
+
+    .btn-icon {
+      @apply h-10 w-10;
+    }

@@ -1,0 +1,104 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+
+  <!-- <div *ngIf="errorMessage" class="message message-error">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="successMessage" class="message message-success">
+    {{ successMessage }}
+  </div> -->
+
+  <div class="mb-6">
+
+    <div *ngIf="!isLoginMode" class="form-group">
+      <label class="form-label">Name</label>
+      <div class="input-wrapper">
+        <i class="fa fa-user input-icon"></i>
+        <input
+          type="text"
+          formControlName="name"
+          placeholder="Your name"
+          class="pl-9"
+          [class.input-error]="form.get('name')?.invalid && form.get('name')?.touched"
+        />
+      </div>
+      <span
+        *ngIf="form.get('name')?.invalid && form.get('name')?.touched"
+        class="validation-error"
+      >
+        Name is required
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Email</label>
+      <div class="input-wrapper">
+        <i class="fa fa-envelope input-icon"></i>
+        <input
+          type="email"
+          formControlName="email"
+          placeholder="you@gmail.com"
+          class="pl-9"
+          [class.input-error]="form.get('email')?.invalid && form.get('email')?.touched"
+        />
+      </div>
+      <span
+        *ngIf="form.get('email')?.invalid && form.get('email')?.touched"
+        class="validation-error"
+      >
+        Valid email is required
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Password</label>
+      <div class="input-wrapper">
+        <i class="fa fa-lock input-icon"></i>
+        <input
+          type="password"
+          formControlName="password"
+          placeholder="Password"
+          class="pl-9"
+          [class.input-error]="form.get('password')?.invalid && form.get('password')?.touched"
+        />
+      </div>
+      <span
+        *ngIf="form.get('password')?.invalid && form.get('password')?.touched"
+        class="validation-error"
+      >
+        Password must be at least 6 characters
+      </span>
+    </div>
+
+  </div>
+
+  <app-button
+    type="submit"
+    class="w-full mt-6"
+    variant="default"
+    size="lg"
+    [disabled]="isLoading"
+  >
+    <span class="text-cyan-text">
+      <i *ngIf="isLoading" class="fa fa-spinner fa-spin mr-2"></i>
+      {{ isLoading ? "Loading..." : isLoginMode ? "Login" : "Sign Up" }}
+    </span>
+  </app-button>
+
+  <div class="switch-text">
+    <span *ngIf="isLoginMode">
+      Don't have an account?
+      <button type="button" (click)="toggleMode()" class="switch-btn">
+        Sign up
+      </button>
+    </span>
+
+    <span *ngIf="!isLoginMode">
+      Already have an account?
+      <button type="button" (click)="toggleMode()" class="switch-btn">
+        Login
+      </button>
+    </span>
+  </div>
+
+</form>
