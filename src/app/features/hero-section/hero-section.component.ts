@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { ButtonComponent } from '../../shared/ui/button/button.component';
+import { SHARED_IMPORTS } from '../../shared/shared-imports';
 
 @Component({
   selector: 'app-hero-section',
   standalone: true,
-  imports: [ButtonComponent],
+  imports: [...SHARED_IMPORTS],
   templateUrl: './hero-section.component.html',
   styleUrl: './hero-section.component.css'
 })

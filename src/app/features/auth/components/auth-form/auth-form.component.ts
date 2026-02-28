@@ -1,15 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { ButtonComponent } from '../../../../shared/ui/button/button.component';
-import { InputComponent } from '../../../../shared/ui/input/input.component';
 import { AuthFormSubmitEvent } from '../../../../core/models/auth.model';
+import { SHARED_IMPORTS } from '../../../../shared/shared-imports';
 
 
 @Component({
   selector: 'app-auth-form',
   standalone: true,
-  imports: [ButtonComponent, InputComponent, CommonModule, ReactiveFormsModule],
+  imports: [...SHARED_IMPORTS],
   templateUrl: './auth-form.component.html',
   styleUrl: './auth-form.component.css',
 })
