@@ -30,9 +30,7 @@ export class LoginComponent {
     if (isLoginMode) {
       this.authService.login({ email, password }).subscribe({
         next: (response) => {
-          this.authService.saveAuthData(response);
-          this.isLoading = false;
-          this.router.navigate(['/']);
+          this.handleOnAuthSuccess(response);
         },
         error: (err) => {
           // TODO: create reusable toast for handling errors/success
@@ -42,15 +40,19 @@ export class LoginComponent {
     } else {
       this.authService.signup({ name: name!, email, password }).subscribe({
         next: (response) => {
-          this.authService.saveAuthData(response);
-          this.isLoading = false;
-          this.router.navigate(['/']);
+          this.handleOnAuthSuccess(response);
         },
         error: (err) => {
           this.isLoading = false;
         },
       });
     }
+  }
+
+  handleOnAuthSuccess(response : any) {
+    this.authService.saveAuthData(response);
+    this.isLoading = false;
+    this.router.navigate(['/']);
   }
 
   loginWithGoogle() {
