@@ -3,7 +3,7 @@ import { ButtonComponent } from '../../ui/button/button.component';
 import { Router, RouterLink, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { filter, Subscription } from 'rxjs';
-import { AuthService } from '../../../core/auth/services/auth.service';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-navbar',

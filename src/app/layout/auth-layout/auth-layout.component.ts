@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoginComponent } from '../../auth/pages/login/login.component';
+import { LoginComponent } from '../../features/auth/pages/login/login.component';
 
 @Component({
   selector: 'app-auth-layout',

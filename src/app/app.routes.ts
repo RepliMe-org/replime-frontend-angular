@@ -4,7 +4,7 @@ export const routes: Routes = [
    {
     path: '',
     loadComponent: () =>
-      import('./core/layout/public-layout/public-layout.component')
+      import('./layout/public-layout/public-layout.component')
         .then(m => m.PublicLayoutComponent),
     children: [
       {
@@ -18,7 +18,7 @@ export const routes: Routes = [
   {
     path: 'auth',
     loadComponent: () =>
-      import('./core/layout/auth-layout/auth-layout.component')
+      import('./layout/auth-layout/auth-layout.component')
         .then(m => m.AuthLayoutComponent)
   },
 ];

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../../../../shared/ui/button/button.component';
 import { InputComponent } from '../../../../shared/ui/input/input.component';
-import { AuthFormSubmitEvent } from '../../models/auth.model';
+import { AuthFormSubmitEvent } from '../../../../core/models/auth.model';
 
 
 @Component({
