@@ -1,0 +1,51 @@
+.verification-complete {
+    @apply max-w-lg mx-auto text-center;
+}
+
+.verification-complete-icon {
+    @apply w-24 h-24 mx-auto mb-8 rounded-2xl bg-green-500/20 flex items-center justify-center;
+}
+
+.verification-complete-icon-i {
+    @apply text-5xl text-green-500;
+}
+
+.verification-complete-title {
+    @apply text-3xl font-bold text-page-text mb-3;
+}
+
+.verification-complete-subtitle {
+    @apply text-subtle-text mb-10 max-w-sm mx-auto;
+}
+
+.verification-channel-card {
+    @apply flex items-center gap-3 mb-6 p-4 rounded-lg bg-green-500/10 border border-green-500/30;
+}
+
+.verification-channel-icon {
+    @apply w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center flex-shrink-0;
+}
+
+.verification-channel-icon-i {
+    @apply text-xl text-green-500;
+}
+
+.verification-channel-info {
+    @apply text-left flex-1;
+}
+
+.verification-channel-handle {
+    @apply text-sm font-semibold text-page-text;
+}
+
+.verification-channel-status {
+    @apply text-xs text-green-500 flex items-center gap-1;
+}
+
+.verification-complete-button {
+    @apply w-full;
+}
+
+.verification-complete-button-text {
+    @apply text-cyan-text;
+}

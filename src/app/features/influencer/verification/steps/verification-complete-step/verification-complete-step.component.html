@@ -1,0 +1,43 @@
+<div class="verification-complete">
+  <div class="verification-complete-icon">
+    <i class="fa-solid fa-circle-check verification-complete-icon-i"></i>
+  </div>
+
+  <h1 class="verification-complete-title">
+    <span class="gradient-text">Verification Complete!</span>
+  </h1>
+
+  <p class="verification-complete-subtitle">
+    Your YouTube channel has been successfully verified. You can now access all influencer features.
+  </p>
+
+  <app-card variant="default">
+    <div class="verification-channel-card">
+      <div class="verification-channel-icon">
+        <i class="fa-brands fa-youtube verification-channel-icon-i"></i>
+      </div>
+
+      <div class="verification-channel-info">
+        <p class="verification-channel-handle">
+          {{ channelHandle }}
+        </p>
+
+        <p class="verification-channel-status">
+          <i class="fa-solid fa-circle-check"></i>
+          Verified
+        </p>
+      </div>
+    </div>
+
+    <app-button
+      (click)="onGoToDashboardClick()"
+      class="verification-complete-button"
+      size="lg"
+    >
+      <i class="fa-solid fa-home verification-complete-button-text"></i>
+      <span class="verification-complete-button-text font-semibold">
+        Go to Dashboard
+      </span>
+    </app-button>
+  </app-card>
+</div>

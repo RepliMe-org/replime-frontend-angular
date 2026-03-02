@@ -75,4 +75,12 @@ export class AuthService {
       role: response.role,
     });
   }
+
+  updateUserRole(newRole: string): void {
+    const userInfo = this.getUserInfo();
+    if (userInfo) {
+      userInfo.role = newRole;
+      this.setUserInfo(userInfo);
+    }
+  }
 }

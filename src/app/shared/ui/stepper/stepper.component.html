@@ -1,0 +1,33 @@
+<div class="stepper">
+  <div
+    *ngFor="let step of steps; let i = index"
+    class="stepper-item"
+  >
+    <div
+      class="stepper-circle"
+      [ngClass]="{
+        'stepper-circle-completed': isStepCompleted(i),
+        'stepper-circle-active': isStepActive(i),
+        'stepper-circle-default': !isStepCompleted(i) && !isStepActive(i)
+      }"
+      (click)="onStepClick(i)"
+    >
+      <ng-container *ngIf="isStepCompleted(i); else stepNumber">
+        <i class="fa-solid fa-circle-check stepper-check-icon"></i>
+      </ng-container>
+
+      <ng-template #stepNumber>
+        {{ i + 1 }}
+      </ng-template>
+    </div>
+
+    <div
+      *ngIf="i < steps.length - 1"
+      class="stepper-line"
+      [ngClass]="{
+        'stepper-line-completed': isStepCompleted(i),
+        'stepper-line-default': !isStepCompleted(i)
+      }"
+    ></div>
+  </div>
+</div>

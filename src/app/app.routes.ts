@@ -12,6 +12,12 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/landing//home/home.component')
             .then(m => m.HomeComponent)
+      },
+      {
+        path: 'dashboard',
+        loadComponent: () =>
+          import('./features/influencer/influencer-dashboard/influencer-dashboard.component')
+            .then(m => m.InfluencerDashboardComponent)
       }
     ]
   },

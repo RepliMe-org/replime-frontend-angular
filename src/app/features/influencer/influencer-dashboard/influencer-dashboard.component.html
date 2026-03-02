@@ -1,0 +1,10 @@
+<app-verification-container *ngIf="!isInfluencer"></app-verification-container>
+
+<div *ngIf="isInfluencer" class="p-6">
+  <h1>
+    Welcome to Your Influencer Dashboard
+  </h1>
+  <p class="text-subtle-text">
+    Your channel has been verified! You can now access all influencer features.
+  </p>
+</div>

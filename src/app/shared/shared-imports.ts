@@ -6,7 +6,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { CardComponent } from './ui/card/card.component';
 import { ButtonComponent } from './ui/button/button.component';
-import { InputComponent } from './ui/input/input.component';
+import { StepperComponent } from './ui/stepper/stepper.component';
 
 export const SHARED_IMPORTS = [
   // Angular directives
@@ -26,5 +26,5 @@ export const SHARED_IMPORTS = [
   // UI
   CardComponent,
   ButtonComponent,
-  InputComponent,
+  StepperComponent
 ];
