@@ -1,10 +1,12 @@
 <nav class="navbar glass-card">
   <div class="navbar-container">
     <div class="navbar-content">
-      <div class="navbar-logo gradient-text">
-        <i class="fa-solid fa-message"></i>
-        RepliMe
-      </div>
+      <a routerLink="/">
+        <div class="navbar-logo gradient-text">
+          <i class="fa-solid fa-message"></i>
+          RepliMe
+        </div>
+      </a>
       <div class="navbar-links">
         <a class="navbar-link">
           <app-button variant="ghost" size="sm">
@@ -12,7 +14,7 @@
             Explore
           </app-button>
         </a>
-        <a class="navbar-link">
+        <a class="navbar-link" routerLink="dashboard">
           <app-button variant="ghost" size="sm">
             <i class="material-icons"></i>
             Creator Dashboard

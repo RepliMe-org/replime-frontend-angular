@@ -1,0 +1,23 @@
+.verification-container {
+    @apply flex flex-col items-center justify-start min-h-screen pt-28 pb-12 px-4;
+}
+
+.verification-container-stepper {
+    @apply mb-12;
+}
+
+.verification-error {
+    @apply max-w-lg w-full mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/30 flex items-start gap-3;
+}
+
+.verification-error-icon {
+    @apply text-red-500 mt-0.5;
+}
+
+.verification-error-text {
+    @apply text-sm text-red-500 flex-1;
+}
+
+.verification-error-close {
+    @apply text-red-500 hover:text-red-400 transition-colors;
+}

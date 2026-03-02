@@ -1,0 +1,58 @@
+<section class="verification-container">
+  
+  <app-stepper
+    [steps]="steps"
+    [activeStepIndex]="currentStep"
+    class="verification-container-stepper"
+  ></app-stepper>
+
+  <div *ngIf="errorMessage" class="verification-error">
+    <i class="fa-solid fa-circle-exclamation verification-error-icon"></i>
+
+    <p class="verification-error-text">
+      {{ errorMessage }}
+    </p>
+
+    <button
+      (click)="errorMessage = ''"
+      class="verification-error-close"
+    >
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+
+  <!-- Step 0 -->
+  <app-verify-channel-step
+    *ngIf="currentStep === 0"
+    [isLoading]="isLoading"
+    (channelSubmit)="onChannelSubmit($event)"
+  ></app-verify-channel-step>
+
+  <!-- Step 1 -->
+  <app-add-token-step
+    *ngIf="currentStep === 1"
+    [channelUrl]="channelUrl"
+    [verificationToken]="verificationToken"
+    [expirationDate]="expirationDate"
+    (tokenAdded)="onTokenAdded()"
+    (back)="onBack(0)"
+  ></app-add-token-step>
+
+  <!-- Step 2 -->
+  <app-ready-verify-step
+    *ngIf="currentStep === 2"
+    [channelUrl]="channelUrl"
+    [verificationToken]="verificationToken"
+    [isVerifying]="isVerifying"
+    (verify)="onVerificationStart()"
+    (back)="onBack(1)"
+    (startOver)="onStartOver()"
+  ></app-ready-verify-step>
+
+  <!-- Step 3 -->
+  <app-verification-complete-step
+    *ngIf="currentStep === 3"
+    [channelUrl]="channelUrl"
+    (complete)="onComplete()"
+  ></app-verification-complete-step>
+</section>

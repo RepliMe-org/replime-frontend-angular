@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { CardComponent } from '../../shared/ui/card/card.component';
-import { CommonModule } from '@angular/common';
+import { SHARED_IMPORTS } from '../../shared/shared-imports';
 
 @Component({
   selector: 'app-features-section',
   standalone: true,
-  imports: [CardComponent, CommonModule],
+  imports: [...SHARED_IMPORTS],
   templateUrl: './features-section.component.html',
   styleUrl: './features-section.component.css',
 })
