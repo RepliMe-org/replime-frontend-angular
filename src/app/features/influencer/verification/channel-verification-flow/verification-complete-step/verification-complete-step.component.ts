@@ -19,7 +19,7 @@ export class VerificationCompleteStepComponent {
     this.channelHandle = match ? `@${match[1]}` : '';
   }
 
-  onGoToDashboardClick() {
+  onSetUpChatBot() {
     this.complete.emit();
   }
 }

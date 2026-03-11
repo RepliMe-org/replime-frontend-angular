@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { VerificationConfirmResponse, VerificationRequestPayload, VerificationRequestResponse } from './verification.model';
+import { VerificationConfirmResponse, VerificationRequestPayload, VerificationRequestResponse } from './models/verification.model';
 
 
 @Injectable({

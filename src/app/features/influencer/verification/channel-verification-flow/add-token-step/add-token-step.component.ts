@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { SharedModule } from '../../../../../shared/shared.module';
+import { SharedModule } from '../../../../../shared/shared.module'; 
 
 @Component({
   selector: 'app-add-token-step',

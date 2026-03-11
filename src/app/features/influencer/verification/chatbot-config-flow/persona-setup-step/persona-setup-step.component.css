@@ -1,0 +1,67 @@
+.persona-icon {
+  @apply w-24 h-24 mx-auto mb-8 rounded-2xl bg-cyan/20 flex items-center justify-center;
+}
+
+.persona-title {
+  @apply text-3xl font-bold text-page-text mb-3;
+}
+
+.persona-subtitle {
+  @apply text-subtle-text mb-10 max-w-md mx-auto;
+}
+
+.form-group {
+  @apply mb-6 text-left;
+}
+
+.form-label {
+  @apply block text-sm font-medium text-page-text mb-2;
+}
+
+.form-input {
+  @apply w-full bg-input-bg border border-border-color rounded-lg px-4 py-3 text-page-text placeholder-subtle-text focus:outline-none focus:border-cyan transition-colors;
+}
+
+.form-help {
+  @apply text-xs text-subtle-text mt-2;
+}
+
+.personality-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-3;
+}
+
+.personality-card {
+  @apply p-4 w-full rounded-xl border-2 border-border-color bg-input-bg transition-all duration-200 cursor-pointer text-left;
+}
+
+.personality-card:hover {
+  @apply border-cyan bg-cyan/5;
+}
+
+.personality-card.selected {
+  @apply border-cyan bg-cyan/10;
+}
+
+.personality-card-content {
+  @apply flex items-start gap-3;
+}
+
+.personality-icon-wrapper {
+  @apply w-8 h-8 rounded-lg flex items-center justify-center bg-subtle-bg text-subtle-text flex-shrink-0 transition-all;
+}
+
+.personality-card.selected .personality-icon-wrapper {
+  @apply bg-cyan/30 text-cyan;
+}
+
+.personality-text {
+  @apply flex-1;
+}
+
+.personality-title {
+  @apply font-semibold text-page-text mb-1;
+}
+
+.personality-description {
+  @apply text-xs text-subtle-text leading-relaxed;
+}
