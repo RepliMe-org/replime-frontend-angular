@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { SHARED_IMPORTS } from '../../shared-imports';
+import { SharedModule } from '../../shared.module';
 
 @Component({
   selector: 'app-button',
   standalone: true,
-  imports: [...SHARED_IMPORTS],
+  imports: [SharedModule],
   templateUrl: './button.component.html',
   styleUrl: './button.component.css',
 })

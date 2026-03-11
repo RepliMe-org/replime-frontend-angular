@@ -3,12 +3,12 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../../core/services/auth.service';
 import { AuthFormComponent } from '../../components/auth-form/auth-form.component';
 import { AuthFormSubmitEvent } from '../../../../core/models/auth.model';
-import { SHARED_IMPORTS } from '../../../../shared/shared-imports';
+import { SharedModule } from '../../../../shared/shared.module';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [...SHARED_IMPORTS, AuthFormComponent],
+  imports: [SharedModule, AuthFormComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })

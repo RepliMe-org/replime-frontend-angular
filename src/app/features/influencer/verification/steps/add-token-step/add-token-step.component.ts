@@ -1,12 +1,10 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { SHARED_IMPORTS } from '../../../../../shared/shared-imports';
-import { CardComponent } from '../../../../../shared/ui/card/card.component';
-import { ButtonComponent } from '../../../../../shared/ui/button/button.component';
+import { SharedModule } from '../../../../../shared/shared.module';
 
 @Component({
   selector: 'app-add-token-step',
   standalone: true,
-  imports: [...SHARED_IMPORTS, CardComponent, ButtonComponent],
+  imports: [SharedModule],
   templateUrl: './add-token-step.component.html',
   styleUrl: './add-token-step.component.css',
 })

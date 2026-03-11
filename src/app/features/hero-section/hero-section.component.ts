@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { SHARED_IMPORTS } from '../../shared/shared-imports';
+import { SharedModule } from '../../shared/shared.module';
 
 @Component({
   selector: 'app-hero-section',
   standalone: true,
-  imports: [...SHARED_IMPORTS],
+  imports: [SharedModule],
   templateUrl: './hero-section.component.html',
   styleUrl: './hero-section.component.css'
 })

@@ -1,10 +1,10 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
-import { SHARED_IMPORTS } from '../../../../../shared/shared-imports';  
+import { SharedModule } from '../../../../../shared/shared.module';
 
 @Component({
   selector: 'app-verify-channel-step',
   standalone: true,
-  imports: [...SHARED_IMPORTS],
+  imports: [SharedModule],
   templateUrl: './verify-channel-step.component.html',
   styleUrls: ['./verify-channel-step.component.css']
 })

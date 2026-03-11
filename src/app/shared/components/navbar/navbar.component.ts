@@ -1,13 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, RouterLink, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
 import { AuthService } from '../../../core/services/auth.service';
-import { SHARED_IMPORTS } from '../../shared-imports';
+import { SharedModule } from '../../shared.module';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [...SHARED_IMPORTS],
+  imports: [SharedModule],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })

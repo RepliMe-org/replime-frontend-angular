@@ -1,12 +1,10 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { SHARED_IMPORTS } from '../../../../../shared/shared-imports';
-import { CardComponent } from '../../../../../shared/ui/card/card.component';
-import { ButtonComponent } from '../../../../../shared/ui/button/button.component';
+import { SharedModule } from '../../../../../shared/shared.module';
 
 @Component({
   selector: 'app-verification-complete-step',
   standalone: true,
-  imports: [...SHARED_IMPORTS],
+  imports: [SharedModule],
   templateUrl: './verification-complete-step.component.html',
   styleUrl: './verification-complete-step.component.css',
 })

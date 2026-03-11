@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SHARED_IMPORTS } from '../../../../shared/shared-imports';
+import { SharedModule } from '../../../../shared/shared.module';
 import { VerifyChannelStepComponent } from '../steps/verify-channel-step/verify-channel-step.component';
 import { AddTokenStepComponent } from '../steps/add-token-step/add-token-step.component';
 import { ReadyVerifyStepComponent } from '../steps/ready-verify-step/ready-verify-step.component';
@@ -13,7 +13,7 @@ import { VerificationResponse } from '../verification.model';
   selector: 'app-verification-container',
   standalone: true,
   imports: [
-    ...SHARED_IMPORTS,
+    SharedModule,
     VerifyChannelStepComponent,
     AddTokenStepComponent,
     ReadyVerifyStepComponent,

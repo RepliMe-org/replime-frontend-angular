@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../core/services/auth.service';
-import { SHARED_IMPORTS } from '../../../shared/shared-imports';
 import { VerificationContainerComponent } from '../verification/verification-container/verification-container.component';
+import { SharedModule } from '../../../shared/shared.module';
 
 @Component({
   selector: 'app-influencer-dashboard',
   standalone: true,
-  imports: [...SHARED_IMPORTS, VerificationContainerComponent],
+  imports: [SharedModule, VerificationContainerComponent],
   templateUrl: './influencer-dashboard.component.html',
   styleUrl: './influencer-dashboard.component.css',
 })
