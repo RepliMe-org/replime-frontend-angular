@@ -1,10 +1,10 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { SharedModule } from '../../shared.module';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-stepper',
   standalone: true,
-  imports: [SharedModule],
+  imports: [CommonModule],
   templateUrl: './stepper.component.html',
   styleUrls: ['./stepper.component.css']
 })
