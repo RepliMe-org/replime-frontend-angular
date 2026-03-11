@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { FeaturesSectionComponent } from '../../features-section/features-section.component';
-import { HeroSectionComponent } from '../../hero-section/hero-section.component';
+import { FeaturesSectionComponent } from '../features-section/features-section.component';
+import { HeroSectionComponent } from '../hero-section/hero-section.component';
 import { NavbarComponent } from '../../../shared/components/navbar/navbar.component';
 
 @Component({
