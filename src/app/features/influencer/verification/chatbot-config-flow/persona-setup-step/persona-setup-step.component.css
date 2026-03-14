@@ -10,22 +10,6 @@
   @apply text-subtle-text mb-10 max-w-md mx-auto;
 }
 
-.form-group {
-  @apply mb-6 text-left;
-}
-
-.form-label {
-  @apply block text-sm font-medium text-page-text mb-2;
-}
-
-.form-input {
-  @apply w-full bg-input-bg border border-border-color rounded-lg px-4 py-3 text-page-text placeholder-subtle-text focus:outline-none focus:border-cyan transition-colors;
-}
-
-.form-help {
-  @apply text-xs text-subtle-text mt-2;
-}
-
 .personality-grid {
   @apply grid grid-cols-1 md:grid-cols-2 gap-3;
 }

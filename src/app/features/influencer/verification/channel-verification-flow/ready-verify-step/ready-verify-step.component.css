@@ -1,76 +1,16 @@
-.ready-verify {
-    @apply max-w-lg mx-auto text-center;
-}
-
-.ready-verify-icon {
-    @apply w-24 h-24 mx-auto mb-8 rounded-2xl bg-cyan/20 flex items-center justify-center;
-}
-
-.ready-verify-icon-i {
-    @apply text-5xl text-cyan;
-}
-
-.ready-verify-title {
-    @apply text-3xl font-bold text-page-text mb-3;
-}
-
-.ready-verify-subtitle {
-    @apply text-subtle-text mb-10 max-w-sm mx-auto;
-}
-
-.verify-channel-card {
-    @apply flex items-center gap-3 mb-6 p-4 rounded-lg bg-subtle-bg border border-border-color;
-}
-
-.verify-channel-icon {
-    @apply w-10 h-10 rounded-lg bg-red-500/20 flex items-center justify-center flex-shrink-0;
-}
-
-.verify-channel-icon-i {
-    @apply text-xl text-red-500;
-}
-
-.verify-channel-info {
-    @apply text-left flex-1;
-}
-
-.verify-channel-handle {
-    @apply text-sm font-semibold text-page-text;
-}
-
-.verify-channel-token {
-    @apply text-xs text-cyan font-mono;
-}
-
-.verify-button {
-    @apply w-full;
-}
-
-.verify-button-text {
-    @apply text-cyan-text;
-}
-
-.back-button {
-    @apply w-full mt-4 text-sm text-subtle-text hover:text-page-text transition-colors;
-}
-
 .verify-progress {
-    @apply mb-6;
+  @apply mb-6;
 }
 
 .verify-progress-bar {
-    @apply w-full bg-subtle-bg rounded-full h-2 overflow-hidden;
+  @apply w-full bg-subtle-bg rounded-full h-2 overflow-hidden;
 }
 
 .verify-progress-fill {
-    @apply h-full bg-gradient-to-r from-cyan to-purple animate-pulse;
-    width: 70%;
+  @apply h-full bg-gradient-to-r from-cyan to-purple animate-pulse;
+  width: 70%;
 }
 
 .verify-progress-text {
-    @apply text-xs text-subtle-text mt-2;
-}
-
-.start-over-button {
-    @apply w-full mt-2 text-sm text-subtle-text hover:text-page-text transition-colors;
+  @apply text-xs text-subtle-text mt-2;
 }

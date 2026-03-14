@@ -166,3 +166,135 @@
     scrollbar-width: thin;
     scrollbar-color: var(--border-color) var(--subtle-bg);
   }
+
+  .page-container {
+    @apply max-w-lg mx-auto text-center;
+  }
+
+  .page-icon {
+    @apply w-24 h-24 mx-auto mb-8 rounded-2xl flex items-center justify-center;
+  }
+
+  .page-icon-i {
+    @apply text-5xl;
+  }
+
+  .page-title {
+    @apply text-3xl font-bold text-page-text mb-3;
+  }
+
+  .page-subtitle {
+    @apply text-subtle-text mb-10 max-w-sm mx-auto;
+  }
+
+  .icon-red {
+    @apply bg-red-500/20;
+  }
+
+  .icon-red i {
+    @apply text-red-500;
+  }
+
+  .icon-green {
+    @apply bg-green-500/20;
+  }
+
+  .icon-green i {
+    @apply text-green-500;
+  }
+
+  .icon-cyan {
+    @apply bg-cyan/20;
+  }
+
+  .icon-cyan i {
+    @apply text-cyan;
+  }
+
+  .input-group {
+    @apply text-left mb-4;
+  }
+
+  .input-label {
+    @apply block text-sm font-medium text-page-text mb-2;
+  }
+
+  .input-field {
+    @apply w-full bg-input-bg border border-border-color rounded-lg px-4 py-3 text-page-text focus:outline-none focus:border-cyan transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .error-text {
+    @apply text-xs text-red-500 mt-2 ml-1 font-medium;
+  }
+
+  .hint-box {
+    @apply mt-4 mb-6 p-4 rounded-xl bg-subtle-bg border border-border-color text-left;
+  }
+
+  .hint-text {
+    @apply text-xs text-subtle-text leading-relaxed;
+  }
+
+  .btn-full {
+    @apply w-full;
+  }
+
+  .btn-text {
+    @apply text-cyan-text;
+  }
+
+  .text-button {
+    @apply w-full mt-4 text-sm text-subtle-text hover:text-page-text transition-colors;
+  }
+
+  .channel-card {
+    @apply flex items-center gap-3 mb-6 p-4 rounded-lg border;
+  }
+
+  .channel-card-default {
+    @apply bg-subtle-bg border-border-color;
+  }
+
+  .channel-card-success {
+    @apply bg-green-500/10 border-green-500/30;
+  }
+
+  .channel-icon {
+    @apply w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0;
+  }
+
+  .channel-icon-youtube {
+    @apply bg-red-500/20 text-red-500;
+  }
+
+  .channel-icon-success {
+    @apply bg-green-500/20 text-green-500;
+  }
+
+  .channel-info {
+    @apply text-left flex-1;
+  }
+
+  .channel-handle {
+    @apply text-sm font-semibold text-page-text;
+  }
+
+  .channel-status {
+    @apply text-xs flex items-center gap-1 text-green-500;
+  }
+
+  .form-group {
+    @apply mb-6 text-left;
+  }
+
+  .form-label {
+    @apply block text-sm font-medium text-page-text mb-2;
+  }
+
+  .form-input {
+    @apply w-full bg-input-bg border border-border-color rounded-lg px-4 py-3 text-page-text placeholder-subtle-text focus:outline-none focus:border-cyan transition-colors;
+  }
+
+  .form-help {
+    @apply text-xs text-subtle-text mt-2;
+  }

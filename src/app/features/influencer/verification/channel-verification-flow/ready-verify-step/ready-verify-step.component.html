@@ -1,17 +1,17 @@
-<div class="ready-verify">
-  <div class="ready-verify-icon">
+<div class="page-container">
+  <div class="page-icon icon-cyan">
     <i
-      class="fa-solid ready-verify-icon-i"
+      class="fa-solid page-icon-i"
       [ngClass]="isVerifying ? 'fa-spinner animate-spin' : 'fa-circle-check'"
     >
-    </i>
+  </i>
   </div>
 
-  <h1 class="ready-verify-title">
+  <h1 class="page-title">
     {{ isVerifying ? "Verifying..." : "Ready to Verify" }}
   </h1>
 
-  <p class="ready-verify-subtitle">
+  <p class="page-subtitle">
     {{
       isVerifying
         ? "We're checking your channel description for the verification token. This may take a moment."
@@ -20,28 +20,26 @@
   </p>
 
   <app-card variant="default">
-    <div class="verify-channel-card">
-      <div class="verify-channel-icon">
-        <i class="fa-brands fa-youtube verify-channel-icon-i"></i>
+    <div class="channel-card channel-card-default">
+      <div class="channel-icon channel-icon-youtube">
+        <i class="fa-brands fa-youtube"></i>
       </div>
 
-      <div class="verify-channel-info">
-        <p class="verify-channel-handle">
+      <div class="channel-info">
+        <p class="channel-handle">
           {{ channelHandle }}
         </p>
-        <p class="verify-channel-token">Token: {{ verificationToken }}</p>
+        <p class="channel-token">Token: {{ verificationToken }}</p>
       </div>
     </div>
 
     <ng-container *ngIf="!isVerifying; else verifyingTemplate">
-      <app-button (click)="onVerifyClick()" class="verify-button" size="lg">
-        <i class="fa-solid fa-sync verify-button-text"></i>
-        <span class="verify-button-text font-semibold">
-          Verify My Channel
-        </span>
+      <app-button (click)="onVerifyClick()" class="btn-full" size="lg">
+        <i class="fa-solid fa-sync btn-text"></i>
+        <span class="btn-text font-semibold"> Verify My Channel </span>
       </app-button>
 
-      <button (click)="onBackClick()" class="back-button">← Back to token</button>
+      <button (click)="onBackClick()" class="text-button">← Back to token</button>
     </ng-container>
 
     <ng-template #verifyingTemplate>
@@ -53,7 +51,7 @@
       </div>
     </ng-template>
 
-    <button (click)="onStartOverClick()" class="start-over-button">
+    <button (click)="onStartOverClick()" class="text-button">
       Start over with a different channel
     </button>
   </app-card>
