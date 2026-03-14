@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { SharedModule } from '../../../../shared/shared.module';
 import { VerifyChannelStepComponent } from '../channel-verification-flow/verify-channel-step/verify-channel-step.component';
 import { AddTokenStepComponent } from '../channel-verification-flow/add-token-step/add-token-step.component';
 import { ReadyVerifyStepComponent } from '../channel-verification-flow/ready-verify-step/ready-verify-step.component';
 import { VerificationCompleteStepComponent } from '../channel-verification-flow/verification-complete-step/verification-complete-step.component';
-import { VerificationService } from '../verification.service';
+import { VerificationService } from '../../services/verification.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../../core/services/auth.service';
-import { VerificationResponse} from '../models/verification.model';
+import { VerificationResponse } from '../models/verification.model';
 import { PersonaSetupStepComponent } from '../chatbot-config-flow/persona-setup-step/persona-setup-step.component';
 import { PersonaData } from '../models/chatbot-config.model';
+import { WelcomeMessageStepComponent } from '../chatbot-config-flow/welcome-message-step/welcome-message-step.component';
 
 @Component({
   selector: 'app-verification-container',
@@ -21,11 +22,14 @@ import { PersonaData } from '../models/chatbot-config.model';
     ReadyVerifyStepComponent,
     VerificationCompleteStepComponent,
     PersonaSetupStepComponent,
+    WelcomeMessageStepComponent,
   ],
   templateUrl: './verification-container.component.html',
   styleUrl: './verification-container.component.css',
 })
 export class VerificationContainerComponent {
+  @Input() state!: 'CHANNEL_VERIFICATION' | 'CHATBOT_SETUP';
+
   currentStep: number = 0;
   channelUrl: string = '';
   verificationToken: string = '';
@@ -33,7 +37,10 @@ export class VerificationContainerComponent {
   isVerifying: boolean = false;
   isLoading: boolean = false;
   errorMessage: string = '';
-  isChannelVerificationComplete: boolean = false;
+
+  personaData: PersonaData = { name: '', personality: '' };
+  chatbotName: string = '';
+  welcomeMessage: string = '';
 
   verificationSteps = ['Verify Channel', 'Add Token', 'Confirm', 'Complete'];
   chatbotSteps = ['AI Persona', 'Welcome Message', 'Confirm', 'Complete'];
@@ -104,14 +111,19 @@ export class VerificationContainerComponent {
   }
 
   onPersonaSubmit(data: PersonaData) {
+    this.personaData = data;
+    this.chatbotName = data.name;
     this.stepForward();
   }
 
   onCompleteChannelVerification() {
-    this.isChannelVerificationComplete = true;
     this.currentStep = 0;
   }
 
+  onWelcomeMessageSubmit(message: string) {
+    this.welcomeMessage = message;
+    this.stepForward();
+  }
   onBack() {
     this.stepBack();
     this.errorMessage = '';

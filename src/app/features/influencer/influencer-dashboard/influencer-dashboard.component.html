@@ -1,6 +1,9 @@
-<app-verification-container *ngIf="!isInfluencer"></app-verification-container>
+<app-verification-container
+  *ngIf="dashboardState !== 'DASHBOARD'"
+  [state]="dashboardState">
+</app-verification-container>
 
-<div *ngIf="isInfluencer" class="p-6">
+<div *ngIf="dashboardState === 'DASHBOARD'" class="p-6">
   <h1>
     Welcome to Your Influencer Dashboard
   </h1>

@@ -1,11 +1,11 @@
 <section class="verification-container">
   <app-stepper
-    [steps]="isChannelVerificationComplete ? chatbotSteps : verificationSteps"
+    [steps]="state === 'CHATBOT_SETUP' ? chatbotSteps : verificationSteps"
     [activeStepIndex]="currentStep"
     class="verification-container-stepper"
   ></app-stepper>
 
-  <div *ngIf="!isChannelVerificationComplete">
+  <div *ngIf="state === 'CHANNEL_VERIFICATION'">
     <div *ngIf="errorMessage" class="verification-error">
       <i class="fa-solid fa-circle-exclamation verification-error-icon"></i>
 
@@ -54,12 +54,20 @@
     ></app-verification-complete-step>
   </div>
 
-  <div *ngIf="isChannelVerificationComplete">
-    
+  <div *ngIf="state === 'CHATBOT_SETUP'">
     <!-- Step 0 -->
     <app-persona-setup-step
       *ngIf="currentStep === 0"
+      [personaData]="personaData"
       (personaSubmit)="onPersonaSubmit($event)"
     ></app-persona-setup-step>
+
+    <!-- Step 1 -->
+    <app-welcome-message-step
+      *ngIf="currentStep === 1"
+      [chatbotName]="chatbotName"
+      (welcomeMessageSubmit)="onWelcomeMessageSubmit($event)"
+      (back)="onBack()"
+    ></app-welcome-message-step>
   </div>
 </section>
