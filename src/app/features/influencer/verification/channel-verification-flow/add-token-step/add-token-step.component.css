@@ -1,103 +1,59 @@
-.add-token {
-    @apply max-w-lg mx-auto text-center;
-}
-
-.add-token-icon {
-    @apply w-24 h-24 mx-auto mb-8 rounded-2xl bg-cyan/20 flex items-center justify-center;
-}
-
-.add-token-icon-i {
-    @apply text-5xl text-cyan;
-}
-
-.add-token-title {
-    @apply text-3xl font-bold text-page-text mb-3;
-}
-
-.add-token-subtitle {
-    @apply text-subtle-text mb-10 max-w-sm mx-auto ;
-}
-
-.channel-card {
-    @apply flex items-center gap-3 mb-6 p-3 rounded-lg bg-card-bg border border-border-color;
-}
-
-.channel-card-icon {
-    @apply w-10 h-10 rounded-lg bg-red-500/20 flex items-center justify-center flex-shrink-0;
-}
-
-.channel-card-icon-i {
-    @apply text-xl text-red-500;
-}
-
-.channel-card-info {
-    @apply text-left flex-1;
-}
-
-.channel-card-handle {
-    @apply text-sm font-semibold text-page-text;
-}
-
-.channel-card-url {
-    @apply text-xs text-subtle-text;
-}
-
 .token-field {
-    @apply text-left mb-4;
+  @apply text-left mb-4;
 }
 
-.token-field-label {
-    @apply block text-sm font-medium text-page-text mb-3;
+.token-label {
+  @apply block text-sm font-medium text-page-text mb-3;
 }
 
-.token-field-input-wrapper {
-    @apply relative;
+.token-input-wrapper {
+  @apply relative;
 }
 
-.token-field-input {
-    @apply w-full bg-input-bg border border-border-color rounded-lg px-4 py-3 pr-12 text-cyan font-mono text-sm focus:outline-none;
+.token-input {
+  @apply w-full bg-input-bg border border-border-color rounded-lg px-4 py-3 pr-12 text-cyan font-mono text-sm focus:outline-none;
 }
 
-.token-field-copy-btn {
-    @apply absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded-md hover:bg-subtle-bg transition-colors;
+.token-copy-btn {
+  @apply absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded-md hover:bg-subtle-bg transition-colors;
 }
 
-.expiration-warning {
-    @apply mb-6 p-3 rounded-lg bg-orange-500/10 border border-orange-500/30 flex items-start gap-2;
+.warning-box {
+  @apply mb-6 p-3 rounded-lg border flex items-start gap-2;
 }
 
-.expiration-warning-icon {
-    @apply text-orange-500 text-sm mt-0.5;
+.warning-orange {
+  @apply bg-orange-500/10 border-orange-500/30;
 }
 
-.expiration-warning-text {
-    @apply text-xs text-orange-500 flex-1 mt-0.5;
+.warning-icon {
+  @apply text-orange-500 text-sm mt-0.5;
+}
+
+.warning-text {
+  @apply text-xs text-orange-500 flex-1 mt-0.5;
 }
 
 .instructions {
-    @apply text-left space-y-4 mb-6;
+  @apply text-left space-y-4 mb-6;
 }
 
 .instruction-item {
-    @apply flex items-start gap-3;
+  @apply flex items-start gap-3;
 }
 
-.instruction-item-number {
-    @apply flex-shrink-0 w-8 h-8 rounded-full bg-cyan/10 text-cyan flex items-center justify-center font-semibold text-sm;
+.instruction-number {
+  @apply flex-shrink-0 w-8 h-8 rounded-full bg-cyan/10 text-cyan flex items-center justify-center font-semibold text-sm;
 }
 
-.instruction-item-text {
-    @apply text-subtle-text mt-1 text-sm;
+.instruction-text {
+  @apply text-subtle-text mt-1 text-sm;
 }
 
-.actions {
-    @apply flex gap-3;
+.actions-row {
+  @apply flex gap-3;
 }
 
 .actions-primary {
-    @apply flex-1;
-}
-
-.actions-primary-text {
-    @apply text-cyan-text font-semibold;
+  @apply flex-1;
 }

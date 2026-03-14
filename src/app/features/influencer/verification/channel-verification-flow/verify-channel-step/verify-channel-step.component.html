@@ -1,21 +1,21 @@
-<div class="verify-channel">
-  <div class="verify-channel-icon">
-    <i class="fa-brands fa-youtube verify-channel-icon-i"></i>
+<div class="page-container">
+  <div class="page-icon icon-red">
+    <i class="fa-brands fa-youtube page-icon-i"></i>
   </div>
 
-  <h1 class="verify-channel-title">
+  <h1 class="page-title">
     Verify Your
     <span class="gradient-text">YouTube Channel</span>
   </h1>
 
-  <p class="verify-channel-subtitle">
+  <p class="page-subtitle">
     To ensure authenticity and prevent impersonation, we need to verify that you
     own this YouTube channel.
   </p>
 
   <app-card variant="default">
-    <div class="verify-channel-input-group">
-      <label class="verify-channel-label"> YouTube Channel URL </label>
+    <div class="input-group">
+      <label class="input-label"> YouTube Channel URL </label>
 
       <input
         type="url"
@@ -24,23 +24,23 @@
         #urlInput="ngModel"
         placeholder="https://youtube.com/@yourchannel"
         [disabled]="isLoading"
-        class="verify-channel-input"
+        class="input-field"
       />
-      
+
       <p *ngIf="urlInput.touched && !isValidUrl() && channelUrl" class="error-text">
         Please enter a valid YouTube channel URL (e.g., youtube.com/&#64;handle).
       </p>
     </div>
 
-    <div class="verify-channel-hint">
-      <p class="verify-channel-hint-text">
+    <div class="hint-box">
+      <p class="hint-text">
         Accepted formats: youtube.com/&#64;handle, youtube.com/channel/ID, youtube.com/c/customname
       </p>
     </div>
 
     <app-button
       (click)="onSubmit()"
-      class="verify-channel-submit"
+      class="btn-full"
       [disabled]="!isValidUrl || isLoading"
       size="lg"
     >
@@ -50,8 +50,8 @@
       </ng-container>
 
       <ng-template #continueTemplate>
-        <span class="verify-channel-submit-text font-semibold"> Continue </span>
-        <i class="fa-solid fa-arrow-right verify-channel-submit-text ml-2"></i>
+        <span class="btn-text font-semibold"> Continue </span>
+        <i class="fa-solid fa-arrow-right btn-text ml-2"></i>
       </ng-template>
     </app-button>
   </app-card>

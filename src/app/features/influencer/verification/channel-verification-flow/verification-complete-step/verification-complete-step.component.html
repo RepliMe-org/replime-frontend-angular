@@ -1,43 +1,38 @@
-<div class="verification-complete">
-  <div class="verification-complete-icon">
-    <i class="fa-solid fa-circle-check verification-complete-icon-i"></i>
+<div class="page-container">
+  <div class="page-icon icon-green">
+    <i class="fa-solid fa-circle-check page-icon-i"></i>
   </div>
 
-  <h1 class="verification-complete-title">
+  <h1 class="page-title">
     <span class="gradient-text">Verification Complete!</span>
   </h1>
 
-  <p class="verification-complete-subtitle">
-    Your YouTube channel has been successfully verified. You can now access all influencer features.
+  <p class="page-subtitle">
+    Your YouTube channel has been successfully verified. You can now access all
+    influencer features.
   </p>
 
   <app-card variant="default">
-    <div class="verification-channel-card">
-      <div class="verification-channel-icon">
-        <i class="fa-brands fa-youtube verification-channel-icon-i"></i>
+    <div class="channel-card channel-card-success">
+      <div class="channel-icon channel-icon-success">
+        <i class="fa-brands fa-youtube"></i>
       </div>
 
-      <div class="verification-channel-info">
-        <p class="verification-channel-handle">
+      <div class="channel-info">
+        <p class="channel-handle">
           {{ channelHandle }}
         </p>
 
-        <p class="verification-channel-status">
+        <p class="channel-status">
           <i class="fa-solid fa-circle-check"></i>
           Verified
         </p>
       </div>
     </div>
 
-   <app-button
-      (click)="onSetUpChatBot()"
-      class="verification-complete-button"
-      size="lg"
-    >
+    <app-button (click)="onSetUpChatBot()" class="btn-full" size="lg">
       <!-- TODO: Add chatbot icon -->
-      <span class="verification-complete-button-text font-semibold">
-        Set up your Chatbot
-      </span>
+      <span class="btn-text font-semibold"> Set up your Chatbot </span>
     </app-button>
   </app-card>
 </div>

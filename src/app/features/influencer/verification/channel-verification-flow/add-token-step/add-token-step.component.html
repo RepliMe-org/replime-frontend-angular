@@ -1,45 +1,43 @@
-<div class="add-token">
-  <div class="add-token-icon">
-    <i class="fa-solid fa-shield add-token-icon-i"></i>
+<div class="page-container">
+  <div class="page-icon icon-cyan">
+    <i class="fa-solid fa-shield page-icon-i"></i>
   </div>
 
-  <h1 class="add-token-title">Add Verification Token</h1>
+  <h1 class="page-title">Add Verification Token</h1>
 
-  <p class="add-token-subtitle">
+  <p class="page-subtitle">
     Copy this unique token and add it anywhere in your YouTube channel's "About"
     description to prove ownership.
   </p>
 
   <app-card variant="default">
-    <div class="channel-card">
-      <div class="channel-card-icon">
-        <i class="fa-brands fa-youtube channel-card-icon-i"></i>
+    <div class="channel-card channel-card-default">
+      <div class="channel-icon channel-icon-youtube">
+        <i class="fa-brands fa-youtube"></i>
       </div>
 
-      <div class="channel-card-info">
-        <p class="channel-card-handle">
+      <div class="channel-info">
+        <p class="channel-handle">
           {{ channelHandle }}
         </p>
-        <p class="channel-card-url">{{ channelUrl }}</p>
+        <p class="text-xs text-subtle-text">{{ channelUrl }}</p>
       </div>
     </div>
 
     <div class="token-field">
-      <label class="token-field-label">
-        Your Verification Token
-      </label>
+      <label class="token-label">Your Verification Token</label>
 
-      <div class="token-field-input-wrapper">
+      <div class="token-input-wrapper">
         <input
           type="text"
           [value]="verificationToken"
           readonly
-          class="token-field-input"
+          class="token-input"
         />
 
         <button
           (click)="copyToken()"
-          class="token-field-copy-btn"
+          class="token-copy-btn"
           [title]="tokenCopied ? 'Copied!' : 'Copy token'"
         >
           <i *ngIf="!tokenCopied" class="fa-solid fa-copy"></i>
@@ -48,9 +46,9 @@
       </div>
     </div>
 
-    <div *ngIf="expirationDate" class="expiration-warning">
-      <i class="fa-solid fa-clock expiration-warning-icon"></i>
-      <p class="expiration-warning-text">
+    <div *ngIf="expirationDate" class="warning-box warning-orange">
+      <i class="fa-solid fa-clock warning-icon"></i>
+      <p class="warning-text">
         Token expires on <strong>{{ getFormattedExpirationDate() }}</strong>
       </p>
     </div>
@@ -60,19 +58,19 @@
         *ngFor="let instruction of instructions; let i = index"
         class="instruction-item"
       >
-        <div class="instruction-item-number">
+        <div class="instruction-number">
           {{ i + 1 }}
         </div>
-        <div class="instruction-item-text">
+        <div class="instruction-text">
           {{ instruction.title }}
         </div>
       </div>
     </div>
 
-    <div class="actions">
+    <div class="actions-row">
       <app-button (click)="onTokenAdded()" class="actions-primary" size="lg">
-        <span class="actions-primary-text">I've Added the Token</span>
-        <i class="fa-solid fa-arrow-right actions-primary-text"></i>
+        <span class="btn-text font-semibold"> I've Added the Token </span>
+        <i class="fa-solid fa-arrow-right btn-text"></i>
       </app-button>
     </div>
   </app-card>

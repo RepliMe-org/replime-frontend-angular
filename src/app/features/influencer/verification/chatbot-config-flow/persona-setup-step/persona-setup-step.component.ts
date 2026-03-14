@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SharedModule } from '../../../../../shared/shared.module';
 import { PersonaData } from '../../models/chatbot-config.model';
 
@@ -10,11 +10,19 @@ import { PersonaData } from '../../models/chatbot-config.model';
   templateUrl: './persona-setup-step.component.html',
   styleUrl: './persona-setup-step.component.css'
 })
-export class PersonaSetupStepComponent {
+export class PersonaSetupStepComponent implements OnInit {
+  @Input() personaData?: PersonaData;
   @Output() personaSubmit = new EventEmitter<PersonaData>();
 
   chatbotName = '';
   selectedPersonality = '';
+
+  ngOnInit() {
+    if (this.personaData) {
+      this.chatbotName = this.personaData.name;
+      this.selectedPersonality = this.personaData.personality;
+    }
+  }
 
   personalityOptions = [
     {
