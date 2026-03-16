@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SharedModule } from '../../../../shared/shared.module';
 import { VerifyChannelStepComponent } from '../channel-verification-flow/verify-channel-step/verify-channel-step.component';
 import { AddTokenStepComponent } from '../channel-verification-flow/add-token-step/add-token-step.component';
@@ -29,6 +29,7 @@ import { WelcomeMessageStepComponent } from '../chatbot-config-flow/welcome-mess
 })
 export class VerificationContainerComponent {
   @Input() state!: 'CHANNEL_VERIFICATION' | 'CHATBOT_SETUP';
+  @Output() stateChange = new EventEmitter<'CHANNEL_VERIFICATION' | 'CHATBOT_SETUP' | 'DASHBOARD'>();
 
   currentStep: number = 0;
   channelUrl: string = '';
@@ -117,6 +118,7 @@ export class VerificationContainerComponent {
   }
 
   onCompleteChannelVerification() {
+    this.stateChange.emit('CHATBOT_SETUP');
     this.currentStep = 0;
   }
 

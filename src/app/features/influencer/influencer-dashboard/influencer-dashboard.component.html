@@ -1,6 +1,7 @@
 <app-verification-container
   *ngIf="dashboardState !== 'DASHBOARD'"
-  [state]="dashboardState">
+  [state]="dashboardState"
+  (stateChange)="updateDashboardState($event)">
 </app-verification-container>
 
 <div *ngIf="dashboardState === 'DASHBOARD'" class="p-6">
