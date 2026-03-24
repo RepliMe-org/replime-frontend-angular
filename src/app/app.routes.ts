@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { oauthGuard } from './core/guards/oauth.guard';
 
 export const routes: Routes = [
    {
@@ -25,6 +26,15 @@ export const routes: Routes = [
     path: 'auth',
     loadComponent: () =>
       import('./layout/auth-layout/auth-layout.component')
-        .then(m => m.AuthLayoutComponent)
+        .then(m => m.AuthLayoutComponent),
+    children: [
+      {
+        path: 'callback',
+        canActivate: [oauthGuard],
+        loadComponent: () =>
+          import('./features/auth/pages/auth-callback/auth-callback.component')
+        .then(m => m.AuthCallbackComponent)
+      },
+    ],
   },
 ];
