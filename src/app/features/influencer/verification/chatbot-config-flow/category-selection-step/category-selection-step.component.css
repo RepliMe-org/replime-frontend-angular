@@ -1,0 +1,70 @@
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.category-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 0.75rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-color);
+  background-color: var(--subtle-bg);
+  color: var(--subtle-text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.category-card:hover {
+  border-color: var(--cyan);
+  color: var(--page-text);
+  background-color: rgba(var(--cyan-rgb), 0.05);
+}
+
+.category-card.selected {
+  border-color: var(--cyan);
+  background-color: rgba(var(--cyan-rgb), 0.1);
+  color: var(--cyan);
+}
+
+.category-icon-wrapper {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  background-color: rgba(var(--cyan-rgb), 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.category-card.selected .category-icon-wrapper {
+  background-color: rgba(var(--cyan-rgb), 0.2);
+}
+
+.category-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.category-check {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  background-color: var(--cyan);
+  color: var(--cyan-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
