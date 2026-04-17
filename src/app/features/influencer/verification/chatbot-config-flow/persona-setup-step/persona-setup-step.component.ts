@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SharedModule } from '../../../../../shared/shared.module';
-import { PersonaData } from '../../models/chatbot-config.model';
+import { PersonaData } from '../../../../chatbot/models/chatbot-config.model';
 
 
 @Component({
@@ -14,55 +14,52 @@ export class PersonaSetupStepComponent implements OnInit {
   @Input() personaData?: PersonaData;
   @Output() personaSubmit = new EventEmitter<PersonaData>();
 
-  chatbotName = '';
-  selectedPersonality = '';
+  chatbotName: string = '';
+  chatbotDescription: string = '';
+  selectedPersonality: string = '';
+  talkLikeMe: boolean = false;
+
+  verbosity: string = 'balanced';
+  formality: string = 'neutral';
+  tone: string = 'friendly';
 
   ngOnInit() {
-    if (this.personaData) {
-      this.chatbotName = this.personaData.name;
-      this.selectedPersonality = this.personaData.personality;
-    }
+  if (this.personaData) {
+    this.chatbotName = this.personaData.name ?? '';
+    this.chatbotDescription = this.personaData.description ?? '';
+    this.talkLikeMe = this.personaData.talkLikeMe ?? false;
+
+    this.tone = this.personaData.tone ?? 'friendly';
+    this.verbosity = this.personaData.verbosity ?? 'balanced';
+    this.formality = this.personaData.formality ?? 'neutral';
+  }
+}
+
+  toggleTalkLikeMe() {
+    this.talkLikeMe = !this.talkLikeMe;
   }
 
-  personalityOptions = [
-    {
-      id: 'friendly',
-      label: 'Friendly & Casual',
-      description: 'Warm, approachable tone like chatting with a friend',
-      icon: 'fa-smile'
-    },
-    {
-      id: 'professional',
-      label: 'Professional & Informative',
-      description: 'Clear, structured responses focused on knowledge sharing',
-      icon: 'fa-book'
-    },
-    {
-      id: 'energetic',
-      label: 'Energetic & Enthusiastic',
-      description: 'High-energy, motivating style with lots of encouragement',
-      icon: 'fa-bolt'
-    },
-    {
-      id: 'witty',
-      label: 'Witty & Humorous',
-      description: 'Clever, entertaining replies with a touch of humor',
-      icon: 'fa-face-smile-wink'
-    }
-  ];
-
-  selectPersonality(personalityId: string) {
-    this.selectedPersonality = personalityId;
+  isDisabled() {
+    return this.talkLikeMe;
   }
 
   onContinue() {
-      this.personaSubmit.emit({
-        name: this.chatbotName,
-        personality: this.selectedPersonality
-      });
+    const payload: PersonaData = {
+      name: this.chatbotName,
+      description: this.chatbotDescription,
+      talkLikeMe: this.talkLikeMe,
+      tone: this.tone,
+      verbosity: this.verbosity,
+      formality: this.formality,
+    };
+
+    this.personaSubmit.emit(payload);
   }
 
   isFormValid(): boolean {
-    return this.chatbotName.trim().length > 0 && this.selectedPersonality !== '';
+    return (
+      this.chatbotName.trim().length > 0 &&
+      this.chatbotDescription.trim().length > 0
+    );
   }
 }
