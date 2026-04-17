@@ -1,0 +1,140 @@
+<div class="page-container">
+  <div class="page-icon icon-cyan">
+    <i class="fa-solid fa-tags page-icon-i"></i>
+  </div>
+
+  <h1 class="page-title">
+    Message <span class="gradient-text">Classifications</span>
+  </h1>
+
+  <p class="page-subtitle">
+    Choose the types of messages your bot should recognize. Select from system
+    classes or add your own custom ones.
+  </p>
+
+  <app-card variant="default">
+
+    <div class="form-group">
+      <label class="form-label">Search Classifications</label>
+      <div class="search-wrapper">
+        <i class="fa-solid fa-search search-icon"></i>
+        <input
+          type="text"
+          [value]="searchQuery"
+          (input)="onSearchInput($any($event.target).value)"
+          class="search-input form-input"
+          placeholder="Filter available classifications..."
+        />
+      </div>
+      <p class="form-help">Click any classification below to select it.</p>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Available Classifications</label>
+
+      <div *ngIf="isLoadingClasses" class="loading-state">
+        <i class="fa-solid fa-spinner fa-spin text-cyan"></i>
+        <span class="text-subtle-text text-sm">Loading classifications...</span>
+      </div>
+
+      <div *ngIf="!isLoadingClasses" class="classes-grid">
+        <button
+          *ngFor="let cls of filteredSystemClasses"
+          type="button"
+          class="class-chip"
+          [class.selected]="isSystemSelected(cls)"
+          (click)="toggleSystemClass(cls)"
+        >
+          <i
+            class="fa-solid text-xs"
+            [ngClass]="isSystemSelected(cls) ? 'fa-check' : 'fa-tag'"
+          ></i>
+          <span>{{ cls.name }}</span>
+        </button>
+
+        <p
+          *ngIf="filteredSystemClasses.length === 0 && !isLoadingClasses"
+          class="text-sm text-subtle-text col-span-full text-center py-4"
+        >
+          No classifications match your search.
+        </p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Add Custom Classification</label>
+      <div class="custom-input-wrapper">
+        <input
+          type="text"
+          [(ngModel)]="customClassInput"
+          (keydown)="onCustomKeydown($event)"
+          placeholder="Type a name and press Enter or comma"
+          class="form-input"
+        />
+        <button
+          type="button"
+          class="add-btn"
+          [disabled]="!customClassInput.trim()"
+          (click)="addCustomClass()"
+        >
+          <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+      <p class="form-help">
+        Press <kbd class="kbd">Enter</kbd> or <kbd class="kbd">,</kbd> to add quickly.
+        Custom classes will be saved when you finish setup.
+      </p>
+    </div>
+
+    <div *ngIf="totalSelected() > 0" class="selected-section">
+      <div class="selected-header">
+        <label class="form-label mb-0">Selected</label>
+        <span class="selected-count">{{ totalSelected }}</span>
+      </div>
+
+      <div class="tags-container">
+        <div
+          *ngFor="let cls of selectedSystemClasses"
+          class="classification-tag system-tag"
+        >
+          <i class="fa-solid fa-tag text-xs"></i>
+          <span>{{ cls.name }}</span>
+          <button type="button" class="tag-remove" (click)="removeSystemClass(cls)">
+            <i class="fa-solid fa-xmark text-xs"></i>
+          </button>
+        </div>
+
+        <div
+          *ngFor="let name of customClasses"
+          class="classification-tag custom-tag"
+        >
+          <i class="fa-solid fa-sparkles text-xs"></i>
+          <span>{{ name }}</span>
+          <button type="button" class="tag-remove" (click)="removeCustomClass(name)">
+            <i class="fa-solid fa-xmark text-xs"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="totalSelected() === 0" class="empty-hint">
+      <i class="fa-solid fa-circle-info text-subtle-text text-sm"></i>
+      <p class="text-xs text-subtle-text">
+        Select at least one classification to continue.
+      </p>
+    </div>
+
+  </app-card>
+
+  <div class="flex justify-between items-center mt-6">
+    <app-button variant="outline" size="lg" (click)="onBack()">
+      <i class="fa-solid fa-arrow-left btn-icon"></i>
+      <span>Back</span>
+    </app-button>
+
+    <app-button size="lg" [disabled]="totalSelected() === 0" (click)="onContinue()">
+      <span class="font-semibold">Finish Setup</span>
+      <i class="fa-solid fa-check btn-icon"></i>
+    </app-button>
+  </div>
+</div>
