@@ -22,26 +22,19 @@ export class InfluencerDashboardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.checkInfluencerStatus();
-    this.checkChatbotStatus();
-    this.updateDashboardState(); 
-  }
-
-  checkInfluencerStatus() {
     this.isInfluencer = this.authService.hasRole('INFLUENCER');
-  }
 
-  checkChatbotStatus() {
     this.chatbotService.getChatbotConfig().subscribe({
       next: (config) => {
-        if (config?.configId != null) {
-          this.isChatbotConfigured = true;
-        }
+        this.isChatbotConfigured = config?.configId != null;
+        this.updateDashboardState();
+      },
+      error: () => {
+        this.isChatbotConfigured = false;
+        this.updateDashboardState();
       },
     });
   }
-
-  
 
   updateDashboardState(newState?: 'CHANNEL_VERIFICATION' | 'CHATBOT_SETUP' | 'DASHBOARD') {
     if (newState) {
