@@ -1,0 +1,157 @@
+<div class="page-container">
+  <div class="page-icon icon-cyan">
+    <i class="fa-solid fa-clipboard-check page-icon-i"></i>
+  </div>
+
+  <h1 class="page-title">
+    Review Your <span class="gradient-text">Setup</span>
+  </h1>
+
+  <p class="page-subtitle">
+    Everything looks good? Click "Setup My Chatbot" to go live, or go back to
+    adjust anything.
+  </p>
+
+  <app-card variant="default">
+    <div class="review-section">
+      <div class="review-section-header">
+        <div class="review-section-icon">
+          <i class="fa-solid fa-robot text-cyan"></i>
+        </div>
+        <h3 class="review-section-title">AI Persona</h3>
+      </div>
+
+      <div class="review-fields">
+        <div class="review-field">
+          <span class="review-field-label">Name</span>
+          <span class="review-field-value">{{ personaData.name }}</span>
+        </div>
+        <div class="review-field">
+          <span class="review-field-label">Description</span>
+          <span class="review-field-value review-field-desc">
+            {{ personaData.description }}
+          </span>
+        </div>
+        <div class="review-field">
+          <span class="review-field-label">Talk Like Me</span>
+          <span class="review-field-value">
+            <span
+              class="status-badge"
+              [ngClass]="personaData.talkLikeMe ? 'badge-on' : 'badge-off'"
+            >
+              {{ personaData.talkLikeMe ? "Enabled" : "Disabled" }}
+            </span>
+          </span>
+        </div>
+        <div class="review-field" *ngIf="!personaData?.talkLikeMe">
+          <span class="review-field-label">Tone</span>
+          <span class="review-field-value capitalize">{{
+            personaData.tone
+          }}</span>
+        </div>
+        <div class="review-field" *ngIf="!personaData?.talkLikeMe">
+          <span class="review-field-label">Response Length</span>
+          <span class="review-field-value capitalize">{{
+            personaData.verbosity
+          }}</span>
+        </div>
+        <div class="review-field" *ngIf="!personaData?.talkLikeMe">
+          <span class="review-field-label">Formality</span>
+          <span class="review-field-value capitalize">{{
+            personaData.formality
+          }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-divider"></div>
+
+    <div class="review-section">
+      <div class="review-section-header">
+        <div class="review-section-icon">
+          <i class="fa-solid fa-message text-cyan"></i>
+        </div>
+        <h3 class="review-section-title">Welcome Message</h3>
+      </div>
+
+      <div class="review-fields">
+        <div class="review-field">
+          <span class="review-field-value review-field-desc review-welcome">
+            "{{ welcomeMessage }}"
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-divider"></div>
+
+    <div class="review-section">
+      <div class="review-section-header">
+        <div class="review-section-icon">
+          <i class="fa-solid fa-layer-group text-cyan"></i>
+        </div>
+        <h3 class="review-section-title">Category</h3>
+      </div>
+
+      <div class="review-fields">
+        <div class="review-field">
+          <span class="review-field-value">{{ categoryName }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-divider"></div>
+
+    <div class="review-section">
+      <div class="review-section-header">
+        <div class="review-section-icon">
+          <i class="fa-solid fa-tags text-cyan"></i>
+        </div>
+        <h3 class="review-section-title">
+          Classifications
+          <span class="selected-count ml-2">{{ totalClasses }}</span>
+        </h3>
+      </div>
+
+      <div class="tags-container mt-3">
+        <div
+          *ngFor="let name of systemClassNames"
+          class="classification-tag system-tag"
+        >
+          <i class="fa-solid fa-tag text-xs"></i>
+          <span>{{ name }}</span>
+        </div>
+        <div
+          *ngFor="let name of customClassNames"
+          class="classification-tag custom-tag"
+        >
+          <i class="fa-solid fa-sparkles text-xs"></i>
+          <span>{{ name }}</span>
+        </div>
+      </div>
+    </div>
+  </app-card>
+
+  <div class="flex justify-between items-center mt-6">
+    <app-button
+      variant="outline"
+      size="lg"
+      (click)="back.emit()"
+      [disabled]="isSaving"
+    >
+      <i class="fa-solid fa-arrow-left btn-icon"></i>
+      <span>Back</span>
+    </app-button>
+
+    <app-button size="lg" (click)="confirm.emit()" [disabled]="isSaving">
+      <ng-container *ngIf="!isSaving">
+        <i class="fa-solid fa-rocket btn-icon"></i>
+        <span class="font-semibold">Setup My Chatbot</span>
+      </ng-container>
+      <ng-container *ngIf="isSaving">
+        <i class="fa-solid fa-spinner fa-spin btn-icon"></i>
+        <span class="font-semibold">Setting up...</span>
+      </ng-container>
+    </app-button>
+  </div>
+</div>

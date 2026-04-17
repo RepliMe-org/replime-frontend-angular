@@ -11,7 +11,7 @@
 }
 
 .token-input {
-  @apply w-full bg-input-bg border border-border-color rounded-lg px-4 py-3 pr-12 text-cyan font-mono text-sm focus:outline-none;
+  @apply w-full bg-input-bg border border-border-color rounded-lg pl-36 py-3 pr-12 text-cyan font-mono text-sm focus:outline-none;
 }
 
 .token-copy-btn {
