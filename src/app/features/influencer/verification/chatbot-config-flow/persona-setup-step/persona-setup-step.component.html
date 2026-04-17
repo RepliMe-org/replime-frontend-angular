@@ -12,61 +12,147 @@
     style.
   </p>
 
-  <app-card variant="default">
+  <app-card>
     <div class="form-group">
-      <label class="form-label"> Bot Name </label>
+      <label class="form-label text-left block"> Bot Name </label>
 
       <input
         type="text"
         name="chatbotName"
         [(ngModel)]="chatbotName"
         placeholder="e.g. YourChannel AI, Ask YourChannel"
-        class="form-input"
+        class="form-input w-full"
       />
 
-      <p class="form-help">
+      <p class="form-help text-left mt-2">
         This is how your chatbot will be presented to your audience.
       </p>
     </div>
 
-    <div class="form-group">
-      <label class="form-label mb-4"> Personality Style </label>
+    <div class="form-group mt-4">
+      <label class="form-label text-left block"> Chatbot Description </label>
 
-      <div class="personality-grid">
-        <button
-          *ngFor="let option of personalityOptions"
-          type="button"
-          (click)="selectPersonality(option.id)"
-          [class.selected]="selectedPersonality === option.id"
-          class="personality-card"
-        >
-          <div class="personality-card-content">
-            <div class="personality-icon-wrapper">
-              <i [class]="'fa-solid ' + option.icon + ' text-lg'"></i>
-            </div>
+      <textarea
+        [(ngModel)]="chatbotDescription"
+        name="chatbotDescription"
+        rows="3"
+        placeholder="e.g. Helps viewers understand my tutorials, answers questions about my content, and explains concepts in a simple way"
+        class="form-input w-full resize-none"
+      ></textarea>
 
-            <div class="personality-text">
-              <h3 class="personality-title">
-                {{ option.label }}
-              </h3>
+      <p class="form-help text-left mt-2">
+        Describe what your chatbot is meant to do. This helps shape how it
+        responds to users and what kind of assistance it provides.
+      </p>
+    </div>
 
-              <p class="personality-description">
-                {{ option.description }}
-              </p>
-            </div>
+    <app-card customClass="!bg-input-bg mb-6 !border-border-color/50">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-4">
+          <div
+            class="w-10 h-10 rounded-full bg-cyan/10 flex items-center justify-center text-cyan shrink-0"
+          >
+            <i class="fa-solid fa-microphone"></i>
           </div>
+          <div class="text-left">
+            <h3 class="font-semibold text-page-text text-base m-0">
+              Talk Like Me
+            </h3>
+            <p class="text-sm text-subtle-text m-0">
+              Make the chatbot mimic your speaking style from your videos
+            </p>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          role="switch"
+          [attr.aria-checked]="talkLikeMe"
+          (click)="toggleTalkLikeMe()"
+          [ngClass]="talkLikeMe ? 'bg-cyan' : 'bg-page-bg'"
+          class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        >
+          <span
+            [ngClass]="
+              talkLikeMe
+                ? 'translate-x-5 bg-input-bg'
+                : 'translate-x-0 bg-subtle-text'
+            "
+            class="pointer-events-none block h-5 w-5 rounded-full shadow-lg ring-0 transition-transform"
+          >
+          </span>
         </button>
       </div>
+
+      <div
+        class="bg-cyan/5 border border-cyan/20 rounded-xl p-4 flex gap-3 text-left transition-all duration-300 overflow-hidden"
+        [ngClass]="
+          talkLikeMe
+            ? 'max-h-40 opacity-100 mt-4'
+            : 'max-h-0 opacity-0 mt-0 p-0 border-0'
+        "
+      >
+        <i class="fa-solid fa-wand-magic-sparkles text-cyan mt-1 shrink-0"></i>
+        <p class="text-sm text-subtle-text leading-relaxed m-0">
+          Your chatbot will analyze your video transcripts to learn your unique
+          tone, phrases, and communication style so it sounds just like you.
+        </p>
+      </div>
+    </app-card>
+
+    <div class="form-group text-left mt-6">
+      <label class="form-label block mb-2">Tone</label>
+
+      <select
+        [(ngModel)]="tone"
+        [disabled]="isDisabled()"
+        class="form-input w-full"
+      >
+        <option value="friendly">Friendly</option>
+        <option value="encouraging">Encouraging</option>
+        <option value="neutral">Neutral</option>
+        <option value="humorous">Humorous</option>
+      </select>
+    </div>
+
+    <div class="form-group text-left mt-4">
+      <label class="form-label block mb-2">Response Length</label>
+
+      <select
+        [(ngModel)]="verbosity"
+        [disabled]="isDisabled()"
+        class="form-input w-full"
+      >
+        <option value="balanced">Balanced</option>
+        <option value="concise">Concise</option>
+        <option value="detailed">Detailed</option>
+      </select>
+    </div>
+
+    <div class="form-group text-left mt-4">
+      <label class="form-label block mb-2">Formality</label>
+
+      <select
+        [(ngModel)]="formality"
+        [disabled]="isDisabled()"
+        class="form-input w-full"
+      >
+        <option value="neutral">Neutral</option>
+        <option value="casual">Casual</option>
+        <option value="formal">Formal</option>
+      </select>
     </div>
 
     <app-button
-      class="w-full"
+      class="w-full mt-6 block"
       size="lg"
       [disabled]="!isFormValid()"
       (click)="onContinue()"
     >
-      <span class="font-semibold">Continue</span>
-      <i class="fa-solid fa-arrow-right"></i>
+      <div class="flex items-center justify-center gap-2">
+        <span class="font-semibold">Continue</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </div>
     </app-button>
   </app-card>
 </div>

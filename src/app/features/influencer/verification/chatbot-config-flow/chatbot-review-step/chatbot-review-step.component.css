@@ -1,0 +1,55 @@
+.review-section {
+  @apply py-4;
+}
+
+.review-section-header {
+  @apply flex items-center gap-3 mb-3;
+}
+
+.review-section-icon {
+  @apply w-8 h-8 rounded-lg bg-cyan/10 flex items-center justify-center shrink-0;
+}
+
+.review-section-title {
+  @apply font-semibold text-page-text text-base flex items-center;
+}
+
+.review-fields {
+  @apply flex flex-col gap-2 pl-11;
+}
+
+.review-field {
+  @apply flex items-start justify-between gap-4;
+}
+
+.review-field-label {
+  @apply text-sm text-subtle-text shrink-0 w-36;
+}
+
+.review-field-value {
+  @apply text-sm text-page-text text-right;
+}
+
+.review-field-desc {
+  @apply text-left text-subtle-text leading-relaxed;
+}
+
+.review-welcome {
+  @apply italic text-page-text;
+}
+
+.review-divider {
+  @apply border-t border-border-color;
+}
+
+.status-badge {
+  @apply text-xs px-2 py-0.5 rounded-full font-medium;
+}
+
+.badge-on {
+  @apply bg-cyan/10 text-cyan;
+}
+
+.badge-off {
+  @apply bg-subtle-bg text-subtle-text;
+}

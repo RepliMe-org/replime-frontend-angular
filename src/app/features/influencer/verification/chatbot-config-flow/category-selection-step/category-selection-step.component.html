@@ -1,0 +1,48 @@
+<div class="page-container">
+  <div class="page-icon icon-cyan">
+    <i class="fa-solid fa-layer-group page-icon-i"></i>
+  </div>
+
+  <h1 class="page-title">
+    Pick Your <span class="gradient-text">Category</span>
+  </h1>
+
+  <p class="page-subtitle">
+    Select the single category that best describes your content so your bot can
+    focus its expertise.
+  </p>
+
+  <app-card variant="default">
+    <p class="text-xs text-subtle-text text-left mb-4">
+      Choose category <span class="text-cyan font-semibold">(select one)</span>
+    </p>
+
+    <div class="form-group text-left">
+      <label class="form-label block mb-2">Category</label>
+
+      <select
+        class="form-input w-full"
+        [ngModel]="currentSelection"
+        (ngModelChange)="onSelectChange($event)"
+      >
+        <option value="" disabled selected>Select a category</option>
+
+        <option *ngFor="let category of categories" [value]="category.id">
+          {{ category.name }}
+        </option>
+      </select>
+    </div>
+  </app-card>
+
+  <div class="flex justify-between items-center mt-6">
+    <app-button variant="outline" size="lg" (click)="onBack()">
+      <i class="fa-solid fa-arrow-left btn-icon"></i>
+      <span>Back</span>
+    </app-button>
+
+    <app-button size="lg" [disabled]="!currentSelection" (click)="onContinue()">
+      <span class="font-semibold">Continue</span>
+      <i class="fa-solid fa-arrow-right btn-icon"></i>
+    </app-button>
+  </div>
+</div>

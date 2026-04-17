@@ -11,4 +11,5 @@ export type CardVariant = 'default' | 'feature' | 'creator' | 'cta';
 })
 export class CardComponent {
   @Input() variant: CardVariant = 'default';
+  @Input() customClass: string = '' ;
 }

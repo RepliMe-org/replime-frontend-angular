@@ -7,7 +7,7 @@
 }
 
 .verification-error {
-    @apply max-w-lg w-full mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/30 flex items-start gap-3;
+    @apply max-w-lg w-full ml-14 mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/30 flex items-center gap-3;
 }
 
 .verification-error-icon {

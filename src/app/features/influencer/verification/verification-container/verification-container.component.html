@@ -55,19 +55,58 @@
   </div>
 
   <div *ngIf="state === 'CHATBOT_SETUP'">
+    <div *ngIf="errorMessage" class="verification-error">
+      <i class="fa-solid fa-circle-exclamation verification-error-icon"></i>
+      <p class="verification-error-text">{{ errorMessage }}</p>
+      <button (click)="errorMessage = ''" class="verification-error-close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
     <!-- Step 0 -->
     <app-persona-setup-step
       *ngIf="currentStep === 0"
-      [personaData]="personaData"
+      [personaData]="chatbotConfig.personaData"
       (personaSubmit)="onPersonaSubmit($event)"
     ></app-persona-setup-step>
 
     <!-- Step 1 -->
     <app-welcome-message-step
       *ngIf="currentStep === 1"
-      [chatbotName]="chatbotName"
+      [chatbotName]="chatbotConfig.personaData.name"
       (welcomeMessageSubmit)="onWelcomeMessageSubmit($event)"
       (back)="onBack()"
     ></app-welcome-message-step>
+
+    <!-- Step 2 -->
+    <app-category-selection-step
+      *ngIf="currentStep === 2"
+      [selectedCategory]="chatbotConfig.category ? +chatbotConfig.category : null"
+      (categorySubmit)="onCategorySubmit($event)"
+      (back)="onBack()"
+    ></app-category-selection-step>
+
+    <!-- Step 3 -->
+    <app-message-classification-step
+      *ngIf="currentStep === 3"
+      [selectedSystemIds]="chatbotConfig.systemClassIds"
+      [selectedCustomNames]="chatbotConfig.customClassNames"
+      [category]="chatbotConfig.category ? +chatbotConfig.category : null"
+      (classificationsSubmit)="onClassificationsSubmit($event)"
+      (back)="onBack()"
+    ></app-message-classification-step>
+
+    <!-- Step 4 -->
+    <app-chatbot-review-step
+      *ngIf="currentStep === 4"
+      [personaData]="chatbotConfig.personaData"
+      [welcomeMessage]="chatbotConfig.welcomeMessage"
+      [categoryName]="selectedCategoryName"
+      [systemClassNames]="selectedSystemClassNames"
+      [customClassNames]="chatbotConfig.customClassNames"
+      [isSaving]="isSavingConfig"
+      (confirm)="onConfirmSetup()"
+      (back)="onBack()"
+    ></app-chatbot-review-step>
   </div>
 </section>
