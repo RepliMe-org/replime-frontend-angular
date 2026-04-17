@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { forkJoin } from 'rxjs';
 import { SharedModule } from '../../../../shared/shared.module';
 import { VerifyChannelStepComponent } from '../channel-verification-flow/verify-channel-step/verify-channel-step.component';
 import { AddTokenStepComponent } from '../channel-verification-flow/add-token-step/add-token-step.component';
@@ -9,8 +10,14 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../../core/services/auth.service';
 import { VerificationResponse } from '../models/verification.model';
 import { PersonaSetupStepComponent } from '../chatbot-config-flow/persona-setup-step/persona-setup-step.component';
-import { PersonaData } from '../models/chatbot-config.model';
+import {PersonaData, ChatbotConfig} from '../../../chatbot/models/chatbot-config.model';
 import { WelcomeMessageStepComponent } from '../chatbot-config-flow/welcome-message-step/welcome-message-step.component';
+import { CategorySelectionStepComponent } from '../chatbot-config-flow/category-selection-step/category-selection-step.component';
+import { ChatbotReviewStepComponent } from '../chatbot-config-flow/chatbot-review-step/chatbot-review-step.component';
+import { ChatbotCategory } from '../../../chatbot/models/chatbot-category.model';
+import { ChatbotService } from '../../../chatbot/services/chatbot.service';
+import { MessageClassificationStepComponent } from '../chatbot-config-flow/message-classification-step/message-classification-step.component';
+import { ClassificationsOutput } from '../models/classification.model';
 
 @Component({
   selector: 'app-verification-container',
@@ -23,6 +30,9 @@ import { WelcomeMessageStepComponent } from '../chatbot-config-flow/welcome-mess
     VerificationCompleteStepComponent,
     PersonaSetupStepComponent,
     WelcomeMessageStepComponent,
+    CategorySelectionStepComponent,
+    MessageClassificationStepComponent,
+    ChatbotReviewStepComponent,
   ],
   templateUrl: './verification-container.component.html',
   styleUrl: './verification-container.component.css',
@@ -30,8 +40,8 @@ import { WelcomeMessageStepComponent } from '../chatbot-config-flow/welcome-mess
 export class VerificationContainerComponent {
   @Input() state!: 'CHANNEL_VERIFICATION' | 'CHATBOT_SETUP';
   @Output() stateChange = new EventEmitter<'CHANNEL_VERIFICATION' | 'CHATBOT_SETUP' | 'DASHBOARD'>();
-
   currentStep: number = 0;
+
   channelUrl: string = '';
   verificationToken: string = '';
   expirationDate: string = '';
@@ -39,16 +49,33 @@ export class VerificationContainerComponent {
   isLoading: boolean = false;
   errorMessage: string = '';
 
-  personaData: PersonaData = { name: '', personality: '' };
-  chatbotName: string = '';
-  welcomeMessage: string = '';
+  chatbotConfig: ChatbotConfig = {
+    personaData: {
+    name: '',
+    description: '',
+    talkLikeMe: false,
+    tone: 'friendly',
+    verbosity: 'balanced',
+    formality: 'neutral',
+  },
+    welcomeMessage: '',
+    category: '',
+    systemClassIds: [],
+    customClassNames: [],
+  };
+
+  selectedCategoryName: string = '';
+  selectedSystemClassNames: string[] = [];
+
+  isSavingConfig: boolean = false;
 
   verificationSteps = ['Verify Channel', 'Add Token', 'Confirm', 'Complete'];
-  chatbotSteps = ['AI Persona', 'Welcome Message', 'Confirm', 'Complete'];
+  chatbotSteps = [ 'AI Persona', 'Welcome Message', 'Category', 'Classifications', 'Review'];
 
   constructor(
     private verificationService: VerificationService,
     private authService: AuthService,
+    private chatbotService: ChatbotService,
     private router: Router,
   ) {}
 
@@ -58,28 +85,16 @@ export class VerificationContainerComponent {
     this.errorMessage = '';
 
     this.verificationService.requestVerification(url).subscribe({
-      next: (response) => {
-        this.handleOnChannelSubmitSuccess(response);
-      },
-      error: (error) => {
-        this.handleOnChannelSubmitError(error);
-      },
+      next: (res) => this.handleOnChannelSubmitSuccess(res),
+      error: (err) => this.handleError(err, 'Failed to request verification.'),
     });
   }
 
   handleOnChannelSubmitSuccess(response: VerificationResponse) {
     this.isLoading = false;
-    this.verificationToken =
-      'RepliMe Verification: ' + response?.verificationToken;
+    this.verificationToken = response?.verificationToken;
     this.expirationDate = response?.expirationDateAt;
     this.stepForward();
-  }
-
-  handleOnChannelSubmitError(error: any) {
-    this.isLoading = false;
-    const userInfo = this.authService.getUserInfo();
-    if (!userInfo) this.router.navigate(['/auth']);
-    this.errorMessage = error?.error?.error ||'Failed to request verification. Please try again.';
   }
 
   onTokenAdded() {
@@ -91,30 +106,14 @@ export class VerificationContainerComponent {
     this.errorMessage = '';
 
     this.verificationService.confirmVerification().subscribe({
-      next: (response) => {
-        this.handleOnVerificationStartSuccess();
+      next: () => {
+        this.isVerifying = false;
+        this.authService.updateUserRole('INFLUENCER');
+        this.stepForward();
       },
-      error: (error) => {
-        this.handleOnVerificationStartError(error);
-      },
+      error: (err) =>
+        this.handleError(err,'Verification failed. Ensure token is correct.'),
     });
-  }
-
-  handleOnVerificationStartSuccess() {
-    this.isVerifying = false;
-    this.stepForward();
-    this.authService.updateUserRole('INFLUENCER');
-  }
-
-  handleOnVerificationStartError(error: any) {
-    this.isVerifying = false;
-    this.errorMessage = error?.error?.error || 'Verification failed. Please ensure the token is in your channel description and try again.';
-  }
-
-  onPersonaSubmit(data: PersonaData) {
-    this.personaData = data;
-    this.chatbotName = data.name;
-    this.stepForward();
   }
 
   onCompleteChannelVerification() {
@@ -122,21 +121,101 @@ export class VerificationContainerComponent {
     this.currentStep = 0;
   }
 
-  onWelcomeMessageSubmit(message: string) {
-    this.welcomeMessage = message;
+  onPersonaSubmit(data: PersonaData) {
+    this.chatbotConfig.personaData = data;
     this.stepForward();
   }
+
+  onWelcomeMessageSubmit(message: string) {
+    this.chatbotConfig.welcomeMessage = message;
+    this.stepForward();
+  }
+
+  onCategorySubmit(category: ChatbotCategory) {
+    this.chatbotConfig.category = category.id.toString();
+    this.selectedCategoryName = category.name;
+    this.stepForward();
+  }
+
+  onClassificationsSubmit(data: ClassificationsOutput) {
+    this.chatbotConfig.systemClassIds = data.systemClassIds;
+    this.chatbotConfig.customClassNames = data.customClassNames;
+    this.selectedSystemClassNames = data.systemClassNames ?? [];
+    this.stepForward();
+  }
+
+  onConfirmSetup() {
+    this.isSavingConfig = true;
+    this.errorMessage = '';
+    this.createConfig();
+  }
+
+  createConfig() {
+    const { personaData, welcomeMessage } = this.chatbotConfig;
+
+    const payload = {
+      name: personaData.name,
+      description: personaData.description,
+      greetingMessage: welcomeMessage,
+      talkLikeMe: personaData.talkLikeMe,
+      tone: personaData.tone.toUpperCase(),
+      verbosity: personaData.verbosity.toUpperCase(),
+      formality: personaData.formality.toUpperCase(),
+    };
+
+    this.chatbotService.createConfig(payload).subscribe({
+      next: () => this.assignCategory(),
+      error: (err) =>
+        this.handleError(err, 'Failed to create chatbot config.'),
+    });
+  }
+
+  assignCategory() {
+    this.chatbotService
+      .updateCategory(this.chatbotConfig.category, {})
+      .subscribe({
+        next: () => this.handleClassifications(),
+        error: (err) =>
+          this.handleError(err, 'Failed to assign category.'),
+      });
+  }
+
+  handleClassifications() {
+    const systemCall = this.chatbotService.updateMessageClass(this.chatbotConfig.systemClassIds);
+
+    const customCall = this.chatbotService.createMessageClass(this.chatbotConfig.customClassNames);
+
+    forkJoin([systemCall, customCall]).subscribe({
+      next: () => this.handleSuccess(),
+      error: (err) =>
+        this.handleError(err, 'Failed to save classifications.'),
+    });
+  }
+
+  handleSuccess() {
+    this.isSavingConfig = false;
+    this.stateChange.emit('DASHBOARD');
+    this.router.navigate(['/dashboard']);
+  }
+
+  handleError(err: any, fallback: string) {
+    this.isSavingConfig = false;
+    this.isLoading = false;
+    this.isVerifying = false;
+    this.errorMessage = err?.error?.error || fallback;
+  }
+
   onBack() {
     this.stepBack();
     this.errorMessage = '';
   }
 
-  stepBack() {
-    this.currentStep--;
-  }
-
   stepForward() {
     this.currentStep++;
+  }
+
+  stepBack() {
+    this.currentStep--;
   }
 
   onStartOver() {
