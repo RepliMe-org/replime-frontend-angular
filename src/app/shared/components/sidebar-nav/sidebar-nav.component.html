@@ -1,0 +1,104 @@
+<nav
+  class="sidebar"
+  [class.expanded]="!collapsed"
+  [class.collapsed]="collapsed"
+  aria-label="Main navigation"
+>
+  <!-- Header -->
+  <div class="sidebar-header">
+    <div class="sidebar-logo">
+      <a [class]="config.logoIcon" routerLink="/"></a>
+    </div>
+
+    <span class="sidebar-title gradient-text" *ngIf="!collapsed">
+      {{ config.title }}
+    </span>
+  </div>
+
+  <!-- Nav -->
+  <div class="sidebar-nav">
+    <ng-container *ngFor="let section of config.sections">
+      <span *ngIf="section.label" class="nav-section-label">
+        {{ section.label }}
+      </span>
+
+      <ng-container *ngFor="let item of section.items">
+        <!-- Route-based item -->
+        <a
+          *ngIf="item.route"
+          class="nav-item"
+          [routerLink]="item.route"
+          routerLinkActive="active"
+          [title]="collapsed ? item.label : ''"
+          (click)="onItemClick(item)"
+        >
+          <span class="nav-icon"><i [class]="item.icon"></i></span>
+          <span class="nav-label" *ngIf="!collapsed">
+            {{ item.label }}
+          </span>
+
+          <!-- tooltip -->
+          <span class="nav-tooltip" *ngIf="collapsed">
+            {{ item.label }}
+          </span>
+        </a>
+
+      </ng-container>
+
+      <div class="section-divider"></div>
+    </ng-container>
+  </div>
+
+  <!-- Footer -->
+  <div class="sidebar-footer">
+    <div class="user-chip" [class.collapsed]="collapsed">
+    <div class="user-avatar">
+      {{ config.user.avatarInitials }}
+    </div>
+
+    <div class="user-info" *ngIf="!collapsed">
+      <div class="user-name">{{ config.user.name }}</div>
+      <div class="user-role">{{ config.user.role }}</div>
+    </div>
+
+    <!-- Tooltip when collapsed -->
+    <span class="nav-tooltip" *ngIf="collapsed">
+      {{ config.user.name }} ({{ config.user.role }})
+    </span>
+  </div>
+
+    <ng-container *ngFor="let action of config.footerActions">
+      <button
+        class="back-btn"
+        (click)="action.action()"
+        [title]="collapsed ? action.label : ''"
+      >
+        <span class="nav-icon">
+          <i [class]="action.icon"></i>
+        </span>
+
+        <span *ngIf="!collapsed">
+          {{ action.label }}
+        </span>
+
+        <!-- Tooltip -->
+        <span class="nav-tooltip" *ngIf="collapsed">
+          {{ action.label }}
+        </span>
+      </button>
+    </ng-container>
+  </div>
+</nav>
+
+<!-- Collapse toggle -->
+<button
+  class="toggle-btn"
+  [class.collapsed]="collapsed"
+  (click)="toggleCollapse()"
+  [attr.aria-label]="collapsed ? 'Expand sidebar' : 'Collapse sidebar'"
+>
+  <i
+  class="fa-solid fa-chevron-left"
+  [class.rotated]="collapsed"
+></i>
+</button>

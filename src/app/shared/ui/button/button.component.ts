@@ -13,8 +13,9 @@ export class ButtonComponent {
   @Input() variant: string = 'default';
   @Input() size: string = 'default';
   @Input() disabled: boolean = false;
+  @Input() isLoading: boolean = false;
 
   getClasses() {
-    return `btn btn-${this.variant} btn-${this.size === 'default' ? 'default-size' : this.size}`;
+    return `btn btn-${this.variant} btn-${this.size === 'default' ? 'default-size' : this.size} ${this.isLoading ? 'opacity-70 cursor-not-allowed' : ''}`;
   }
 } 

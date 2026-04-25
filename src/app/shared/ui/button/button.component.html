@@ -1,8 +1,14 @@
 <button
   [attr.type]="type"
-  [disabled]="disabled"
+  [disabled]="disabled || isLoading"
   [ngClass]="getClasses()"
-  class="gap-2"
+  class="gap-2 flex items-center justify-center"
 >
-  <ng-content></ng-content>
+  <ng-container *ngIf="isLoading; else content">
+    <i class="fa-solid fa-spinner animate-spin"></i>
+    <ng-content select="[loading]"></ng-content>
+  </ng-container>
+  <ng-template #content>
+    <ng-content></ng-content>
+  </ng-template>
 </button>
