@@ -1,0 +1,23 @@
+<div *ngIf="show" class="modal-overlay" (click)="onOverlay($event)">
+  <div class="modal-box" [ngClass]="maxWidth" role="dialog" aria-modal="true">
+
+    <div class="modal-header">
+      <div>
+        <h2 class="modal-title">{{ title }}</h2>
+        <p *ngIf="subtitle" class="modal-subtitle">{{ subtitle }}</p>
+      </div>
+      <button class="modal-close" (click)="close()" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <ng-content select="[modal-body]"></ng-content>
+    </div>
+
+    <div class="modal-footer">
+      <ng-content select="[modal-footer]"></ng-content>
+    </div>
+
+  </div>
+</div>

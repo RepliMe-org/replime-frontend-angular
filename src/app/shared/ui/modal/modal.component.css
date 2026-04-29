@@ -1,0 +1,55 @@
+.modal-overlay {
+  @apply fixed inset-0 z-50 flex items-center justify-center px-4;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(6px);
+  animation: overlay-in 0.15s ease;
+}
+
+.modal-box {
+  @apply w-full rounded-2xl border border-border-color;
+  background: var(--card-bg);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+  animation: box-in 0.2s ease;
+}
+
+.modal-header {
+  @apply flex items-start justify-between gap-4 px-6 pt-6 pb-0;
+}
+
+.modal-title {
+  @apply text-lg font-bold text-page-text;
+}
+
+.modal-subtitle {
+  @apply text-sm text-subtle-text mt-1 leading-relaxed;
+}
+
+.modal-close {
+  @apply w-8 h-8 flex items-center justify-center rounded-lg
+         text-subtle-text hover:text-page-text hover:bg-subtle-bg
+         border-none cursor-pointer transition-colors duration-150 flex-shrink-0;
+  background: transparent;
+  font-size: 15px;
+}
+
+.modal-body {
+  @apply px-6 py-5;
+}
+
+.modal-footer {
+  @apply flex items-center justify-end gap-3 px-6 py-4 border-t border-border-color;
+}
+
+.modal-footer ::ng-deep app-button {
+  width: auto !important;
+}
+
+@keyframes overlay-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes box-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
