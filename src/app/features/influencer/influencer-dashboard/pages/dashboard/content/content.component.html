@@ -1,0 +1,59 @@
+<div class="content-page">
+
+  <div class="page-header">
+    <div class="page-header-text">
+      <h1 class="page-title">Learning Sources</h1>
+      <p class="page-subtitle">
+        Track and manage the videos and playlists your chatbot learns from.
+      </p>
+    </div>
+
+    <div class="header-actions">
+      <app-button
+        variant="outline"
+        size="default"
+        (click)="openModal('PLAYLIST')"
+      >
+        <i class="fa-solid fa-list"></i>
+        Add Playlist
+      </app-button>
+      <app-button size="default" (click)="openModal('VIDEO')">
+        <i class="fa-solid fa-plus"></i>
+        Add Video
+      </app-button>
+    </div>
+  </div>
+
+  <div class="grid-wrapper" *ngIf="rowData.length > 0">
+    <ag-grid-angular
+      class="ag-theme-alpine-dark content-grid"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [context]="gridContext"
+      [rowHeight]="80"
+      [headerHeight]="40"
+      [suppressCellFocus]="true"
+      [suppressHorizontalScroll]="true"
+      (gridReady)="onGridReady($event)"
+    >
+    </ag-grid-angular>
+  </div>
+
+  <div *ngIf="rowData.length === 0" class="empty-state">
+    <div class="empty-icon"><i class="fa-solid fa-film"></i></div>
+    <p class="empty-title">No sources found</p>
+    <p class="empty-desc">Add a YouTube video or playlist to get started.</p>
+    <app-button variant="default" size="default" (click)="openModal('VIDEO')">
+      <i class="fa-solid fa-plus"></i>
+      Add Video
+    </app-button>
+  </div>
+</div>
+
+<app-add-source-modal
+  [show]="showModal"
+  [mode]="modalMode"
+  [isLoading]="isSubmitting"
+  (closeModal)="showModal = false"
+  (submitSource)="onSubmit($event)"
+/>
