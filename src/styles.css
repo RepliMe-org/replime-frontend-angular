@@ -1,5 +1,7 @@
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
   @import "@fortawesome/fontawesome-free/css/all.min.css";
+  @import "ag-grid-community/styles/ag-grid.css";
+  @import "ag-grid-community/styles/ag-theme-alpine.css";
 
   @tailwind base;
   @tailwind components;
@@ -185,7 +187,7 @@
   }
 
   .page-subtitle {
-    @apply text-subtle-text mb-10 max-w-sm mx-auto;
+    @apply text-subtle-text mb-10 mx-auto;
   }
 
   .icon-red {
@@ -315,4 +317,69 @@
   select.form-input option {
     background-color: rgb(var(--input-bg-rgb));
     color: rgb(var(--page-text-rgb));
+  }
+
+  .grid-wrapper {
+    @apply rounded-xl border border-border-color overflow-hidden;
+    background: var(--card-bg);
+  }
+
+  .content-grid {
+    width: 100%;
+  }
+
+  .content-grid.ag-theme-alpine,
+  .content-grid.ag-theme-alpine-dark,
+  .content-grid {
+    --ag-background-color: var(--card-bg);
+    --ag-foreground-color: var(--page-text);
+    --ag-border-color: var(--border-color);
+    --ag-secondary-border-color: var(--border-color);
+    --ag-row-hover-color: rgba(var(--subtle-bg-rgb), 0.6);
+    --ag-selected-row-background-color: rgba(var(--cyan-rgb), 0.08);
+    --ag-cell-horizontal-padding: 16px;
+    --ag-row-border-color: var(--border-color);
+    --ag-header-background-color: var(--card-bg);
+    --ag-odd-row-background-color: var(--card-bg);
+    --ag-font-family: 'Inter', system-ui, sans-serif;
+    --ag-font-size: 14px;
+    --ag-grid-size: 4px;
+    --ag-list-item-height: 80px;
+    --ag-input-focus-border-color: var(--cyan);
+    --ag-range-selection-border-color: var(--cyan);
+    --ag-checkbox-checked-color: var(--cyan);
+    --ag-alpine-active-color: var(--cyan);
+  }
+
+  .empty-state {
+    @apply flex flex-col items-center justify-center py-20 text-center;
+  }
+
+  .empty-icon {
+    @apply w-16 h-16 rounded-2xl flex items-center justify-center mb-4;
+    background: var(--subtle-bg);
+    font-size: 28px;
+    color: var(--subtle-text);
+  }
+
+  .empty-title {
+    @apply text-lg font-semibold text-page-text mb-1;
+  }
+
+  .empty-desc {
+    @apply text-sm text-subtle-text mb-6;
+  }
+
+  .empty-state app-button {
+    @apply w-auto;
+  }
+
+  .grid-wrapper {
+    height: 500px;
+    width: 100%;
+  }
+
+  .content-grid {
+    width: 100%;
+    height: 100%;
   }

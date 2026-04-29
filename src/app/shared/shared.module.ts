@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CardComponent } from './ui/card/card.component';
 import { StepperComponent } from './ui/stepper/stepper.component';
 import { ButtonComponent } from './ui/button/button.component';
+import { ModalComponent } from './ui/modal/modal.component';
 
 @NgModule({
   declarations: [],
@@ -23,6 +24,7 @@ import { ButtonComponent } from './ui/button/button.component';
     CardComponent,
     ButtonComponent,
     StepperComponent,
+    ModalComponent
   ],
   exports: [
     CommonModule,
@@ -39,6 +41,7 @@ import { ButtonComponent } from './ui/button/button.component';
     CardComponent,
     ButtonComponent,
     StepperComponent,
+    ModalComponent
   ],
 })
 export class SharedModule {}

@@ -1,0 +1,22 @@
+<div class="flex items-center h-full py-2">
+  <div
+    class="w-16 h-11 rounded-lg overflow-hidden flex-shrink-0"
+    style="background: var(--subtle-bg)"
+  >
+    <img
+      *ngIf="thumbnail; else placeholder"
+      [src]="thumbnail"
+      alt="thumbnail"
+      class="w-full h-full object-cover"
+      (error)="thumbnail = null"
+    />
+    <ng-template #placeholder>
+      <div class="w-full h-full flex items-center justify-center">
+        <i
+          class="fa-solid fa-ellipsis"
+          style="color: var(--subtle-text); font-size: 1rem"
+        ></i>
+      </div>
+    </ng-template>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+.field-label {
+  @apply block text-sm font-medium text-page-text mb-2;
+}
+
+.required {
+  @apply text-red-400 ml-0.5;
+}
+
+input.is-error {
+  border-color: var(--danger) !important;
+  box-shadow: 0 0 0 3px rgba(var(--danger-rgb), 0.15) !important;
+}
+
+.error-msg {
+  @apply flex items-center gap-1.5 text-xs text-red-400 mt-2;
+}

@@ -3,7 +3,14 @@ import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { HeroSectionComponent } from './features/landing/hero-section/hero-section.component';
 import { FeaturesSectionComponent } from './features/landing/features-section/features-section.component';
+import { AllCommunityModule, ModuleRegistry, provideGlobalGridOptions } from 'ag-grid-community';
 
+provideGlobalGridOptions({
+    theme: "legacy",
+});
+ModuleRegistry.registerModules([
+    AllCommunityModule,
+]);
 
 @Component({
   selector: 'app-root',

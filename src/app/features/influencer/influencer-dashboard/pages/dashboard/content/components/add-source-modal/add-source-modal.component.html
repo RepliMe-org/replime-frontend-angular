@@ -1,0 +1,33 @@
+<app-modal
+  [show]="show"
+  [title]="getConfig().title"
+  [subtitle]="getConfig().subtitle"
+  (closeModal)="close()"
+>
+  <div modal-body>
+    <label class="field-label">
+      YouTube URL <span class="required">*</span>
+    </label>
+    <input
+      type="url"
+      [(ngModel)]="url"
+      [placeholder]="getConfig().placeholder"
+      [class.is-error]="urlError"
+      (input)="urlError = ''"
+      autocomplete="off"
+    />
+    <p *ngIf="urlError" class="error-msg">
+      <i class="fa-solid fa-circle-exclamation"></i> {{ urlError }}
+    </p>
+  </div>
+
+  <ng-container modal-footer>
+    <app-button variant="outline" [disabled]="isLoading" (click)="close()">
+      Cancel
+    </app-button>
+    <app-button variant="default" [isLoading]="isLoading" (click)="submit()">
+      <span loading>Adding…</span>
+      {{ getConfig().btnLabel }}
+    </app-button>
+  </ng-container>
+</app-modal>
