@@ -1,0 +1,13 @@
+<div class="flex items-center justify-center h-full">
+  <button
+    class="w-8 h-8 rounded-lg flex items-center justify-center transition-colors duration-200"
+    style="color: var(--danger); background: transparent"
+    (mouseenter)="hovered = true"
+    (mouseleave)="hovered = false"
+    [style.background]="hovered ? 'rgba(239,67,67,0.12)' : 'transparent'"
+    (click)="onDelete()"
+    title="Delete video"
+  >
+    <i class="fa-solid fa-trash-can text-sm"></i>
+  </button>
+</div>
