@@ -51,6 +51,10 @@ export const routes: Routes = [
           import('./features/influencer/influencer-dashboard/influencer-dashboard.component').then(
             (m) => m.InfluencerDashboardComponent,
           ),
+        loadChildren: () =>
+          import('./features/influencer/influencer-dashboard/influencer.routes').then(
+            (m) => m.INFLUENCER_ROUTES,
+          ),
       },
       {
         path: '',
