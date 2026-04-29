@@ -1,0 +1,201 @@
+:host {
+  @apply relative contents;
+}
+
+.sidebar {
+  @apply flex flex-col min-h-screen shrink-0 overflow-hidden
+         transition-all duration-300
+         border-r;
+  background: var(--sidebar-bg);
+  border-color: var(--sidebar-border);
+}
+
+.sidebar.expanded {
+  @apply w-[240px];
+}
+
+.sidebar.collapsed {
+  @apply w-[90px];
+}
+
+.sidebar-header {
+  @apply flex items-center gap-3 border-b overflow-hidden;
+  border-color: var(--sidebar-border);
+  padding: 16px;
+}
+
+.sidebar.collapsed .sidebar-header {
+  @apply justify-center px-0;
+}
+
+.sidebar-logo {
+  @apply flex items-center justify-center rounded-lg shrink-0 w-8 h-8;
+  background: var(--gradient-primary);
+}
+
+.sidebar-logo i {
+  @apply text-[14px];
+  color: var(--cyan-text);
+}
+
+.sidebar-title {
+  @apply text-sm font-semibold whitespace-nowrap transition-opacity duration-150;
+  color: var(--sidebar-text);
+}
+
+.sidebar.collapsed .sidebar-title {
+  @apply opacity-0 pointer-events-none;
+}
+
+.sidebar-nav {
+  @apply flex flex-col flex-1 overflow-y-auto px-2 py-2 gap-[2px];
+}
+
+.sidebar-nav::-webkit-scrollbar {
+  width: 4px;
+}
+.sidebar-nav::-webkit-scrollbar-thumb {
+  background: var(--sidebar-border);
+  border-radius: 4px;
+}
+
+.nav-section-label {
+  @apply text-[10px] font-semibold uppercase tracking-wider
+         px-2 pt-2 pb-1 whitespace-nowrap overflow-hidden transition-opacity;
+  color: var(--subtle-text);
+}
+
+.sidebar.collapsed .nav-section-label {
+  @apply opacity-0;
+}
+
+.section-divider {
+  @apply h-[1px] my-1 opacity-50;
+  background: var(--sidebar-border);
+}
+
+.nav-item {
+  @apply relative flex items-center gap-2 px-3 py-2 rounded-lg w-full text-left
+         text-[13.5px] transition-all duration-150 whitespace-nowrap overflow-hidden;
+  color: var(--subtle-text);
+}
+
+.nav-item:hover {
+  background: var(--sidebar-subtle-bg);
+  color: var(--sidebar-text);
+}
+
+.nav-item.active {
+  background: var(--gradient-primary);
+  color: var(--cyan-text);
+}
+
+.sidebar.collapsed .nav-item {
+  @apply justify-center;
+}
+
+/* Icon */
+.nav-icon {
+  @apply flex items-center justify-center min-w-[24px];
+}
+
+.nav-icon i {
+  @apply text-sm;
+}
+
+/* Label */
+.nav-label {
+  @apply flex-1 transition-opacity duration-200;
+}
+
+.sidebar.collapsed .nav-label {
+  @apply opacity-0 pointer-events-none;
+}
+
+/* Tooltip */
+.nav-tooltip {
+  @apply absolute left-[70px] top-1/2 -translate-y-1/2
+         text-xs px-2 py-1 rounded-md whitespace-nowrap
+         opacity-0 pointer-events-none transition;
+  background: #111;
+  color: #fff;
+}
+
+.sidebar.collapsed .nav-item:hover .nav-tooltip {
+  @apply opacity-100;
+}
+
+.sidebar-footer {
+  @apply border-t p-4 flex flex-col gap-2;
+  border-color: var(--sidebar-border);
+}
+
+/* User chip */
+.user-chip {
+  @apply flex items-center gap-3 p-2 rounded-lg relative;
+  background: var(--sidebar-subtle-bg);
+}
+
+.sidebar.collapsed .user-chip {
+  @apply justify-center;
+}
+
+.user-avatar {
+  @apply flex items-center justify-center rounded-full font-bold text-white;
+  @apply w-9 h-9;
+  background: #444;
+}
+
+.user-info {
+  @apply overflow-hidden;
+}
+
+.user-name {
+  @apply text-xs font-semibold whitespace-nowrap;
+  color: var(--sidebar-text);
+}
+
+.user-role {
+  @apply text-[10px] uppercase tracking-wide;
+  color: var(--sidebar-cyan);
+}
+
+.back-btn {
+  @apply flex items-center gap-2 w-full mt-2 px-3 py-2 rounded-lg
+         text-[12.5px] transition-all;
+  color: var(--subtle-text);
+}
+
+.back-btn:hover {
+  background: var(--sidebar-subtle-bg);
+  color: var(--sidebar-text);
+}
+
+.sidebar.collapsed .back-btn {
+  @apply justify-center;
+}
+
+.sidebar.collapsed .back-btn span:not(.nav-icon) {
+  @apply hidden;
+}
+
+.toggle-btn {
+  @apply absolute top-5 z-10 flex items-center justify-center
+         w-5 h-5 rounded-full border transition-all duration-300;
+  background: var(--sidebar-bg);
+  border-color: var(--sidebar-border);
+  left: 228px;
+}
+
+.toggle-btn.collapsed {
+  left: 79px;
+}
+
+.toggle-btn i {
+  @apply text-[10px] transition-transform;
+  color: var(--subtle-text);
+}
+
+.toggle-btn i.rotated {
+  @apply rotate-180;
+}

@@ -143,15 +143,10 @@
       <span>Back</span>
     </app-button>
 
-    <app-button size="lg" (click)="confirm.emit()" [disabled]="isSaving">
-      <ng-container *ngIf="!isSaving">
-        <i class="fa-solid fa-rocket btn-icon"></i>
-        <span class="font-semibold">Setup My Chatbot</span>
-      </ng-container>
-      <ng-container *ngIf="isSaving">
-        <i class="fa-solid fa-spinner fa-spin btn-icon"></i>
-        <span class="font-semibold">Setting up...</span>
-      </ng-container>
+    <app-button size="lg" (click)="confirm.emit()" [isLoading]="isSaving">
+      <span loading class="ml-2 font-semibold">Setting up...</span>
+      <i class="fa-solid fa-rocket btn-icon"></i>
+      <span class="font-semibold">Setup My Chatbot</span>
     </app-button>
   </div>
 </div>

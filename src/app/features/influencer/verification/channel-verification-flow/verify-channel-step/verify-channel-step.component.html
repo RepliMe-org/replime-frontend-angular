@@ -41,18 +41,13 @@
     <app-button
       (click)="onSubmit()"
       class="btn-full"
-      [disabled]="!isValidUrl || isLoading"
+      [disabled]="!isValidUrl()"
+      [isLoading]="isLoading"
       size="lg"
     >
-      <ng-container *ngIf="isLoading; else continueTemplate">
-        <i class="fa-solid fa-spinner animate-spin"></i>
-        Requesting Verification...
-      </ng-container>
-
-      <ng-template #continueTemplate>
-        <span class="btn-text font-semibold"> Continue </span>
-        <i class="fa-solid fa-arrow-right btn-text ml-2"></i>
-      </ng-template>
+      <span loading class="ml-2">Requesting Verification...</span>
+      <span class="btn-text font-semibold"> Continue </span>
+      <i class="fa-solid fa-arrow-right btn-text ml-2"></i>
     </app-button>
   </app-card>
 </div>

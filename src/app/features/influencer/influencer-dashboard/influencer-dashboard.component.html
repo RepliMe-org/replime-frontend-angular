@@ -1,14 +1,16 @@
-<app-verification-container
-  *ngIf="dashboardState !== 'DASHBOARD'"
-  [state]="dashboardState"
-  (stateChange)="updateDashboardState($event)">
-</app-verification-container>
+<ng-container *ngIf="!isLoading; else loadingTemplate">
+  <app-verification-container
+    *ngIf="dashboardState !== 'DASHBOARD'"
+    [state]="dashboardState"
+    (stateChange)="updateDashboardState($event)" />
 
-<div *ngIf="dashboardState === 'DASHBOARD'" class="p-6">
-  <h1>
-    Welcome to Your Influencer Dashboard
-  </h1>
-  <p class="text-subtle-text">
-    Your channel has been verified! You can now access all influencer features.
-  </p>
-</div>
+  <div *ngIf="dashboardState === 'DASHBOARD'">
+    <router-outlet />
+  </div>
+</ng-container>
+
+<ng-template #loadingTemplate>
+  <div class="flex items-center justify-center min-h-[50vh]">
+    <div class="animate-spin rounded-full h-12 w-12 border-4 border-gray-200 border-t-blue-600"></div>
+  </div>
+</ng-template>
