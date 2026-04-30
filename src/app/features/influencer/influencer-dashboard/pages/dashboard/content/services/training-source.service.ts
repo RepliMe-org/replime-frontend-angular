@@ -18,10 +18,12 @@ export class TrainingSourceService {
     );
   }
 
-  deleteVideo(videoId: number): Observable<string> {
-    return this.http.delete<string>(`${this.baseUrl}/videos/${videoId}`);
+  deleteVideo(videoId: string) {
+    return this.http.delete(`${this.baseUrl}/videos/${videoId}`, {
+      responseType: 'text',
+    });
   }
-
+  
   getAllVideos(): Observable<VideoResponseDTO[]> {
     return this.http.get<VideoResponseDTO[]>(`${this.baseUrl}/videos`);
   }

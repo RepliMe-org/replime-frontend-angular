@@ -125,7 +125,7 @@ export class ContentComponent implements OnInit, OnDestroy {
     });
   }
 
-  deleteVideo(videoId: number) {
+  deleteVideo(videoId: string) {
     this.trainingSourceService
       .deleteVideo(videoId)
       .pipe(finalize(() => this.getAllVideos()))

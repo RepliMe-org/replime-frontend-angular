@@ -11,11 +11,11 @@ import { ICellRendererParams } from 'ag-grid-community';
 })
 export class ActionCellRendererComponent implements ICellRendererAngularComp {
   hovered = false;
-  private videoId: number;
-  private onDeleteCallback: (videoId: number) => void;
+  videoId: string;
+  private onDeleteCallback: (videoId: string) => void;
 
-  agInit(params: ICellRendererParams) {
-    this.videoId = params.data?.videoId;
+  agInit(params: ICellRendererParams) {    
+    this.videoId = params.data?.youtubeVideoId;
     this.onDeleteCallback = params.context?.onDeleteVideo;
   }
 

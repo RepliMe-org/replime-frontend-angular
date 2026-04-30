@@ -1,7 +1,3 @@
-.field-label {
-  @apply block text-sm font-medium text-page-text mb-2;
-}
-
 .required {
   @apply text-red-400 ml-0.5;
 }

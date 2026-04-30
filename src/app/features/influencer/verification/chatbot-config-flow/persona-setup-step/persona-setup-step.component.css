@@ -1,14 +1,4 @@
-.persona-icon {
-  @apply w-24 h-24 mx-auto mb-8 rounded-2xl bg-cyan/20 flex items-center justify-center;
-}
 
-.persona-title {
-  @apply text-3xl font-bold text-page-text mb-3;
-}
-
-.persona-subtitle {
-  @apply text-subtle-text mb-10 max-w-md mx-auto;
-}
 
 .personality-grid {
   @apply grid grid-cols-1 md:grid-cols-2 gap-3;

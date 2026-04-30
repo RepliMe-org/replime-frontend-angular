@@ -51,13 +51,14 @@ export class VerificationContainerComponent {
 
   chatbotConfig: ChatbotConfig = {
     personaData: {
-    name: '',
-    description: '',
-    talkLikeMe: false,
-    tone: 'friendly',
-    verbosity: 'balanced',
-    formality: 'neutral',
-  },
+      name: '',
+      description: '',
+      talkLikeMe: false,
+      fetchChannel: false,
+      tone: 'friendly',
+      verbosity: 'balanced',
+      formality: 'neutral',
+    },
     welcomeMessage: '',
     category: '',
     systemClassIds: [],
@@ -117,8 +118,10 @@ export class VerificationContainerComponent {
   }
 
   onCompleteChannelVerification() {
+    this.isLoading = true;
     this.stateChange.emit('CHATBOT_SETUP');
     this.currentStep = 0;
+    this.isLoading = false;
   }
 
   onPersonaSubmit(data: PersonaData) {
@@ -158,6 +161,7 @@ export class VerificationContainerComponent {
       description: personaData.description,
       greetingMessage: welcomeMessage,
       talkLikeMe: personaData.talkLikeMe,
+      fetchChannel: personaData.fetchChannel,
       tone: personaData.tone.toUpperCase(),
       verbosity: personaData.verbosity.toUpperCase(),
       formality: personaData.formality.toUpperCase(),
@@ -165,8 +169,7 @@ export class VerificationContainerComponent {
 
     this.chatbotService.createConfig(payload).subscribe({
       next: () => this.assignCategory(),
-      error: (err) =>
-        this.handleError(err, 'Failed to create chatbot config.'),
+      error: (err) => this.handleError(err, 'Failed to create chatbot config.'),
     });
   }
 
@@ -175,8 +178,7 @@ export class VerificationContainerComponent {
       .updateCategory(this.chatbotConfig.category, {})
       .subscribe({
         next: () => this.handleClassifications(),
-        error: (err) =>
-          this.handleError(err, 'Failed to assign category.'),
+        error: (err) => this.handleError(err, 'Failed to assign category.'),
       });
   }
 
@@ -187,8 +189,7 @@ export class VerificationContainerComponent {
 
     forkJoin([systemCall, customCall]).subscribe({
       next: () => this.handleSuccess(),
-      error: (err) =>
-        this.handleError(err, 'Failed to save classifications.'),
+      error: (err) => this.handleError(err, 'Failed to save classifications.'),
     });
   }
 

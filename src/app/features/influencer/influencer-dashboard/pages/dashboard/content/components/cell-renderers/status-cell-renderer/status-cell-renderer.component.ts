@@ -9,13 +9,13 @@ const STATUS_MAP= {
   COMPLETED: {
     label: 'Indexed',
     icon: 'fa-solid fa-circle-check',
-    color: 'green-500',          // green-500
+    color: '#22c55e',
     bg: 'rgba(34,197,94,0.12)',
   },
   PROCESSING: {
     label: 'Learning',
     icon: 'fa-solid fa-spinner fa-spin',
-    color: 'amber-400',          // amber-400
+    color: '#f59e0b',
     bg: 'rgba(245,158,11,0.12)',
   },
   FAILED: {
