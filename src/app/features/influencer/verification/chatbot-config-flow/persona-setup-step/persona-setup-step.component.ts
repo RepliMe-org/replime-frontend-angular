@@ -18,6 +18,7 @@ export class PersonaSetupStepComponent implements OnInit {
   chatbotDescription: string = '';
   selectedPersonality: string = '';
   talkLikeMe: boolean = false;
+  fetchChannel: boolean = false;
 
   verbosity: string = 'balanced';
   formality: string = 'neutral';
@@ -28,6 +29,7 @@ export class PersonaSetupStepComponent implements OnInit {
     this.chatbotName = this.personaData.name ?? '';
     this.chatbotDescription = this.personaData.description ?? '';
     this.talkLikeMe = this.personaData.talkLikeMe ?? false;
+    this.fetchChannel = this.personaData.fetchChannel ?? false;
 
     this.tone = this.personaData.tone ?? 'friendly';
     this.verbosity = this.personaData.verbosity ?? 'balanced';
@@ -39,6 +41,10 @@ export class PersonaSetupStepComponent implements OnInit {
     this.talkLikeMe = !this.talkLikeMe;
   }
 
+  toggleFetchChannel() {
+    this.fetchChannel = !this.fetchChannel;
+  }
+
   isDisabled() {
     return this.talkLikeMe;
   }
@@ -48,6 +54,7 @@ export class PersonaSetupStepComponent implements OnInit {
       name: this.chatbotName,
       description: this.chatbotDescription,
       talkLikeMe: this.talkLikeMe,
+      fetchChannel: this.fetchChannel,
       tone: this.tone,
       verbosity: this.verbosity,
       formality: this.formality,

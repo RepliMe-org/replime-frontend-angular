@@ -2,6 +2,7 @@ export interface PersonaData {
   name: string;
   description: string;
   talkLikeMe: boolean;
+  fetchChannel: boolean;
   tone: string;
   verbosity: string;
   formality: string;
