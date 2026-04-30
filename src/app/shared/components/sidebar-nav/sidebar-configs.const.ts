@@ -1,7 +1,7 @@
 import { SidebarConfig } from './sidebar-nav.model';
-import { AuthService } from '../../../core/services/auth.service';
+import { AuthService } from '../../../features/auth/services/auth.service';
 import { Router } from '@angular/router';
-import { UserInfo } from '../../../core/models/auth.model';
+import { UserInfo } from '../../../features/auth/models/auth.model';
 
 export const ADMIN_SIDEBAR_CONFIG = (
   router: Router,

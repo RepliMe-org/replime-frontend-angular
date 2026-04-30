@@ -13,7 +13,7 @@ export const routes: Routes = [
       {
         path: '',
         loadComponent: () =>
-          import('./features/landing/home/home.component').then(
+          import('./features/landing/pages/home/home.component').then(
             (m) => m.HomeComponent,
           ),
       },
@@ -47,12 +47,8 @@ export const routes: Routes = [
     children: [
       {
         path: 'influencer',
-        loadComponent: () =>
-          import('./features/influencer/influencer-dashboard/influencer-dashboard.component').then(
-            (m) => m.InfluencerDashboardComponent,
-          ),
         loadChildren: () =>
-          import('./features/influencer/influencer-dashboard/influencer.routes').then(
+          import('./features/influencer/influencer.routes').then(
             (m) => m.INFLUENCER_ROUTES,
           ),
       },

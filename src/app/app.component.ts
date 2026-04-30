@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
-import { HeroSectionComponent } from './features/landing/hero-section/hero-section.component';
-import { FeaturesSectionComponent } from './features/landing/features-section/features-section.component';
+import { HeroSectionComponent } from './features/landing/components/hero-section/hero-section.component';
+import { FeaturesSectionComponent } from './features/landing/components/features-section/features-section.component';
 import { AllCommunityModule, ModuleRegistry, provideGlobalGridOptions } from 'ag-grid-community';
 
 provideGlobalGridOptions({

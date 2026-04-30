@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../../core/services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { AuthFormComponent } from '../../components/auth-form/auth-form.component';
-import { AuthFormSubmitEvent } from '../../../../core/models/auth.model';
+import { AuthFormSubmitEvent } from '../../models/auth.model';
 import { SharedModule } from '../../../../shared/shared.module';
 
 @Component({
