@@ -1,0 +1,25 @@
+<div class="dashboard-form-card">
+  <h2 class="dashboard-form-card-title">{{ title }}</h2>
+
+  <ng-content></ng-content>
+
+  <p *ngIf="errorMessage" class="error-text">{{ errorMessage }}</p>
+
+  <div class="dashboard-form-actions">
+    <app-button
+      type="submit"
+      (click)="save.emit()"
+      [isLoading]="saving"
+    >
+      <i class="fa-solid fa-check text-xs"></i>
+      {{ saving ? savingText : saveText }}
+    </app-button>
+    <app-button
+      variant="outline"
+      (click)="cancel.emit()"
+      [disabled]="saving"
+    >
+      <i class="fa-solid fa-xmark text-xs"></i> Cancel
+    </app-button>
+  </div>
+</div>

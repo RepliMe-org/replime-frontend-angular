@@ -1,0 +1,15 @@
+.page-header {
+  @apply flex items-start justify-between gap-6;
+}
+
+.page-title {
+  @apply text-2xl font-bold text-page-text md:text-3xl;
+}
+
+.page-subtitle {
+  @apply text-subtle-text mt-1 text-sm;
+}
+
+.header-actions {
+  @apply flex items-center gap-3 flex-shrink-0;
+}

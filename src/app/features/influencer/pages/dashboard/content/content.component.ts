@@ -1,16 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, DestroyRef, inject } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
 import { ColDef, GridApi } from 'ag-grid-community';
-import { finalize, Subscription, switchMap } from 'rxjs';
+import { finalize, switchMap } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-import {
-  AddSourceMode,
-  AddSourcePayload,
-  VideoResponseDTO,
-} from './models/training-source.model';
-import { TrainingSourceService } from './services/training-source.service';
+import { AddSourceMode, AddSourcePayload, VideoResponseDTO } from '../../../models/training-source.model';
+import { TrainingSourceService } from '../../../services/training-source.service';
 import { SyncStatusWsService } from '../../../../../core/websocket/domains/sync-status-ws.service';
-import { ChatbotService } from '../../../../chatbot/services/chatbot.service';
+import { InfluencerChatbotService } from '../../../services/influencer-chatbot.service';
 import { AddSourceModalComponent } from './components/add-source-modal/add-source-modal.component';
 import { ThumbnailCellRendererComponent } from './components/cell-renderers/thumbnail-cell-renderer/thumbnail-cell-renderer.component';
 import { VideoDetailsCellRendererComponent } from './components/cell-renderers/video-details-cell-render/video-details-cell-render.component';
@@ -18,6 +15,7 @@ import { StatusCellRendererComponent } from './components/cell-renderers/status-
 import { ActionCellRendererComponent } from './components/cell-renderers/action-cell-renderer/action-cell-renderer.component';
 import { WsSyncMessage } from '../../../../../core/websocket/websocket.model';
 import { SharedModule } from '../../../../../shared/shared.module';
+import { ToastService } from '../../../../../core/services/toast.service';
 
 @Component({
   selector: 'app-content',
@@ -69,12 +67,13 @@ export class ContentComponent implements OnInit, OnDestroy {
     },
   ];
 
-  private wsSub?: Subscription;
+  private destroyRef = inject(DestroyRef);
 
   constructor(
     private trainingSourceService: TrainingSourceService,
-    private chatbotService: ChatbotService,
+    private chatbotService: InfluencerChatbotService,
     private syncStatusWs: SyncStatusWsService,
+    private toast: ToastService,
   ) {}
 
   ngOnInit() {
@@ -84,15 +83,16 @@ export class ContentComponent implements OnInit, OnDestroy {
       .getChatbotConfig()
       .pipe(
         switchMap((chatbot: any) => {
-          const chatbotId = chatbot?.id;
+          const chatbotId = chatbot?.chatbotInfo?.id;
 
           if (!chatbotId) {
             console.error('[WS] No chatbotId found — skipping WebSocket');
             return this.trainingSourceService.getAllVideos();
           }
 
-          this.wsSub = this.syncStatusWs
+          this.syncStatusWs
             .connect(chatbotId)
+            .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((msg: WsSyncMessage) => {
               if (msg.type === 'VIDEO_UPDATE' && msg.videoId != null) {
                 this.updateRowStatus(msg.videoId, msg.status);
@@ -130,7 +130,8 @@ export class ContentComponent implements OnInit, OnDestroy {
       .deleteVideo(videoId)
       .pipe(finalize(() => this.getAllVideos()))
       .subscribe({
-        error: (err) => console.error('[Delete] Failed:', err),
+        next: () => this.toast.success('Video removed successfully.'),
+        error: () => this.toast.error('Failed to delete video. Please try again.'),
       });
   }
 
@@ -139,7 +140,7 @@ export class ContentComponent implements OnInit, OnDestroy {
     this.showModal = true;
   }
 
-  onGridReady(params: { api: GridApi }) {
+  onGridReady(params) {
     this.gridApi = params.api;
   }
 
@@ -155,17 +156,17 @@ export class ContentComponent implements OnInit, OnDestroy {
       )
       .subscribe({
         next: () => {
+          this.toast.success('Source added successfully.');
           this.showModal = false;
           this.getAllVideos();
         },
         error: (err) => {
-          console.error('[Add Source] Failed:', err);
+          this.toast.error( err?.error?.message || 'Failed to add source. Please try again.');
         },
       });
   }
 
   ngOnDestroy() {
-    this.wsSub?.unsubscribe();
     this.syncStatusWs.disconnect();
   }
 }

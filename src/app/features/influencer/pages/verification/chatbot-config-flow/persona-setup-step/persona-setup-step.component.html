@@ -13,13 +13,13 @@
   </p>
 
   <app-card>
+    <form [formGroup]="personaForm">
     <div class="grid grid-cols-1 gap-4 text-left mb-4">
       <div class="form-group">
         <label class="form-label block">Bot Name</label>
         <input
           type="text"
-          name="chatbotName"
-          [(ngModel)]="chatbotName"
+          formControlName="name"
           placeholder="e.g. YourChannel AI, Ask YourChannel"
           class="form-input w-full"
         />
@@ -31,13 +31,54 @@
       <div class="form-group">
         <label class="form-label block">Chatbot Description</label>
         <textarea
-          [(ngModel)]="chatbotDescription"
-          name="chatbotDescription"
+          formControlName="description"
           rows="2"
           placeholder="e.g. Helps viewers understand my tutorials and answers questions about my content"
           class="form-input w-full resize-none"
         ></textarea>
         <p class="form-help mt-1">Describe what your chatbot is meant to do.</p>
+      </div>
+    </div>
+
+    <div class="border border-border-color/50 rounded-xl p-4 mb-5">
+      <p
+        class="text-xs font-semibold text-subtle-text uppercase tracking-wider text-left mb-3 flex items-center gap-2"
+      >
+        <i class="fa-solid fa-image text-cyan"></i>
+        Bot Avatar
+      </p>
+      <p class="text-xs text-subtle-text text-left mb-4">
+        Choose an avatar that will represent your chatbot in conversations.
+      </p>
+
+      <div class="flex flex-wrap gap-3 justify-start">
+        <button
+          *ngFor="let n of avatarList"
+          type="button"
+          (click)="selectAvatar(n)"
+          [ngClass]="
+            selectedAvatar() === n
+              ? 'ring-2 ring-cyan ring-offset-2 ring-offset-input-bg scale-105'
+              : 'ring-1 ring-border-color hover:ring-cyan/50 hover:scale-105'
+          "
+          class="relative w-16 h-16 rounded-full overflow-hidden bg-subtle-bg transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan"
+          [attr.aria-label]="'Avatar ' + n"
+          [attr.aria-pressed]="selectedAvatar() === n"
+        >
+          <img
+            [src]="'assets/avatars/' + n + '.svg'"
+            [alt]="'Avatar ' + n"
+            class="w-full h-full object-cover"
+            draggable="false"
+          />
+
+          <span
+            *ngIf="selectedAvatar() === n"
+            class="absolute bottom-0 right-0 w-5 h-5 bg-cyan rounded-full flex items-center justify-center"
+          >
+            <i class="fa-solid fa-check text-[9px] text-cyan-text"></i>
+          </span>
+        </button>
       </div>
     </div>
 
@@ -162,8 +203,7 @@
         <div class="form-group">
           <label class="form-label block mb-1 text-xs">Tone</label>
           <select
-            [(ngModel)]="tone"
-            [disabled]="talkLikeMe"
+            formControlName="tone"
             class="form-input w-full text-sm"
           >
             <option value="friendly">Friendly</option>
@@ -175,7 +215,7 @@
 
         <div class="form-group">
           <label class="form-label block mb-1 text-xs">Response Length</label>
-          <select [(ngModel)]="verbosity" class="form-input w-full text-sm">
+          <select formControlName="verbosity" class="form-input w-full text-sm">
             <option value="balanced">Balanced</option>
             <option value="concise">Concise</option>
             <option value="detailed">Detailed</option>
@@ -185,8 +225,7 @@
         <div class="form-group">
           <label class="form-label block mb-1 text-xs">Formality</label>
           <select
-            [(ngModel)]="formality"
-            [disabled]="talkLikeMe"
+            formControlName="formality"
             class="form-input w-full text-sm"
           >
             <option value="neutral">Neutral</option>
@@ -217,5 +256,6 @@
         <i class="fa-solid fa-arrow-right"></i>
       </div>
     </app-button>
+    </form>
   </app-card>
 </div>

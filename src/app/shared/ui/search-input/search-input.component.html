@@ -1,0 +1,11 @@
+<div class="dashboard-search-wrapper">
+  <i class="fa-solid fa-magnifying-glass dashboard-search-icon"></i>
+  <input
+    type="text"
+    class="form-input"
+    style="padding-left: 40px"
+    [placeholder]="placeholder"
+    [ngModel]="value"
+    (ngModelChange)="onModelChange($event)"
+  />
+</div>

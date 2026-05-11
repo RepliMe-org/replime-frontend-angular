@@ -17,6 +17,13 @@ export const routes: Routes = [
             (m) => m.HomeComponent,
           ),
       },
+      {
+        path: 'explore',
+        loadComponent: () =>
+          import('./features/landing/pages/explore/explore.component').then(
+            (m) => m.ExploreComponent,
+          ),
+      },
     ],
   },
 
@@ -51,6 +58,11 @@ export const routes: Routes = [
           import('./features/influencer/influencer.routes').then(
             (m) => m.INFLUENCER_ROUTES,
           ),
+      },
+      {
+        path: 'admin',
+        loadChildren: () =>
+          import('./features/admin/admin.routes').then((m) => m.ADMIN_ROUTES),
       },
       {
         path: '',

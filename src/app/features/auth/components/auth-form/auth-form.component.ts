@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthFormSubmitEvent } from '../../models/auth.model';
+import { AuthFormSubmitEvent } from '../../../../core/models/auth.model';
 import { SharedModule } from '../../../../shared/shared.module';
 
 

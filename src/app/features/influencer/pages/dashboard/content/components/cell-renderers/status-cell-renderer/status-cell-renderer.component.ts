@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
-import { SyncStatus } from '../../../models/training-source.model';
+import { SyncStatus } from '../../../../../../models/training-source.model'; 
 
 
 const STATUS_MAP= {

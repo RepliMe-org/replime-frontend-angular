@@ -6,6 +6,16 @@ import { CardComponent } from './ui/card/card.component';
 import { StepperComponent } from './ui/stepper/stepper.component';
 import { ButtonComponent } from './ui/button/button.component';
 import { ModalComponent } from './ui/modal/modal.component';
+import { EmptyStateComponent } from './ui/empty-state/empty-state.component';
+import { StatCardComponent } from './ui/stat-card/stat-card.component';
+import { ToastComponent } from './ui/toast/toast.component';
+import { DashboardHeaderComponent } from './ui/dashboard-header/dashboard-header.component';
+import { SearchInputComponent } from './ui/search-input/search-input.component';
+import { DataGridComponent } from './ui/data-grid/data-grid.component';
+import { FormCardComponent } from './ui/form-card/form-card.component';
+import { DashboardPageComponent } from './ui/dashboard-page/dashboard-page.component';
+import { StepPageComponent } from './ui/step-page/step-page.component';
+import { SidebarComponent } from './components/sidebar-nav/sidebar-nav.component';
 
 @NgModule({
   declarations: [],
@@ -24,7 +34,17 @@ import { ModalComponent } from './ui/modal/modal.component';
     CardComponent,
     ButtonComponent,
     StepperComponent,
-    ModalComponent
+    ModalComponent,
+    EmptyStateComponent,
+    StatCardComponent,
+    ToastComponent,
+    DashboardHeaderComponent,
+    SearchInputComponent,
+    DataGridComponent,
+    FormCardComponent,
+    DashboardPageComponent,
+    StepPageComponent,
+    SidebarComponent,
   ],
   exports: [
     CommonModule,
@@ -41,7 +61,17 @@ import { ModalComponent } from './ui/modal/modal.component';
     CardComponent,
     ButtonComponent,
     StepperComponent,
-    ModalComponent
+    ModalComponent,
+    EmptyStateComponent,
+    StatCardComponent,
+    ToastComponent,
+    DashboardHeaderComponent,
+    SearchInputComponent,
+    DataGridComponent,
+    FormCardComponent,
+    DashboardPageComponent,
+    StepPageComponent,
+    SidebarComponent,
   ],
 })
 export class SharedModule {}

@@ -1,0 +1,15 @@
+.filters-row {
+  @apply flex items-center mb-6 w-full;
+}
+
+.category-list {
+  @apply space-y-2;
+}
+
+.category-item {
+  @apply bg-card-bg border border-border-color rounded-xl px-5 py-4 flex items-center gap-3 hover:border-subtle-text/30 transition-colors;
+}
+
+.category-name {
+  @apply font-medium text-page-text flex-1;
+}

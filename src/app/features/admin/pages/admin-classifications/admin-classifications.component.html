@@ -1,0 +1,116 @@
+<app-dashboard-page>
+  <app-dashboard-header
+    title="Classifications"
+    subtitle="Manage classifications within each category"
+  >
+    <app-button (click)="openAddForm()" [disabled]="showAddForm">
+      <i class="fa-solid fa-plus text-xs"></i> Add Classifications
+    </app-button>
+  </app-dashboard-header>
+
+  <app-stat-card
+    [value]="totalClassificationCount()"
+    label="Total Classifications"
+    iconClass="fa-solid fa-tags"
+    iconColorClass="text-purple bg-purple/20"
+  ></app-stat-card>
+
+  <div class="filters-row">
+    <app-search-input
+      placeholder="Search classifications..."
+      [value]="searchQuery"
+      (valueChange)="searchQuery = $event"
+    ></app-search-input>
+    <select class="form-input category-filter" [(ngModel)]="categoryFilter">
+      <option value="">All categories</option>
+      <option *ngFor="let category of allCategories" [value]="category.id">
+        {{ category.name }}
+      </option>
+    </select>
+  </div>
+
+  <app-form-card
+    *ngIf="showAddForm"
+    title="Add Classifications"
+    [errorMessage]="formError"
+    [saving]="saving"
+    (save)="saveNewClassifications()"
+    (cancel)="discardAddForm()"
+  >
+    <div class="form-group">
+      <label class="form-label">
+        Target Category <span class="text-cyan">*</span>
+      </label>
+      <select
+        class="form-input"
+        [(ngModel)]="targetCategoryId"
+        (ngModelChange)="formError = ''"
+      >
+        <option [ngValue]="null" disabled>Select a category</option>
+        <option *ngFor="let category of allCategories" [ngValue]="category.id">
+          {{ category.name }}
+        </option>
+      </select>
+    </div>
+
+    <app-dynamic-input-list
+      [items]="newClassificationItems"
+      [duplicateItemFlags]="duplicateItemFlags"
+      [existingItemFlags]="existingItemFlags"
+      [triggerValidation]="triggerListValidation"
+      placeholder="Classification name"
+      existingItemMessage="Already exists in this category"
+      (itemsChange)="onClassificationItemsChanged($event)"
+    />
+  </app-form-card>
+
+  <app-empty-state
+    *ngIf="loading || visibleCategories().length === 0"
+    [isLoading]="loading"
+    loadingMessage="Loading classifications…"
+    title="No classifications found"
+    iconClass="fa-solid fa-tags"
+    description="Select a category and add classifications to it."
+  >
+    <app-button (click)="openAddForm()" [disabled]="showAddForm">
+      <i class="fa-solid fa-plus text-xs"></i> Add Classifications
+    </app-button>
+  </app-empty-state>
+
+  <div *ngIf="!loading" class="groups-list">
+    <div
+      *ngFor="let category of visibleCategories(); trackBy: trackByCategoryId"
+      class="group-card"
+    >
+      <div class="group-header">
+        <i class="fa-solid fa-folder-tree text-cyan text-sm w-4 shrink-0"></i>
+        <span class="group-name">{{ category.name }}</span>
+        <span class="group-badge">
+          {{ category.messageClasses.length }} classifications
+        </span>
+      </div>
+
+      <p *ngIf="category.messageClasses.length === 0" class="empty-classes-msg">
+        No classifications yet.
+      </p>
+
+      <div
+        *ngFor="
+          let classification of category.messageClasses;
+          trackBy: trackByClassificationId
+        "
+        class="classification-row"
+      >
+        <i class="fa-solid fa-tag text-subtle-text text-xs w-4 shrink-0"></i>
+        <span class="classification-name">{{ classification.name }}</span>
+        <button
+          class="delete-btn"
+          title="Delete"
+          (click)="deleteClassification(category.id, classification)"
+        >
+          <i class="fa-solid fa-trash text-xs"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</app-dashboard-page>

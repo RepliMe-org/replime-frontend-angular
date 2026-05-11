@@ -1,0 +1,7 @@
+ .stat-card {
+   @apply inline-flex items-center gap-4 mb-6 bg-card-bg border border-border-color rounded-xl p-4 min-w-[200px];
+ }
+
+ .stat-card-icon {
+   @apply w-11 h-11 rounded-xl flex items-center justify-center text-lg shrink-0;
+ }

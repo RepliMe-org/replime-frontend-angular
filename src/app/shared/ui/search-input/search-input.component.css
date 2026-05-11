@@ -1,0 +1,7 @@
+.dashboard-search-wrapper {
+  @apply relative flex-1 mb-6 w-[34rem];
+}
+
+.dashboard-search-icon {
+  @apply absolute left-4 top-1/2 -translate-y-1/2 text-subtle-text text-sm pointer-events-none;
+}

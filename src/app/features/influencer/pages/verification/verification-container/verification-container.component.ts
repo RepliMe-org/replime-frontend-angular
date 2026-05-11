@@ -7,17 +7,20 @@ import { ReadyVerifyStepComponent } from '../channel-verification-flow/ready-ver
 import { VerificationCompleteStepComponent } from '../channel-verification-flow/verification-complete-step/verification-complete-step.component';
 import { VerificationService } from '../../../services/verification.service';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../../auth/services/auth.service';
+import { AuthService } from '../../../../../core/services/auth.service';
 import { VerificationResponse } from '../../../models/verification/verification.model';
 import { PersonaSetupStepComponent } from '../chatbot-config-flow/persona-setup-step/persona-setup-step.component';
-import {PersonaData, ChatbotConfig} from '../../../../chatbot/models/chatbot-config.model';
+import {PersonaData, ChatbotConfig} from '../../../models/chatbot-config.model';
 import { WelcomeMessageStepComponent } from '../chatbot-config-flow/welcome-message-step/welcome-message-step.component';
 import { CategorySelectionStepComponent } from '../chatbot-config-flow/category-selection-step/category-selection-step.component';
 import { ChatbotReviewStepComponent } from '../chatbot-config-flow/chatbot-review-step/chatbot-review-step.component';
-import { ChatbotCategory } from '../../../../chatbot/models/chatbot-category.model';
-import { ChatbotService } from '../../../../chatbot/services/chatbot.service';
+import { ChatbotCategory } from '../../../../../core/models/chatbot-category.model';
+import { InfluencerChatbotService } from '../../../services/influencer-chatbot.service';
 import { MessageClassificationStepComponent } from '../chatbot-config-flow/message-classification-step/message-classification-step.component';
 import { ClassificationsOutput } from '../../../models/verification/classification.model';
+import { ChatbotCategoryService } from '../../../../../core/services/chatbot-category.service';
+import { ChatbotClassificationsService } from '../../../../../core/services/chatbot-classifications.service';
+import { ToastService } from '../../../../../core/services/toast.service';
 
 @Component({
   selector: 'app-verification-container',
@@ -58,6 +61,7 @@ export class VerificationContainerComponent {
       tone: 'friendly',
       verbosity: 'balanced',
       formality: 'neutral',
+      avatarNumber: 1,
     },
     welcomeMessage: '',
     category: '',
@@ -76,8 +80,11 @@ export class VerificationContainerComponent {
   constructor(
     private verificationService: VerificationService,
     private authService: AuthService,
-    private chatbotService: ChatbotService,
+    private chatbotService: InfluencerChatbotService,
+    private chatbotCategoryService: ChatbotCategoryService,
+    private chatbotClassificationsService: ChatbotClassificationsService,
     private router: Router,
+    private toast: ToastService,
   ) {}
 
   onChannelSubmit(url: string) {
@@ -165,6 +172,7 @@ export class VerificationContainerComponent {
       tone: personaData.tone.toUpperCase(),
       verbosity: personaData.verbosity.toUpperCase(),
       formality: personaData.formality.toUpperCase(),
+      avatarNumber: personaData.avatarNumber,
     };
 
     this.chatbotService.createConfig(payload).subscribe({
@@ -175,7 +183,7 @@ export class VerificationContainerComponent {
 
   assignCategory() {
     this.chatbotService
-      .updateCategory(this.chatbotConfig.category, {})
+      .assignChatbotCategory(this.chatbotConfig.category, {})
       .subscribe({
         next: () => this.handleClassifications(),
         error: (err) => this.handleError(err, 'Failed to assign category.'),
@@ -183,9 +191,9 @@ export class VerificationContainerComponent {
   }
 
   handleClassifications() {
-    const systemCall = this.chatbotService.updateMessageClass(this.chatbotConfig.systemClassIds);
+    const systemCall = this.chatbotService.addSystemClassifications(this.chatbotConfig.systemClassIds);
 
-    const customCall = this.chatbotService.createMessageClass(this.chatbotConfig.customClassNames);
+    const customCall = this.chatbotService.createCustomMessageClass(this.chatbotConfig.customClassNames);
 
     forkJoin([systemCall, customCall]).subscribe({
       next: () => this.handleSuccess(),
@@ -195,6 +203,7 @@ export class VerificationContainerComponent {
 
   handleSuccess() {
     this.isSavingConfig = false;
+    this.toast.success('Chatbot configured successfully! Welcome to your dashboard.');
     this.stateChange.emit('DASHBOARD');
     this.router.navigate(['/dashboard']);
   }
@@ -203,7 +212,8 @@ export class VerificationContainerComponent {
     this.isSavingConfig = false;
     this.isLoading = false;
     this.isVerifying = false;
-    this.errorMessage = err?.error?.error || fallback;
+    // this.errorMessage = err?.error?.error || fallback;
+    this.toast.error(err?.error?.error || fallback);
   }
 
   onBack() {

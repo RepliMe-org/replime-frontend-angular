@@ -1,0 +1,46 @@
+<div class="items-list">
+  @for (control of formArray.controls; track $index; let index = $index) {
+    <div class="item-row">
+      <div class="item-input-wrapper">
+        <input
+          class="list-input"
+          [placeholder]="placeholder"
+          [formControl]="control"
+          [class.list-input--error]="
+            isControlInvalid(index) ||
+            duplicateItemFlags[index] ||
+            existingItemFlags[index]
+          "
+        />
+
+        @if (isControlInvalid(index)) {
+          <p class="error-text">This field is required</p>
+        }
+
+        @if (shouldShowExistingError(index)) {
+          <p class="error-text">
+            {{ existingItemMessage }}
+          </p>
+        }
+
+        @if (shouldShowDuplicateError(index)) {
+          <p class="error-text">Value already in the list above</p>
+        }
+      </div>
+
+      <button
+        class="remove-item-btn"
+        type="button"
+        title="Remove item"
+        (click)="removeItem(index)"
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+  }
+</div>
+
+<button class="add-item-btn" type="button" (click)="addItem()">
+  <i class="fa-solid fa-plus"></i>
+  Add another
+</button>

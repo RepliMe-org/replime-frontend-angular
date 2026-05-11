@@ -1,0 +1,11 @@
+.dashboard-form-card {
+  @apply bg-card-bg border border-border-color rounded-xl p-6 mb-6 space-y-4;
+}
+
+.dashboard-form-card-title {
+  @apply font-semibold text-page-text text-base mb-2;
+}
+
+.dashboard-form-actions {
+  @apply flex items-center gap-3 pt-1;
+}

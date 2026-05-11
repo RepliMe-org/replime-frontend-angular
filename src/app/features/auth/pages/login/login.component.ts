@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../../core/services/auth.service';
 import { AuthFormComponent } from '../../components/auth-form/auth-form.component';
-import { AuthFormSubmitEvent } from '../../models/auth.model';
+import { AuthFormSubmitEvent } from '../../../../core/models/auth.model';
 import { SharedModule } from '../../../../shared/shared.module';
+import { ToastService } from '../../../../core/services/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ export class LoginComponent {
   constructor(
     private authService: AuthService,
     private router: Router,
+    private toast: ToastService,
   ) {}
 
   onFormSubmit(event: AuthFormSubmitEvent) {
@@ -31,7 +33,7 @@ export class LoginComponent {
           this.handleOnAuthSuccess(response);
         },
         error: (err) => {
-          // TODO: create reusable toast for handling errors/success
+          this.toast.error(err?.error?.message || 'Login failed. Please check your credentials.');
           this.isLoading = false;
         },
       });
@@ -41,6 +43,7 @@ export class LoginComponent {
           this.handleOnAuthSuccess(response);
         },
         error: (err) => {
+          this.toast.error(err?.error?.message || 'Registration failed. Please try again.');
           this.isLoading = false;
         },
       });

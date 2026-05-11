@@ -1,0 +1,23 @@
+.step-page-container {
+  @apply flex flex-col items-center justify-start min-h-screen pt-28 pb-12 px-4;
+}
+
+.step-page-stepper {
+  @apply mb-12;
+}
+
+.step-page-error {
+  @apply mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 flex items-start gap-3 relative transition-all duration-300;
+}
+
+.step-page-error-icon {
+  @apply text-red-500 mt-1;
+}
+
+.step-page-error-text {
+  @apply text-sm text-red-400 flex-1 leading-relaxed;
+}
+
+.step-page-error-close {
+  @apply text-subtle-text hover:text-page-text transition-colors w-6 h-6 flex items-center justify-center rounded-lg hover:bg-subtle-bg;
+}

@@ -1,0 +1,47 @@
+.chatbot-card {
+  @apply flex flex-col items-center text-center p-6 rounded-2xl border border-border-color/50 bg-card-bg hover:border-cyan/40 hover:shadow-lg transition-all duration-300 cursor-pointer h-full;
+}
+
+.chatbot-card-avatar-wrap {
+  @apply relative mb-4;
+}
+
+.chatbot-card-avatar-ring {
+  @apply w-20 h-20 rounded-full ring-2 ring-border-color/50 group-hover:ring-cyan/50 transition-all duration-300 overflow-hidden bg-subtle-bg flex items-center justify-center;
+}
+
+.chatbot-card-avatar-img {
+  @apply w-full h-full object-cover;
+}
+
+.chatbot-card-avatar-fallback {
+  @apply absolute inset-0 flex items-center justify-center;
+}
+
+.chatbot-card-status-dot {
+  @apply absolute bottom-0.5 right-0.5 w-3.5 h-3.5 rounded-full bg-green-500 ring-2 ring-card-bg;
+}
+
+.chatbot-card-name {
+  @apply font-bold text-page-text text-base mb-1 line-clamp-1;
+}
+
+.chatbot-card-handle {
+  @apply text-xs text-subtle-text mb-3 flex items-center gap-1.5;
+}
+
+.chatbot-card-desc {
+  @apply text-xs text-subtle-text leading-relaxed line-clamp-2 mb-4 flex-1;
+}
+
+.chatbot-card-footer {
+  @apply w-full mt-auto;
+}
+
+.chatbot-card-btn {
+  @apply w-full py-2 px-4 rounded-lg text-xs font-semibold bg-cyan/10 text-cyan border border-cyan/20 hover:bg-cyan hover:text-cyan-text transition-all duration-200 flex items-center justify-center gap-2;
+}
+
+.chatbot-card-category {
+  @apply flex items-center gap-1.5 text-[11px] px-3 py-1 rounded-full bg-cyan/10 text-cyan border border-cyan/20 mb-3;
+}

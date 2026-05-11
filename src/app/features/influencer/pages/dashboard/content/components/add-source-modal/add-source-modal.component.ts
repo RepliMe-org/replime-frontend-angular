@@ -6,10 +6,8 @@ import {
   OnChanges,
 } from '@angular/core';
 import { SharedModule } from '../../../../../../../shared/shared.module';
-import {
-  AddSourceMode,
-  AddSourcePayload,
-} from '../../models/training-source.model';
+import { AddSourceMode, AddSourcePayload } from '../../../../../models/training-source.model';
+
 
 const VIDEO_REGEX =
   /^(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)[\w-]{11}/;
