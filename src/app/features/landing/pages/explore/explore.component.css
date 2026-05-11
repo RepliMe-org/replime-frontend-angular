@@ -1,0 +1,76 @@
+.explore-page {
+  @apply max-w-7xl mx-auto px-7 py-24;
+}
+
+.explore-hero {
+  @apply text-center mb-12;
+}
+
+.explore-title {
+  @apply text-4xl font-bold text-page-text mb-4;
+}
+
+.explore-subtitle {
+  @apply text-subtle-text text-base max-w-xl mx-auto mb-8 leading-relaxed;
+}
+
+.explore-search-wrap {
+  @apply flex items-center justify-center gap-3 max-w-xl mx-auto;
+}
+
+.explore-search-box {
+  @apply relative flex-1;
+}
+
+.explore-search-icon {
+  @apply absolute left-4 top-1/2 -translate-y-1/2 text-subtle-text text-sm pointer-events-none;
+}
+
+.explore-search-input {
+  @apply w-full h-12 pl-11 pr-10 bg-card-bg border border-border-color rounded-xl text-page-text placeholder-subtle-text text-sm focus:border-cyan focus:ring-2 focus:ring-cyan/20 transition-all duration-200 outline-none;
+}
+
+.explore-search-clear {
+  @apply absolute right-3 top-1/2 -translate-y-1/2 text-subtle-text hover:text-page-text transition-colors w-6 h-6 flex items-center justify-center rounded;
+}
+
+.explore-meta {
+  @apply mb-6;
+}
+
+.explore-error {
+  @apply flex items-center justify-center py-12 text-danger text-sm;
+}
+
+.explore-grid {
+  @apply grid gap-5;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.explore-skeleton {
+  @apply flex flex-col items-center gap-3 p-6 rounded-2xl border border-border-color/30 bg-card-bg animate-pulse;
+}
+
+.skeleton-avatar {
+  @apply w-20 h-20 rounded-full bg-subtle-bg;
+}
+
+.skeleton-line {
+  @apply h-3 rounded-full bg-subtle-bg;
+}
+
+.skeleton-btn {
+  @apply w-full h-8 rounded-lg bg-subtle-bg mt-2;
+}
+
+.explore-categories {
+  @apply flex flex-wrap items-center justify-center gap-3 mt-6;
+}
+
+.category-chip {
+  @apply px-4 py-2 rounded-full text-sm border border-border-color bg-card-bg text-subtle-text hover:border-cyan hover:text-cyan transition-all duration-200;
+}
+
+.category-chip-active {
+  @apply bg-cyan text-cyan-text border-cyan hover:border-cyan hover:text-cyan-text;
+}

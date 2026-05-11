@@ -1,0 +1,93 @@
+<div class="explore-page">
+  <div class="explore-hero">
+    <h1 class="explore-title">
+      Explore <span class="gradient-text">Creators</span>
+    </h1>
+    <p class="explore-subtitle">
+      Discover and chat with AI versions of your favorite content creators. Each
+      chatbot is trained on their unique content and style.
+    </p>
+
+    <div class="explore-search-wrap">
+      <div class="explore-search-box">
+        <i class="fa-solid fa-magnifying-glass explore-search-icon"></i>
+        <input
+          type="text"
+          [(ngModel)]="searchQuery"
+          (ngModelChange)="onSearch()"
+          placeholder="Search creators..."
+          class="explore-search-input"
+        />
+        <button
+          *ngIf="searchQuery"
+          (click)="clearSearch()"
+          class="explore-search-clear"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="explore-categories">
+    <button
+      class="category-chip"
+      [class.category-chip-active]="selectedCategory === 'All'"
+      (click)="selectCategory('All')"
+    >
+      All
+    </button>
+
+    <button
+      *ngFor="let category of categories"
+      class="category-chip"
+      [class.category-chip-active]="selectedCategory === category.name"
+      (click)="selectCategory(category.name)"
+    >
+      {{ category.name }}
+    </button>
+  </div>
+
+  <div *ngIf="!isLoading && !errorMessage" class="explore-meta">
+    <span class="text-subtle-text text-sm">
+      {{ filtered.length }} chatbot{{ filtered.length !== 1 ? "s" : "" }}
+      available
+    </span>
+  </div>
+
+  <div *ngIf="errorMessage" class="explore-error">
+    <i class="fa-solid fa-circle-exclamation text-danger mr-2"></i>
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="isLoading" class="explore-grid mt-2">
+    <div *ngFor="let s of [1, 2, 3, 4, 5, 6, 7, 8]" class="explore-skeleton">
+      <div class="skeleton-avatar"></div>
+      <div class="skeleton-line w-32"></div>
+      <div class="skeleton-line w-20 opacity-60"></div>
+      <div class="skeleton-line w-full"></div>
+      <div class="skeleton-line w-3/4"></div>
+      <div class="skeleton-btn"></div>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading && !errorMessage" class="explore-grid">
+    <app-chatbot-card
+      *ngFor="let chatbot of filtered"
+      [chatbot]="chatbot"
+    ></app-chatbot-card>
+  </div>
+
+  <app-empty-state
+    *ngIf="!isLoading && !errorMessage && filtered.length === 0"
+    [isLoading]="isLoading"
+    loadingMessage="Loading chatbots..."
+    iconClass="fa-solid fa-robot"
+    title="No chatbots found"
+    description="Try a different search term or check back later."
+  >
+    <button (click)="clearSearch()" class="explore-reset-btn">
+      Clear Search
+    </button>
+  </app-empty-state>
+</div>

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
-import { AuthService } from '../../../features/auth/services/auth.service';
+import { AuthService } from '../../../core/services/auth.service';
 import { SharedModule } from '../../shared.module';
 
 @Component({
@@ -13,8 +13,8 @@ import { SharedModule } from '../../shared.module';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
-  username: string | null = null;
-  role: string | null = null;
+  username: string;
+  role: string;
   showUserMenu = false;
   private routerSubscription?: Subscription;
 

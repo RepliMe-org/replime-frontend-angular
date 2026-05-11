@@ -8,18 +8,30 @@
         </div>
       </a>
       <div class="navbar-links">
-        <a class="navbar-link">
+        <a class="navbar-link" routerLink="/explore">
           <app-button variant="ghost" size="sm">
             <i class="fa-solid fa-magnifying-glass"></i>
             Explore
           </app-button>
         </a>
-        <a class="navbar-link" routerLink="dashboard/influencer">
+        <a
+          *ngIf="role === 'ADMIN'; else creatorDashboard"
+          class="navbar-link"
+          routerLink="dashboard/admin"
+        >
           <app-button variant="ghost" size="sm">
             <i class="material-icons"></i>
-            Creator Dashboard
+            Admin Dashboard
           </app-button>
         </a>
+        <ng-template #creatorDashboard>
+          <a class="navbar-link" routerLink="dashboard/influencer">
+            <app-button variant="ghost" size="sm">
+              <i class="material-icons"></i>
+              Creator Dashboard
+            </app-button>
+          </a>
+        </ng-template>
       </div>
 
       <a *ngIf="!isAuthenticated" class="navbar-link" routerLink="auth">

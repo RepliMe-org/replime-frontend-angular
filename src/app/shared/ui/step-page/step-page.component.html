@@ -1,0 +1,17 @@
+<section class="step-page-container">
+  <app-stepper
+    [steps]="steps"
+    [activeStepIndex]="activeStepIndex"
+    class="step-page-stepper"
+  ></app-stepper>
+
+  <div *ngIf="errorMessage" class="step-page-error">
+    <i class="fa-solid fa-circle-exclamation step-page-error-icon"></i>
+    <p class="step-page-error-text">{{ errorMessage }}</p>
+    <button (click)="errorDismissed.emit()" class="step-page-error-close">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+
+  <ng-content></ng-content>
+</section>

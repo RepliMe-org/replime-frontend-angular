@@ -1,7 +1,7 @@
 import { SidebarConfig } from './sidebar-nav.model';
-import { AuthService } from '../../../features/auth/services/auth.service';
+import { AuthService } from '../../../core/services/auth.service';
 import { Router } from '@angular/router';
-import { UserInfo } from '../../../features/auth/models/auth.model';
+import { UserInfo } from '../../../core/models/auth.model';
 
 export const ADMIN_SIDEBAR_CONFIG = (
   router: Router,
@@ -16,28 +16,28 @@ export const ADMIN_SIDEBAR_CONFIG = (
         {
           label: 'Overview',
           icon: 'fa-solid fa-grid',
-          route: '/admin/overview',
+          route: '/dashboard/admin/overview',
         },
-        { label: 'Users', icon: 'fa-solid fa-users', route: '/admin/users' },
+        { label: 'Users', icon: 'fa-solid fa-users', route: '/dashboard/admin/users' },
         {
           label: 'Chatbots',
           icon: 'fa-solid fa-robot',
-          route: '/admin/chatbots',
+          route: '/dashboard/admin/chatbots',
         },
         {
           label: 'Categories',
           icon: 'fa-solid fa-folder-tree',
-          route: '/admin/categories',
+          route: '/dashboard/admin/categories',
         },
         {
           label: 'Classifications',
           icon: 'fa-solid fa-tags',
-          route: '/admin/classifications',
+          route: '/dashboard/admin/classifications',
         },
         {
           label: 'Settings',
           icon: 'fa-solid fa-gear',
-          route: '/admin/settings',
+          route: '/dashboard/admin/settings',
         },
       ],
     },

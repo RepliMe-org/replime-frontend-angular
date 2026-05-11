@@ -1,0 +1,18 @@
+<div class="empty-state">
+  <ng-container *ngIf="isLoading; else emptyTemplate">
+    <i class="fa-solid fa-spinner fa-spin text-subtle-text text-2xl"></i>
+    <p class="text-subtle-text text-sm mt-3">{{ loadingMessage }}</p>
+  </ng-container>
+
+  <ng-template #emptyTemplate>
+    <div *ngIf="iconClass" class="empty-icon">
+      <i [class]="iconClass"></i>
+    </div>
+    <p class="empty-title">{{ title }}</p>
+    <p *ngIf="description" class="empty-desc">{{ description }}</p>
+    
+    <div>
+      <ng-content></ng-content>
+    </div>
+  </ng-template>
+</div>

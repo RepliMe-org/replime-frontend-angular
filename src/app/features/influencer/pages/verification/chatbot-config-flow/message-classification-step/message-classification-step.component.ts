@@ -9,8 +9,11 @@ import {
 import { Subject, Subscription, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, catchError } from 'rxjs/operators';
 import { SharedModule } from '../../../../../../shared/shared.module';
-import { ChatbotCategoryService } from '../../../../../chatbot/services/chatbot-category.service';
-import { ClassificationsOutput, MessageClass } from '../../../../models/verification/classification.model';
+import {
+  ClassificationsOutput,
+} from '../../../../models/verification/classification.model';
+import { MessageClass } from '../../../../../../core/models/chatbot-category.model';
+import { ChatbotClassificationsService } from '../../../../../../core/services/chatbot-classifications.service';
 
 @Component({
   selector: 'app-message-classification-step',
@@ -39,7 +42,9 @@ export class MessageClassificationStepComponent implements OnInit, OnDestroy {
 
   customClassInput = '';
 
-  constructor(private chatbotCategoryService: ChatbotCategoryService) {}
+  constructor(
+    private chatbotClassificationsService: ChatbotClassificationsService,
+  ) {}
 
   ngOnInit() {
     this.customClasses = [...(this.selectedCustomNames ?? [])];
@@ -60,8 +65,8 @@ export class MessageClassificationStepComponent implements OnInit, OnDestroy {
   loadSystemClassifications() {
     this.isLoadingClasses = true;
 
-    const loadSub = this.chatbotCategoryService
-      .getMessageClasses(this.category!.toString())
+    const loadSub = this.chatbotClassificationsService
+      .getMessageClasses(this.category)
       .subscribe({
         next: (classes) => {
           this.allSystemClasses = Array.isArray(classes)
@@ -168,13 +173,13 @@ export class MessageClassificationStepComponent implements OnInit, OnDestroy {
   }
 
   onContinue() {
-  if (this.totalSelected() === 0) return;
-  this.classificationsSubmit.emit({
-    systemClassIds: this.selectedSystemClasses.map(c => c.id),
-    systemClassNames: this.selectedSystemClasses.map(c => c.name),
-    customClassNames: [...this.customClasses],
-  });
-}
+    if (this.totalSelected() === 0) return;
+    this.classificationsSubmit.emit({
+      systemClassIds: this.selectedSystemClasses.map(c => c.id),
+      systemClassNames: this.selectedSystemClasses.map(c => c.name),
+      customClassNames: [...this.customClasses],
+    });
+  }
 
   onBack() {
     this.back.emit();

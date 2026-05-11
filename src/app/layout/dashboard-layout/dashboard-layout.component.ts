@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { LayoutService } from '../services/layout.service';
-import { AuthService } from '../../features/auth/services/auth.service';
+import { AuthService } from '../../core/services/auth.service';
 import { SidebarComponent } from '../../shared/components/sidebar-nav/sidebar-nav.component';
 import { ADMIN_SIDEBAR_CONFIG, INFLUENCER_SIDEBAR_CONFIG } from '../../shared/components/sidebar-nav/sidebar-configs.const';
 

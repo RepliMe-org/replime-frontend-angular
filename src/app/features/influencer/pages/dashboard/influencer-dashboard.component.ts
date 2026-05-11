@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AuthService } from '../../../auth/services/auth.service';
+import { AuthService } from '../../../../core/services/auth.service'; 
 import { VerificationContainerComponent } from '../verification/verification-container/verification-container.component';
 import { SharedModule } from '../../../../shared/shared.module';
-import { ChatbotService } from '../../../chatbot/services/chatbot.service';
+import { InfluencerChatbotService } from '../../services/influencer-chatbot.service';
 import { LayoutService } from '../../../../layout/services/layout.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class InfluencerDashboardComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private chatbotService: ChatbotService,
+    private chatbotService: InfluencerChatbotService,
     private layoutService: LayoutService,
   ) {}
 
@@ -30,7 +30,7 @@ export class InfluencerDashboardComponent implements OnInit, OnDestroy {
 
     this.chatbotService.getChatbotConfig().subscribe({
       next: (config) => {
-        this.isChatbotConfigured = config?.configId != null;
+        this.isChatbotConfigured = config?.configInfo?.configId != null;
         this.updateDashboardState();
         this.isLoading = false;
       },

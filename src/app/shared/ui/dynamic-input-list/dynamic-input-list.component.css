@@ -1,0 +1,28 @@
+.list-input {
+  @apply w-full bg-input-bg border border-border-color rounded-lg px-4 py-3 text-sm text-page-text placeholder-subtle-text focus:outline-none focus:border-cyan transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
+  height: auto;
+}
+
+.list-input--error {
+  @apply !border-danger;
+}
+
+.items-list {
+  @apply space-y-3;
+}
+
+.item-row {
+  @apply flex items-start gap-3;
+}
+
+.item-input-wrapper {
+  @apply flex-1 space-y-1;
+}
+
+.remove-item-btn {
+  @apply mt-2 w-9 h-9 flex items-center justify-center text-subtle-text hover:text-danger hover:bg-danger/10 rounded-lg transition-colors shrink-0 text-sm;
+}
+
+.add-item-btn {
+  @apply flex items-center gap-2 text-cyan text-sm font-medium hover:opacity-75 transition-opacity mt-1;
+}

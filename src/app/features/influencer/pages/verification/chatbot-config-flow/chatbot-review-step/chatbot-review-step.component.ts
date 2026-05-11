@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SharedModule } from '../../../../../../shared/shared.module';
-import { PersonaData } from '../../../../../chatbot/models/chatbot-config.model';
+import { PersonaData } from '../../../../models/chatbot-config.model'; 
 
 @Component({
   selector: 'app-chatbot-review-step',
@@ -10,7 +10,7 @@ import { PersonaData } from '../../../../../chatbot/models/chatbot-config.model'
   styleUrl: './chatbot-review-step.component.css',
 })
 export class ChatbotReviewStepComponent {
-  @Input() personaData!: PersonaData;
+  @Input() personaData?: PersonaData;
   @Input() welcomeMessage!: string;
   @Input() categoryName!: string;
   @Input() systemClassNames: string[] = [];

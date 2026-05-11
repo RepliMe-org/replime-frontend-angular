@@ -1,0 +1,43 @@
+.filters-row {
+  @apply flex items-center gap-3;
+}
+
+.category-filter {
+  @apply w-full mb-5 md:w-[220px] shrink-0;
+}
+
+.form-group {
+  margin-bottom: 20px !important;
+}
+
+.groups-list {
+  @apply space-y-3;
+}
+
+.group-card {
+  @apply bg-card-bg border border-border-color rounded-xl overflow-hidden;
+}
+
+.group-header {
+  @apply flex items-center gap-3 px-5 py-4 border-b border-border-color;
+}
+
+.group-name {
+  @apply font-semibold text-page-text;
+}
+
+.group-badge {
+  @apply ml-1 text-xs font-semibold bg-cyan/10 text-cyan border border-cyan/20 px-2.5 py-0.5 rounded-full;
+}
+
+.empty-classes-msg {
+  @apply text-subtle-text text-sm px-5 py-4;
+}
+
+.classification-row {
+  @apply flex items-center gap-3 px-5 py-3 border-b border-border-color last:border-0 hover:bg-subtle-bg/40 transition-colors;
+}
+
+.classification-name {
+  @apply text-page-text text-sm flex-1;
+}

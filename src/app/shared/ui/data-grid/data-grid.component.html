@@ -1,0 +1,14 @@
+<div class="grid-wrapper">
+  <ag-grid-angular
+    class="ag-theme-alpine-dark content-grid"
+    [rowData]="rowData"
+    [columnDefs]="columnDefs"
+    [context]="context"
+    [rowHeight]="rowHeight"
+    [headerHeight]="headerHeight"
+    [suppressCellFocus]="suppressCellFocus"
+    [suppressHorizontalScroll]="suppressHorizontalScroll"
+    (gridReady)="onGridReady($event)"
+  >
+  </ag-grid-angular>
+</div>

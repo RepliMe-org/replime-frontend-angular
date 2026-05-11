@@ -11,6 +11,7 @@ import { SharedModule } from '../../../../../../shared/shared.module';
 export class WelcomeMessageStepComponent {
 
   @Input() chatbotName: string = '';
+  @Input() avatarNumber: number = 1;
 
   @Output() welcomeMessageSubmit = new EventEmitter<string>();
   @Output() back = new EventEmitter<void>();

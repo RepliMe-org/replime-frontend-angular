@@ -24,8 +24,9 @@
         class="form-input w-full"
         [ngModel]="currentSelection"
         (ngModelChange)="onSelectChange($event)"
+        [disabled]="isLoading"
       >
-        <option value="" disabled selected>Select a category</option>
+        <option value="" disabled selected>{{ isLoading ? 'Loading categories...' : 'Select a category' }}</option>
 
         <option *ngFor="let category of categories" [value]="category.id">
           {{ category.name }}

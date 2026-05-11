@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SharedModule } from '../../../../../../shared/shared.module';
-import { ChatbotCategoryService } from '../../../../../chatbot/services/chatbot-category.service';
-import { ChatbotCategory } from '../../../../../chatbot/models/chatbot-category.model';
+import { ChatbotCategoryService } from '../../../../../../core/services/chatbot-category.service';
+import { ChatbotCategory } from '../../../../../../core/models/chatbot-category.model';
+import { ToastService } from '../../../../../../core/services/toast.service';
 
 @Component({
   selector: 'app-category-selection-step',
@@ -17,8 +18,12 @@ export class CategorySelectionStepComponent implements OnInit {
 
   currentSelection: number | null = null;
   categories: ChatbotCategory[] = [];
+  isLoading = true;
 
-  constructor(private categoryService: ChatbotCategoryService) {}
+  constructor(
+    private categoryService: ChatbotCategoryService,
+    private toast: ToastService
+  ) {}
 
   ngOnInit() {
     this.currentSelection = this.selectedCategory;
@@ -26,6 +31,11 @@ export class CategorySelectionStepComponent implements OnInit {
     this.categoryService.getCategories().subscribe({
       next: (res) => {
         this.categories = res;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        this.toast.error('Failed to load categories. Please try again.');
+        this.isLoading = false;
       }
     });
   }

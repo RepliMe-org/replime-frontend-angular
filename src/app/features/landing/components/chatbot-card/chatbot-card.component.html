@@ -1,0 +1,33 @@
+<div class="chatbot-card group">
+
+  <div class="chatbot-card-avatar-wrap">
+    <div class="chatbot-card-avatar-ring">
+      <img
+        [src]="avatarSrc"
+        [alt]="chatbot.chatbotName"
+        class="chatbot-card-avatar-img"
+      />
+    </div>
+  </div>
+
+  <h3 class="chatbot-card-name">{{ chatbot.chatbotName }}</h3>
+
+  <a href="https://www.youtube.com/{{ chatbot.channelHandle }}" class="chatbot-card-handle">
+    <i class="fa-brands fa-youtube text-[10px]"></i>
+    {{ chatbot.channelHandle }}
+  </a>
+
+  <div class="chatbot-card-category">
+    <i class="fa-solid fa-layer-group text-[10px]"></i>
+    {{ chatbot.categoryName }}
+  </div>
+
+  <p class="chatbot-card-desc">{{ chatbot.chatbotDescription }}</p>
+
+  <div class="chatbot-card-footer">
+    <button class="chatbot-card-btn">
+      <i class="fa-solid fa-message text-xs"></i>
+      Chat Now
+    </button>
+  </div>
+</div>
