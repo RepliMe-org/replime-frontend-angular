@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 export class SearchInputComponent {
   @Input() placeholder = 'Search...';
   @Input() value = '';
+  @Input() fullWidth = false;
   @Output() valueChange = new EventEmitter<string>();
 
   onModelChange(val: string) {

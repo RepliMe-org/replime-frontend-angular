@@ -1,0 +1,38 @@
+<app-dashboard-page>
+  <app-dashboard-header
+    title="Chatbot Management"
+    subtitle="Review, verify, and manage creator chatbots"
+  >
+  </app-dashboard-header>
+
+  <app-chatbot-stats
+    [total]="totalChatbots"
+    [active]="activeChatbots"
+    [training]="pendingChatbots"
+    [failed]="failedChatbots"
+  ></app-chatbot-stats>
+
+  <app-chatbot-filters
+    [searchQuery]="searchQuery"
+    [activeFilter]="activeFilter"
+    (searchChange)="onSearchChange($event)"
+    (filterChange)="setFilter($event)"
+  ></app-chatbot-filters>
+
+  <app-empty-state
+    *ngIf="loading || filteredChatbots.length === 0"
+    [isLoading]="loading"
+    loadingMessage="Loading chatbots…"
+    iconClass="fa-solid fa-robot"
+    title="No chatbots found"
+    description="No chatbots match your current filters."
+  ></app-empty-state>
+
+  <div *ngIf="!loading && filteredChatbots.length > 0" class="chatbot-grid">
+    <app-admin-chatbot-card
+      *ngFor="let bot of filteredChatbots"
+      [bot]="bot"
+      (visibilityToggle)="toggleVisibility($event)"
+    ></app-admin-chatbot-card>
+  </div>
+</app-dashboard-page>

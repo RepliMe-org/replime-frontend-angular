@@ -16,6 +16,7 @@ import { FormCardComponent } from './ui/form-card/form-card.component';
 import { DashboardPageComponent } from './ui/dashboard-page/dashboard-page.component';
 import { StepPageComponent } from './ui/step-page/step-page.component';
 import { SidebarComponent } from './components/sidebar-nav/sidebar-nav.component';
+import { ChatbotStatusBadgeComponent } from './ui/chatbot-status-badge/chatbot-status-badge.component';
 
 @NgModule({
   declarations: [],
@@ -45,6 +46,7 @@ import { SidebarComponent } from './components/sidebar-nav/sidebar-nav.component
     DashboardPageComponent,
     StepPageComponent,
     SidebarComponent,
+    ChatbotStatusBadgeComponent
   ],
   exports: [
     CommonModule,
@@ -72,6 +74,7 @@ import { SidebarComponent } from './components/sidebar-nav/sidebar-nav.component
     DashboardPageComponent,
     StepPageComponent,
     SidebarComponent,
+    ChatbotStatusBadgeComponent
   ],
 })
 export class SharedModule {}

@@ -1,5 +1,5 @@
  .stat-card {
-   @apply inline-flex items-center gap-4 mb-6 bg-card-bg border border-border-color rounded-xl p-4 min-w-[200px];
+   @apply inline-flex items-center w-full h-full gap-4 mb-6 bg-card-bg border border-border-color rounded-xl p-4 min-w-[200px];
  }
 
  .stat-card-icon {

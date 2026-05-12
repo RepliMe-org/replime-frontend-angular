@@ -1,5 +1,5 @@
 .dashboard-form-card {
-  @apply bg-card-bg border border-border-color rounded-xl p-6 mb-6 space-y-4;
+  @apply bg-card-bg border border-border-color rounded-xl p-6 mb-6 mt-6 space-y-4;
 }
 
 .dashboard-form-card-title {

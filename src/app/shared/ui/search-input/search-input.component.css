@@ -1,5 +1,5 @@
 .dashboard-search-wrapper {
-  @apply relative flex-1 mb-6 w-[34rem];
+  @apply relative flex-1 w-[34rem];
 }
 
 .dashboard-search-icon {

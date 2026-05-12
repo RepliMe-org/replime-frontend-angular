@@ -4,19 +4,23 @@
       <i class="fa-solid fa-plus text-xs"></i> Add Categories
     </app-button>
   </app-dashboard-header>
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+    <app-stat-card
+      [value]="categories.length"
+      label="Total Categories"
+      iconClass="fa-solid fa-folder-tree"
+      iconColorClass="text-cyan bg-cyan/20"
+    />
+  </div>
 
-  <app-stat-card
-    [value]="categories.length"
-    label="Total Categories"
-    iconClass="fa-solid fa-folder-tree"
-    iconColorClass="text-cyan bg-cyan/20"
-  />
-
-  <app-search-input
-    placeholder="Search categories..."
-    [value]="searchQuery"
-    (valueChange)="onSearchChange($event)"
-  ></app-search-input>
+  <app-card>
+    <app-search-input
+      [fullWidth]="true"
+      placeholder="Search categories..."
+      [value]="searchQuery"
+      (valueChange)="onSearchChange($event)"
+    ></app-search-input>
+  </app-card>
 
   <app-form-card
     *ngIf="showAddForm"
