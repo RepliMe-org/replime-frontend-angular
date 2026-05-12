@@ -15,4 +15,11 @@ export const ADMIN_ROUTES: Routes = [
         (m) => m.AdminClassificationsComponent,
       ),
   },
+  {
+    path: 'chatbots',
+    loadComponent: () =>
+      import('./pages/admin-chatbots/admin-chatbots.component').then(
+        (m) => m.AdminChatbotsComponent,
+      ),
+  },
 ];

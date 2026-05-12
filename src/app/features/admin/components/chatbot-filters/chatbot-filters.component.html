@@ -1,0 +1,44 @@
+<app-card>
+  <div class="chatbot-filters-row">
+    <div class="filter-item">
+      <app-search-input
+        [fullWidth]="true"
+        placeholder="Search chatbots..."
+        [value]="searchQuery"
+        (valueChange)="searchChange.emit($event)"
+      ></app-search-input>
+    </div>
+
+    <div class="filter-item">
+      <div class="filter-buttons">
+        <app-button
+          [variant]="activeFilter === 'All' ? 'active' : 'glass'"
+          (click)="setFilter('All')"
+        >
+          All
+        </app-button>
+
+        <app-button
+          [variant]="activeFilter === 'Active' ? 'active' : 'glass'"
+          (click)="setFilter('Active')"
+        >
+          Active
+        </app-button>
+
+        <app-button
+          [variant]="activeFilter === 'Training' ? 'active' : 'glass'"
+          (click)="setFilter('Training')"
+        >
+          Training
+        </app-button>
+
+        <app-button
+          [variant]="activeFilter === 'Failed' ? 'active' : 'glass'"
+          (click)="setFilter('Failed')"
+        >
+          Failed
+        </app-button>
+      </div>
+    </div>
+  </div>
+</app-card>

@@ -1,0 +1,19 @@
+.status-badge {
+    @apply px-2 py-0.5 rounded text-xs font-semibold;
+}
+
+.status-active {
+    @apply bg-emerald-500/20 text-emerald-500;
+}
+
+.status-pending {
+    @apply bg-amber-500/20 text-amber-500;
+}
+
+.status-failed {
+    @apply bg-red-500/20 text-red-500;
+}
+
+.status-default {
+    @apply bg-[#20283c] text-[#7588a3];
+}

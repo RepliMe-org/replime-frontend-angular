@@ -1,0 +1,15 @@
+.chatbot-filters-row {
+    @apply flex flex-col md:flex-row gap-4 w-full mb-6;
+}
+
+.filter-item {
+    @apply flex-1 min-w-0;
+}
+
+.filter-buttons {
+    @apply flex gap-2 w-full h-full;
+}
+
+.filter-buttons app-button {
+    @apply flex-1;
+}

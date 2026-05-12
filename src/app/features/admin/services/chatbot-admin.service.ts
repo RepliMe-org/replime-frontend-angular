@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
@@ -11,7 +11,12 @@ export class ChatbotAdminService {
     return this.http.get(`${this.baseUrl}`);
   }
 
-  updateVisibility(id: string, data: any) {
-    return this.http.patch(`${this.baseUrl}/${id}/visibility`, data);
+  updateVisibility(id: string, isPublic: boolean) {
+    const params = new HttpParams().set('isPublic', isPublic.toString());
+
+    return this.http.patch(`${this.baseUrl}/${id}/visibility`, null, {
+      params: params,
+      responseType: 'text',
+    });
   }
 }

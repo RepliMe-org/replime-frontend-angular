@@ -1,0 +1,59 @@
+<app-card variant="default" customClass="chatbot-card">
+  <div class="chatbot-card-header">
+    <div class="chatbot-card-user">
+      <img [src]="avatarUrl" alt="Avatar" class="chatbot-card-avatar" />
+
+      <div class="chatbot-card-user-info">
+        <div class="chatbot-card-name-row">
+          <span class="chatbot-card-name">
+            {{ bot.chatbotName }}
+          </span>
+        </div>
+
+        <span class="chatbot-card-username">
+          {{ bot.influencerUsername }}
+        </span>
+      </div>
+    </div>
+
+    <button
+      (click)="onToggleVisibility()"
+      class="chatbot-visibility-btn"
+      [title]="bot.isPublic ? 'Hide Chatbot' : 'Show Chatbot'"
+    >
+      <i
+        class="fa-solid"
+        [ngClass]="bot.isPublic ? 'fa-eye' : 'fa-eye-slash text-red-400'"
+      ></i>
+    </button>
+  </div>
+
+  <div class="chatbot-card-details">
+    <div class="chatbot-card-row">
+      <span class="chatbot-card-label">Status</span>
+
+      <app-chatbot-status-badge
+        [status]="bot.status"
+      ></app-chatbot-status-badge>
+    </div>
+
+    <div class="chatbot-card-row">
+      <span class="chatbot-card-label">Category</span>
+
+      <span class="chatbot-card-category">
+        {{ bot.chatbotCategory }}
+      </span>
+    </div>
+
+    <div class="chatbot-card-row">
+      <span class="chatbot-card-icon-label">
+        <i class="fa-solid fa-video chatbot-icon"></i>
+        Videos
+      </span>
+
+      <span class="chatbot-card-value">
+        {{ bot.numberOfIngestedVideos }}
+      </span>
+    </div>
+  </div>
+</app-card>

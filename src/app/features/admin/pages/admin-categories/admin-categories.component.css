@@ -1,9 +1,5 @@
-.filters-row {
-  @apply flex items-center mb-6 w-full;
-}
-
 .category-list {
-  @apply space-y-2;
+  @apply space-y-2 mt-6;
 }
 
 .category-item {

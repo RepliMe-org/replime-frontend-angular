@@ -1,0 +1,29 @@
+<div class="chatbot-stats-grid">
+  <app-stat-card
+    [value]="total"
+    label="Total Chatbots"
+    iconClass="fa-solid fa-robot"
+    iconColorClass="text-cyan bg-cyan/20"
+  ></app-stat-card>
+
+  <app-stat-card
+    [value]="active"
+    label="Active"
+    iconClass="fa-solid fa-check-circle"
+    iconColorClass="text-emerald-500 bg-emerald-500/20"
+  ></app-stat-card>
+
+  <app-stat-card
+    [value]="training"
+    label="Training"
+    iconClass="fa-solid fa-hourglass-half"
+    iconColorClass="text-amber-500 bg-amber-500/20"
+  ></app-stat-card>
+
+  <app-stat-card
+    [value]="failed"
+    label="Failed"
+    iconClass="fa-solid fa-triangle-exclamation"
+    iconColorClass="text-red-500 bg-red-500/20"
+  ></app-stat-card>
+</div>

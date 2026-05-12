@@ -3,8 +3,8 @@
 }
 
 .toast {
-  @apply flex items-center gap-3 min-w-[280px] max-w-[420px] py-3.5 px-4 rounded-xl border border-transparent pointer-events-auto backdrop-blur-lg shadow-[0_8px_32px_rgba(0, 0, 0, 0.35)];
-  animation: toast-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  @apply flex items-center gap-3 min-w-[280px] max-w-[420px] py-3.5 px-4 rounded-xl border border-transparent pointer-events-auto backdrop-blur-lg;
+  animation: toast-in 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .toast-success {

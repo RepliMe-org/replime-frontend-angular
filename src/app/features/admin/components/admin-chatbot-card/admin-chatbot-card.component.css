@@ -1,0 +1,63 @@
+.chatbot-card {
+  @apply p-5 flex flex-col gap-4;
+}
+
+.chatbot-card-header {
+  @apply flex justify-between items-start mb-5;
+}
+
+.chatbot-card-user {
+  @apply flex gap-3 items-center;
+}
+
+.chatbot-card-avatar {
+  @apply w-10 h-10 rounded-full object-cover border bg-black/20;
+}
+
+.chatbot-card-user-info {
+  @apply flex flex-col;
+}
+
+.chatbot-card-name-row {
+  @apply flex items-center gap-1.5;
+}
+
+.chatbot-card-name {
+  @apply font-semibold text-page-text text-sm;
+}
+
+.chatbot-card-username {
+  @apply text-xs text-subtle-text;
+}
+
+.chatbot-visibility-btn {
+  @apply text-subtle-text hover:text-page-text transition-colors;
+}
+
+.chatbot-card-details {
+  @apply flex flex-col gap-3 text-sm;
+}
+
+.chatbot-card-row {
+  @apply flex justify-between items-center;
+}
+
+.chatbot-card-label {
+  @apply text-subtle-text;
+}
+
+.chatbot-card-icon-label {
+  @apply text-subtle-text flex items-center gap-2;
+}
+
+.chatbot-card-value {
+  @apply font-medium text-page-text;
+}
+
+.chatbot-card-category {
+  @apply font-medium text-page-text;
+}
+
+.chatbot-icon {
+  @apply w-4;
+}

@@ -51,7 +51,7 @@ export class PersonaSetupStepComponent implements OnInit {
   fetchChannel() { return this.personaForm.get('fetchChannel')?.value; }
 
   toggleTalkLikeMe() {
-    const talkLikeMe = !this.talkLikeMe;
+    const talkLikeMe = !this.talkLikeMe();
 
     this.personaForm.patchValue({ talkLikeMe });
 
@@ -65,7 +65,7 @@ export class PersonaSetupStepComponent implements OnInit {
   }
 
   toggleFetchChannel() {
-    this.personaForm.patchValue({ fetchChannel: !this.fetchChannel });
+    this.personaForm.patchValue({ fetchChannel: !this.fetchChannel() });
   }
 
   selectAvatar(n: number) { 
