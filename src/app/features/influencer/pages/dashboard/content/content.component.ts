@@ -141,7 +141,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   }
 
   onGridReady(params) {
-    this.gridApi = params.api;
+    this.gridApi = params;
   }
 
   onSubmit(event: AddSourcePayload) {

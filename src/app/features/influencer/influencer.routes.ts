@@ -20,6 +20,13 @@ export const INFLUENCER_ROUTES: Routes = [
             (m) => m.ContentComponent,
           ),
       },
+      {
+        path: 'classifications',
+        loadComponent: () =>
+          import('./pages/dashboard/classifications/classifications.component').then(
+            (m) => m.ClassificationsComponent,
+          ),
+      },
     ],
   },
 ];

@@ -18,7 +18,11 @@ export const ADMIN_SIDEBAR_CONFIG = (
           icon: 'fa-solid fa-grid',
           route: '/dashboard/admin/overview',
         },
-        { label: 'Users', icon: 'fa-solid fa-users', route: '/dashboard/admin/users' },
+        {
+          label: 'Users',
+          icon: 'fa-solid fa-users',
+          route: '/dashboard/admin/users',
+        },
         {
           label: 'Chatbots',
           icon: 'fa-solid fa-robot',
@@ -34,18 +38,15 @@ export const ADMIN_SIDEBAR_CONFIG = (
           icon: 'fa-solid fa-tags',
           route: '/dashboard/admin/classifications',
         },
-        {
-          label: 'Settings',
-          icon: 'fa-solid fa-gear',
-          route: '/dashboard/admin/settings',
-        },
       ],
     },
   ],
   user: {
     name: userInfo.username,
     role: userInfo.role,
-    avatarInitials: 'A',
+    avatarInitials:
+      userInfo.username.charAt(0).toUpperCase() +
+      userInfo.username.charAt(1).toUpperCase(),
   },
 
   footerActions: [
@@ -102,34 +103,14 @@ export const INFLUENCER_SIDEBAR_CONFIG = (
       label: 'Management',
       items: [
         {
+          label: 'Classifications',
+          icon: 'fa-solid fa-folder-tree',
+          route: '/dashboard/influencer/classifications',
+        },
+        {
           label: 'Bot Settings',
           icon: 'fa-solid fa-robot',
           route: '/dashboard/influencer/bot-settings',
-        },
-        {
-          label: 'Audience',
-          icon: 'fa-solid fa-users',
-          route: '/dashboard/influencer/audience',
-        },
-        {
-          label: 'Automations',
-          icon: 'fa-solid fa-rotate',
-          route: '/dashboard/influencer/automations',
-        },
-        {
-          label: 'Knowledge Base',
-          icon: 'fa-solid fa-book',
-          route: '/dashboard/influencer/knowledge-base',
-        },
-      ],
-    },
-    {
-      label: 'Preferences',
-      items: [
-        {
-          label: 'Settings',
-          icon: 'fa-solid fa-gear',
-          route: '/dashboard/influencer/settings',
         },
       ],
     },

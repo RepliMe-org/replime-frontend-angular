@@ -1,0 +1,135 @@
+<app-dashboard-page>
+  <app-dashboard-header
+    title="My Classifications"
+    subtitle="Manage the topics your AI is trained on. Pick from our library or add your own custom topics."
+  ></app-dashboard-header>
+
+  <app-empty-state
+    *ngIf="isLoading"
+    [isLoading]="true"
+    loadingMessage="Loading classifications..."
+  ></app-empty-state>
+
+  <app-card *ngIf="!isLoading" variant="default">
+    <div class="category-meta">
+      <div class="category-icon-wrap">
+        <i class="fa-solid fa-table-cells category-icon-i"></i>
+      </div>
+      <div>
+        <h2 class="category-name">{{ categoryName }}</h2>
+        <p class="category-stats">
+          <span class="stat">{{ pickedClasses.length }} picked</span>
+          <span class="stat-sep">·</span>
+          <span class="stat">{{ customClasses.length }} custom</span>
+          <span class="stat-sep">·</span>
+          <span class="stat">{{ availableClasses.length }} available</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="classes-section" *ngIf="pickedClasses.length > 0">
+      <div class="section-label">
+        <i class="fa-solid fa-bookmark section-label-icon"></i>
+        <span>Your Picked Classes</span>
+      </div>
+
+      <div class="chips-row">
+        <div *ngFor="let cls of pickedClasses" class="chip chip--picked">
+          <i class="fa-solid fa-check chip-icon"></i>
+          <span>{{ cls.name }}</span>
+          <button
+            type="button"
+            class="chip-remove"
+            title="Remove"
+            [disabled]="isSaving"
+            (click)="removePickedClass(cls)"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="classes-section" *ngIf="customClasses.length > 0">
+      <div class="section-label">
+        <i class="fa-solid fa-tag section-label-icon"></i>
+        <span>Your Custom Classes</span>
+      </div>
+
+      <div class="chips-row">
+        <div *ngFor="let cls of customClasses" class="chip chip--custom">
+          <i class="fa-solid fa-sparkles chip-icon"></i>
+          <span>{{ cls.name }}</span>
+          <button
+            type="button"
+            class="chip-remove chip-remove--purple"
+            title="Remove"
+            [disabled]="isSaving"
+            (click)="removeCustomClass(cls)"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="classes-section" *ngIf="availableClasses.length > 0">
+      <div class="section-label">
+        <i class="fa-solid fa-lightbulb section-label-icon"></i>
+        <span>Available Classes</span>
+      </div>
+
+      <div class="chips-row">
+        <button
+          *ngFor="let cls of availableClasses"
+          type="button"
+          class="chip chip--available"
+          [disabled]="isSaving"
+          (click)="pickClass(cls)"
+        >
+          <i class="fa-solid fa-plus chip-icon"></i>
+          <span>{{ cls.name }}</span>
+        </button>
+      </div>
+    </div>
+
+    <div
+      *ngIf="totalSelected() === 0 && availableClasses.length > 0"
+      class="empty-hint"
+    >
+      <i class="fa-solid fa-circle-info text-subtle-text text-sm"></i>
+      <p class="text-xs text-subtle-text">
+        Pick a class above or add a custom one below to get started.
+      </p>
+    </div>
+
+    <div class="add-custom-section">
+      <div class="section-label section-label--spaced">
+        <span>Add a Custom Class</span>
+      </div>
+
+      <div class="custom-input-row">
+        <input
+          type="text"
+          [(ngModel)]="customInput"
+          (keydown)="onCustomKeydown($event)"
+          [placeholder]="'e.g. Something specific to ' + categoryName + '…'"
+          class="form-input"
+        />
+        <button
+          type="button"
+          class="add-btn"
+          [disabled]="!customInput.trim() || isSaving"
+          (click)="addCustomClass()"
+        >
+          <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+
+      <p class="form-help mt-2">
+        Press <kbd class="kbd">Enter</kbd> or <kbd class="kbd">,</kbd> to add
+        quickly.
+      </p>
+    </div>
+  </app-card>
+</app-dashboard-page>
