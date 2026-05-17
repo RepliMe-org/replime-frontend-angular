@@ -31,6 +31,7 @@ export interface ChatMessage {
   sentAt: string;
   messageStatus: 'SENT' | 'DELIVERED' | 'READ';
   messageClass: string;
+  sources?: MessageSource[];
 }
 
 export interface MessageSource {

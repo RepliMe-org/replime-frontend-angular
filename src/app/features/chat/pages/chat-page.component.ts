@@ -106,7 +106,7 @@ export class ChatPageComponent implements OnInit, OnDestroy, AfterViewChecked{
         this.sessionDetail = detail;
         this.messages = msgs.map((m) => ({
           msg: m,
-          sources: [],
+          sources: m?.sources,
           isNew: false,
         }));
         this.isChatLoading = false;
@@ -193,8 +193,8 @@ export class ChatPageComponent implements OnInit, OnDestroy, AfterViewChecked{
           );
 
           this.messages.push({
-            msg: res.aiResponse,
-            sources: res.sources,
+            msg: res?.aiResponse,
+            sources: res?.aiResponse?.sources,
             isNew: true,
           });
 
