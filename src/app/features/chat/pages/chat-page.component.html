@@ -56,7 +56,7 @@
 
       <ng-container *ngIf="!isChatLoading">
         <app-chat-welcome
-          *ngIf="messages.length < 0"
+          *ngIf="messages.length === 0"
           [chatbotName]="chatbot?.chatbotName"
           [greetingMessage]="chatbot?.greetingMessage"
           [avatarNumber]="chatbot?.avatarNumber"
