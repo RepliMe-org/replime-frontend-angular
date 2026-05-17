@@ -3,7 +3,7 @@
   <div class="chatbot-card-avatar-wrap">
     <div class="chatbot-card-avatar-ring">
       <img
-        [src]="avatarSrc"
+        [src]="avatarSrc()"
         [alt]="chatbot.chatbotName"
         class="chatbot-card-avatar-img"
       />
@@ -25,7 +25,7 @@
   <p class="chatbot-card-desc">{{ chatbot.chatbotDescription }}</p>
 
   <div class="chatbot-card-footer">
-    <button class="chatbot-card-btn">
+    <button class="chatbot-card-btn" (click)="navigateToChat()">
       <i class="fa-solid fa-message text-xs"></i>
       Chat Now
     </button>

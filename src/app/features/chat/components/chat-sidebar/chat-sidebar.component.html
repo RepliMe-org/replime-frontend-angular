@@ -1,0 +1,58 @@
+<aside class="chat-sidebar">
+  <div class="chat-sidebar-header">
+    <h2 class="chat-sidebar-title">Chat History</h2>
+  </div>
+
+  <button class="chat-new-btn" (click)="onNewChat()">
+    <i class="fa-solid fa-plus"></i>
+    New Chat
+  </button>
+
+  <div class="chat-sessions-list" (scroll)="onScroll($event)">
+    <ng-container *ngIf="isLoading">
+      <div *ngFor="let s of [1, 2, 3]" class="chat-session-skeleton">
+        <div class="sk-line sk-line--title"></div>
+        <div class="sk-line sk-line--sub"></div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="!isLoading && sessions.length === 0">
+      <div class="chat-sessions-empty">
+        <i class="fa-regular fa-comment-dots chat-sessions-empty-icon"></i>
+        <p>
+          No previous chats with<br /><strong>{{ chatbotName }}</strong>
+        </p>
+      </div>
+    </ng-container>
+
+    <button
+      *ngFor="let session of sessions"
+      class="chat-session-item"
+      [class.chat-session-item--active]="session.id === activeSessionId"
+      (click)="selectSession(session.id)"
+    >
+      <div class="chat-session-icon">
+        <i class="fa-regular fa-comment"></i>
+      </div>
+      <div class="chat-session-info">
+        <p class="chat-session-topic">
+          {{ session.sessionTopic || "New conversation" }}
+        </p>
+        <span class="chat-session-date">{{
+          formatDate(session.lastMessageAt)
+        }}</span>
+      </div>
+      <span
+        *ngIf="session.id === activeSessionId"
+        class="chat-session-active-dot"
+      ></span>
+      <button
+        class="chat-session-delete-btn"
+        (click)="deleteSession(session.id, $event)"
+        aria-label="Delete session"
+      >
+        <i class="fa-solid fa-trash-can"></i>
+      </button>
+    </button>
+  </div>
+</aside>

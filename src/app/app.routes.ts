@@ -28,6 +28,14 @@ export const routes: Routes = [
   },
 
   {
+    path: 'chat/:chatbotId',
+    loadComponent: () =>
+      import('./features/chat/pages/chat-page.component').then(
+        (m) => m.ChatPageComponent,
+      ),
+  },
+
+  {
     path: 'auth',
     loadComponent: () =>
       import('./layout/auth-layout/auth-layout.component').then(

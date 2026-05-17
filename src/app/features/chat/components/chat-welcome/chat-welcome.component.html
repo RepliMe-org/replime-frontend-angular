@@ -1,0 +1,17 @@
+<div class="chat-welcome">
+  <div class="chat-welcome-avatar-wrap">
+    <div class="chat-welcome-glow"></div>
+    <div class="chat-welcome-avatar-ring">
+      <img
+        [src]="avatarSrc"
+        class="chat-welcome-avatar-img"
+      />
+    </div>
+  </div>
+
+  <h1 class="chat-welcome-heading">How can I help you today?</h1>
+
+  <p class="chat-welcome-greeting" *ngIf="greetingMessage">
+    {{ greetingMessage }}
+  </p>
+</div>

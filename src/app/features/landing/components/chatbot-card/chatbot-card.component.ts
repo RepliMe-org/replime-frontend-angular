@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { PublicChatbot } from '../../../../core/models/public-chatbot.model';
 
 @Component({
@@ -13,8 +13,13 @@ import { PublicChatbot } from '../../../../core/models/public-chatbot.model';
 export class ChatbotCardComponent {
   @Input() chatbot: PublicChatbot;
 
-  get avatarSrc(): string {
+  constructor(private router: Router) {}
+
+  avatarSrc(): string {
     return `assets/avatars/${this.chatbot.avatarNumber}.svg`;
   }
 
+  navigateToChat(): void {
+    this.router.navigate(['/chat', this.chatbot.id]);
+  }
 }

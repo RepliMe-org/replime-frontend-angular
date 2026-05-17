@@ -1,0 +1,71 @@
+.chat-input-bar {
+  @apply flex items-end gap-3 p-3 rounded-2xl;
+  background: var(--subtle-bg);
+  border: 1px solid var(--border-color);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.chat-input-bar:focus-within {
+  border-color: rgba(33, 213, 237, 0.5);
+  box-shadow: 0 0 0 3px rgba(33, 213, 237, 0.08);
+}
+
+.chat-input-textarea {
+  @apply flex-1 bg-transparent text-sm resize-none outline-none border-none leading-relaxed;
+  color: var(--page-text);
+  min-height: 24px;
+  max-height: 140px;
+  padding: 0;
+  border: none !important;
+  box-shadow: none !important;
+  --tw-ring-shadow: none !important;
+  height: auto !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+.chat-input-textarea:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.chat-input-textarea::placeholder {
+  color: var(--subtle-text);
+}
+
+.chat-input-textarea:focus {
+  ring: none;
+}
+
+.chat-send-btn {
+  @apply w-9 h-9 flex items-center justify-center rounded-xl flex-shrink-0 transition-all duration-200;
+  background: var(--border-color);
+  color: var(--subtle-text);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.chat-send-btn--active {
+  background: var(--gradient-primary);
+  color: var(--cyan-text);
+  cursor: pointer;
+  opacity: 1;
+  box-shadow: 0 2px 10px rgba(33, 213, 237, 0.3);
+}
+
+.chat-send-btn--active:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 14px rgba(33, 213, 237, 0.4);
+}
+
+.chat-input-hint {
+  @apply text-center text-[11px] mt-2;
+  color: var(--subtle-text);
+}
+
+.chat-input-hint kbd {
+  @apply px-1.5 py-0.5 rounded text-[10px] font-medium;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--subtle-text);
+}

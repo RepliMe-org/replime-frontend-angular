@@ -1,0 +1,22 @@
+<div class="chat-input-bar">
+  <textarea
+    #textarea
+    class="chat-input-textarea"
+    [(ngModel)]="message"
+    (keydown)="onKeydown($event)"
+    (input)="autoResize($event)"
+    placeholder="Type a message…"
+    rows="1"
+    [disabled]="isDisabled"
+  ></textarea>
+
+  <button
+    class="chat-send-btn"
+    [class.chat-send-btn--active]="canSend"
+    [disabled]="!canSend()"
+    (click)="send()"
+    aria-label="Send message"
+  >
+    <i class="fa-solid fa-paper-plane text-sm"></i>
+  </button>
+</div>
