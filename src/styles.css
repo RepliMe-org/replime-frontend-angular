@@ -2,6 +2,8 @@
   @import "@fortawesome/fontawesome-free/css/all.min.css";
   @import "ag-grid-community/styles/ag-grid.css";
   @import "ag-grid-community/styles/ag-theme-alpine.css";
+  @import "prismjs/themes/prism-okaidia.css";
+  @import "katex/dist/katex.min.css";
 
   @tailwind base;
   @tailwind components;

@@ -46,7 +46,7 @@ import { ChatbotStatusBadgeComponent } from './ui/chatbot-status-badge/chatbot-s
     DashboardPageComponent,
     StepPageComponent,
     SidebarComponent,
-    ChatbotStatusBadgeComponent
+    ChatbotStatusBadgeComponent,
   ],
   exports: [
     CommonModule,
@@ -74,7 +74,7 @@ import { ChatbotStatusBadgeComponent } from './ui/chatbot-status-badge/chatbot-s
     DashboardPageComponent,
     StepPageComponent,
     SidebarComponent,
-    ChatbotStatusBadgeComponent
+    ChatbotStatusBadgeComponent,
   ],
 })
 export class SharedModule {}

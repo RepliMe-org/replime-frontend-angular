@@ -1,0 +1,49 @@
+<div
+  class="chat-msg"
+  [class.chat-msg--user]="isUser"
+  [class.chat-msg--bot]="!isUser"
+>
+  <div *ngIf="!isUser" class="chat-msg-avatar">
+    <img [src]="'assets/avatars/' + avatarNumber + '.svg'" alt="" />
+  </div>
+
+  <div class="chat-msg-body">
+    <div class="chat-msg-bubble">
+      <markdown
+        class="markdown-content"
+        [data]="renderedText"
+        katex
+        mermaid
+      ></markdown>
+    </div>
+
+    <div
+      *ngIf="!isUser && sources && sources.length > 0"
+      class="chat-msg-sources"
+    >
+      <p class="chat-msg-sources-label">
+        <i class="fa-brands fa-youtube"></i> Sources
+      </p>
+      <a
+        *ngFor="let src of sources"
+        [href]="src.youtubeUrl"
+        target="_blank"
+        rel="noopener"
+        class="chat-msg-source-chip"
+      >
+        <img
+          *ngIf="src.thumbnailUrl"
+          [src]="src.thumbnailUrl"
+          class="chat-msg-source-thumb"
+          [alt]="src.videoTitle"
+        />
+        <span class="chat-msg-source-title">{{ src.videoTitle }}</span>
+        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      </a>
+    </div>
+
+    <span class="chat-msg-time" [class.chat-msg-time--user]="isUser">
+      {{ formatTime(message.sentAt) }}
+    </span>
+  </div>
+</div>

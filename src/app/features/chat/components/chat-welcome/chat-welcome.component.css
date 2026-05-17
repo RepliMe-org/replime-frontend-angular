@@ -1,0 +1,50 @@
+.chat-welcome {
+  @apply flex flex-col items-center justify-center text-center py-12 px-8;
+  animation: fadeSlideUp 0.5s ease-out both;
+}
+
+.chat-welcome-avatar-wrap {
+  @apply relative mb-6;
+}
+
+.chat-welcome-glow {
+  @apply absolute inset-0 rounded-full blur-2xl opacity-30;
+  background: var(--gradient-primary);
+  transform: scale(1.5);
+}
+
+.chat-welcome-avatar-ring {
+  @apply relative w-24 h-24 rounded-full overflow-hidden flex items-center justify-center;
+  background: var(--subtle-bg);
+  border: 2px solid rgba(33, 213, 237, 0.4);
+  box-shadow:
+    0 0 0 6px rgba(33, 213, 237, 0.08),
+    0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.chat-welcome-avatar-img {
+  @apply w-full h-full object-cover;
+}
+
+.chat-welcome-heading {
+  @apply text-3xl font-bold mb-4;
+  color: var(--page-text);
+  line-height: 1.2;
+}
+
+.chat-welcome-greeting {
+  @apply text-sm leading-relaxed max-w-sm;
+  color: var(--subtle-text);
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
