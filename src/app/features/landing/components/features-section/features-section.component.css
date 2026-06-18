@@ -11,5 +11,5 @@
 }
 
 .icon-box {
-    @apply w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-br from-cyan/20 to-purple/20;
+    @apply w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-br from-primary/20 to-secondary/20;
 }

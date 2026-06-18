@@ -9,11 +9,11 @@
 }
 
 .personality-card:hover {
-  @apply border-cyan bg-cyan/5;
+  @apply border-primary bg-primary/5;
 }
 
 .personality-card.selected {
-  @apply border-cyan bg-cyan/10;
+  @apply border-primary bg-primary/10;
 }
 
 .personality-card-content {
@@ -25,7 +25,7 @@
 }
 
 .personality-card.selected .personality-icon-wrapper {
-  @apply bg-cyan/30 text-cyan;
+  @apply bg-primary/30 text-primary;
 }
 
 .personality-text {

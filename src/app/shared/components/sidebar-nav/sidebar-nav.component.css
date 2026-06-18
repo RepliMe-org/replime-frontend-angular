@@ -30,12 +30,12 @@
 
 .sidebar-logo {
   @apply flex items-center justify-center rounded-lg shrink-0 w-8 h-8;
-  background: var(--gradient-primary);
+  background: var(--primary);
 }
 
 .sidebar-logo i {
   @apply text-[14px];
-  color: var(--cyan-text);
+  color: var(--primary-text);
 }
 
 .sidebar-title {
@@ -86,8 +86,8 @@
 }
 
 .nav-item.active {
-  background: var(--gradient-primary);
-  color: var(--cyan-text);
+  background: var(--primary);
+  color: var(--primary-text);
 }
 
 .sidebar.collapsed .nav-item {
@@ -117,8 +117,9 @@
   @apply absolute left-[70px] top-1/2 -translate-y-1/2
          text-xs px-2 py-1 rounded-md whitespace-nowrap
          opacity-0 pointer-events-none transition;
-  background: #111;
-  color: #fff;
+  background: var(--active-bg);
+  color: var(--page-text);
+  border: 1px solid var(--border-color);
 }
 
 .sidebar.collapsed .nav-item:hover .nav-tooltip {
@@ -141,9 +142,10 @@
 }
 
 .user-avatar {
-  @apply flex items-center justify-center rounded-full font-bold text-white;
+  @apply flex items-center justify-center rounded-full font-bold;
   @apply w-9 h-9;
-  background: #444;
+  background: var(--primary);
+  color: var(--primary-text);
 }
 
 .user-info {
@@ -157,7 +159,7 @@
 
 .user-role {
   @apply text-[10px] uppercase tracking-wide;
-  color: var(--sidebar-cyan);
+  color: var(--sidebar-primary);
 }
 
 .back-btn {

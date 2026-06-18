@@ -1,0 +1,18 @@
+<section class="how-section" id="how-it-works">
+  <div class="how-inner">
+
+    <h2 class="how-title">How RepliMe works</h2>
+
+    <div class="how-steps">
+      <div class="how-step" *ngFor="let step of steps">
+        <div class="how-step-icon">
+          <i [class]="step.icon"></i>
+        </div>
+        <div class="how-step-label">Step {{ step.number }}</div>
+        <h3 class="how-step-title">{{ step.title }}</h3>
+        <p class="how-step-desc">{{ step.description }}</p>
+      </div>
+    </div>
+
+  </div>
+</section>

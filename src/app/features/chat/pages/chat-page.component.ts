@@ -35,7 +35,7 @@ import { ChatTypingComponent } from '../components/chat-typing/chat-typing.compo
   templateUrl: './chat-page.component.html',
   styleUrls: ['./chat-page.component.css'],
 })
-export class ChatPageComponent implements OnInit, OnDestroy, AfterViewChecked{
+export class ChatPageComponent implements OnInit, AfterViewChecked{
   @ViewChild('messageArea') messageArea: ElementRef<HTMLDivElement>;
 
   @ViewChild(ChatSidebarComponent) sidebar: ChatSidebarComponent;
@@ -72,8 +72,6 @@ export class ChatPageComponent implements OnInit, OnDestroy, AfterViewChecked{
       this.shouldScroll = false;
     }
   }
-
-  ngOnDestroy(): void {}
 
   loadInitialData(): void {
     this.isPageLoading = true;

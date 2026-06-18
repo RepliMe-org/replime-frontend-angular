@@ -1,7 +1,6 @@
 <div class="empty-state">
   <ng-container *ngIf="isLoading; else emptyTemplate">
-    <i class="fa-solid fa-spinner fa-spin text-subtle-text text-2xl"></i>
-    <p class="text-subtle-text text-sm mt-3">{{ loadingMessage }}</p>
+    <app-loader [message]="loadingMessage"></app-loader>
   </ng-container>
 
   <ng-template #emptyTemplate>

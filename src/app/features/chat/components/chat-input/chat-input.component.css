@@ -1,27 +1,18 @@
 .chat-input-bar {
   @apply flex items-end gap-3 p-3 rounded-2xl;
-  background: var(--subtle-bg);
-  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border, var(--border-color));
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .chat-input-bar:focus-within {
-  border-color: rgba(33, 213, 237, 0.5);
-  box-shadow: 0 0 0 3px rgba(33, 213, 237, 0.08);
+  border-color: #21d5ed80;
+  box-shadow: 0 0 0 3px #21d5ed14;
 }
 
 .chat-input-textarea {
-  @apply flex-1 bg-transparent text-sm resize-none outline-none border-none leading-relaxed;
-  color: var(--page-text);
-  min-height: 24px;
-  max-height: 140px;
-  padding: 0;
-  border: none !important;
-  box-shadow: none !important;
-  --tw-ring-shadow: none !important;
-  height: auto !important;
-  border-radius: 0 !important;
-  background: transparent !important;
+  @apply flex-1 bg-transparent text-sm resize-none outline-none border-none p-2;
+ 
 }
 
 .chat-input-textarea:disabled {
@@ -37,6 +28,15 @@
   ring: none;
 }
 
+.chat-input-textarea::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-input-textarea::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 999px;
+}
+
 .chat-send-btn {
   @apply w-9 h-9 flex items-center justify-center rounded-xl flex-shrink-0 transition-all duration-200;
   background: var(--border-color);
@@ -45,17 +45,17 @@
   opacity: 0.5;
 }
 
-.chat-send-btn--active {
-  background: var(--gradient-primary);
-  color: var(--cyan-text);
+.chat-send-btn-active {
+  background: var(--chat-user-bg);
+  color: var(--chat-user-text);
   cursor: pointer;
   opacity: 1;
-  box-shadow: 0 2px 10px rgba(33, 213, 237, 0.3);
+  box-shadow: var(--chat-user-shadow);
 }
 
-.chat-send-btn--active:hover {
+.chat-send-btn-active:hover {
   transform: scale(1.05);
-  box-shadow: 0 4px 14px rgba(33, 213, 237, 0.4);
+  box-shadow: var(--shadow-glow);
 }
 
 .chat-input-hint {

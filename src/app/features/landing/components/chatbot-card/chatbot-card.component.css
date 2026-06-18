@@ -1,5 +1,5 @@
 .chatbot-card {
-  @apply flex flex-col items-center text-center p-6 rounded-2xl border border-border-color/50 bg-card-bg hover:border-cyan/40 hover:shadow-lg transition-all duration-300 cursor-pointer h-full;
+  @apply flex flex-col items-center text-center p-6 rounded-2xl border border-border-color/50 bg-card-bg hover:border-primary/40 hover:shadow-lg transition-all duration-300 cursor-pointer h-full;
 }
 
 .chatbot-card-avatar-wrap {
@@ -7,7 +7,7 @@
 }
 
 .chatbot-card-avatar-ring {
-  @apply w-20 h-20 rounded-full ring-2 ring-border-color/50 group-hover:ring-cyan/50 transition-all duration-300 overflow-hidden bg-subtle-bg flex items-center justify-center;
+  @apply w-20 h-20 rounded-full ring-2 ring-border-color/50 group-hover:ring-primary/50 transition-all duration-300 overflow-hidden bg-subtle-bg flex items-center justify-center;
 }
 
 .chatbot-card-avatar-img {
@@ -39,9 +39,9 @@
 }
 
 .chatbot-card-btn {
-  @apply w-full py-2 px-4 rounded-lg text-xs font-semibold bg-cyan/10 text-cyan border border-cyan/20 hover:bg-cyan hover:text-cyan-text transition-all duration-200 flex items-center justify-center gap-2;
+  @apply w-full py-2 px-4 rounded-lg text-xs font-semibold bg-primary/10 text-primary border border-primary/20 hover:bg-primary hover:text-primary-text transition-all duration-200 flex items-center justify-center gap-2;
 }
 
 .chatbot-card-category {
-  @apply flex items-center gap-1.5 text-[11px] px-3 py-1 rounded-full bg-cyan/10 text-cyan border border-cyan/20 mb-3;
+  @apply flex items-center gap-1.5 text-[11px] px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 mb-3;
 }

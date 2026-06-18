@@ -1,55 +1,200 @@
-.review-section {
-  @apply py-4;
+.review-card {
+  text-align: left;
+  border-radius: 1rem;
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
 }
 
-.review-section-header {
-  @apply flex items-center gap-3 mb-3;
+.review-card:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-elevated);
 }
 
-.review-section-icon {
-  @apply w-8 h-8 rounded-lg bg-cyan/10 flex items-center justify-center shrink-0;
+.review-card:hover .review-edit {
+  opacity: 1;
+  transform: translateX(0);
 }
 
-.review-section-title {
-  @apply font-semibold text-page-text text-base flex items-center;
+.review-card:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
-.review-fields {
-  @apply flex flex-col gap-2 pl-11;
+.review-edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--primary);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
-.review-field {
-  @apply flex items-start justify-between gap-4;
+.review-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
 }
 
-.review-field-label {
-  @apply text-sm text-subtle-text shrink-0 w-36;
+.review-card-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--subtle-text);
 }
 
-.review-field-value {
-  @apply text-sm text-page-text text-right;
+.review-card-label i {
+  color: var(--primary);
+  font-size: 0.75rem;
 }
 
-.review-field-desc {
-  @apply text-left text-subtle-text leading-relaxed;
+.review-identity {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.1rem;
+  padding: 1.5rem 1.5rem;
 }
 
-.review-welcome {
-  @apply italic text-page-text;
+.review-avatar {
+  flex-shrink: 0;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--primary-text);
+  background: var(--gradient-primary);
 }
 
-.review-divider {
-  @apply border-t border-border-color;
+.review-identity-text {
+  flex: 1;
+  min-width: 0;
 }
 
-.status-badge {
-  @apply text-xs px-2 py-0.5 rounded-full font-medium;
+.review-identity-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
 }
 
-.badge-on {
-  @apply bg-cyan/10 text-cyan;
+.review-bot-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--page-text);
+  margin: 0;
+  line-height: 1.2;
 }
 
-.badge-off {
-  @apply bg-subtle-bg text-subtle-text;
+.review-bot-desc {
+  margin: 0.35rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--subtle-text);
+}
+
+.review-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+}
+
+.review-chip {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  background: var(--subtle-bg);
+  color: var(--text-secondary);
+  border: 1px solid var(--card-border);
+}
+
+.review-chat-preview {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.review-chat-avatar {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--primary-text);
+  background: var(--gradient-primary);
+}
+
+.review-chat-bubble {
+  position: relative;
+  max-width: 85%;
+  padding: 0.7rem 1rem;
+  border-radius: 0 0.85rem 0.85rem 0.85rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  background: var(--subtle-bg);
+  color: var(--page-text);
+  border: 1px solid var(--border-color);
+}
+
+.review-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.review-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 0.3rem 0.7rem;
+  border-radius: 9999px;
+}
+
+.review-tag i { font-size: 0.65rem; }
+
+.review-tag-system {
+  color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--primary) 30%, transparent);
+}
+
+.review-tag-custom {
+  color: var(--secondary);
+  background: color-mix(in srgb, var(--secondary) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--secondary) 30%, transparent);
+}
+
+.review-tag-count {
+  margin-left: 0.25rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--subtle-text);
 }

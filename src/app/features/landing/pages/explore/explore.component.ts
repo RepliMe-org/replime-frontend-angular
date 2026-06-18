@@ -6,6 +6,7 @@ import { PublicChatbot } from '../../../../core/models/public-chatbot.model';
 import { ChatbotCardComponent } from '../../components/chatbot-card/chatbot-card.component';
 import { ChatbotCategoryService } from '../../../../core/services/chatbot-category.service';
 import { SharedModule } from '../../../../shared/shared.module';
+import { filterByQuery } from '../../../../shared/utils/filter.utils';
 
 @Component({
   selector: 'app-explore',
@@ -28,11 +29,11 @@ export class ExploreComponent implements OnInit {
 
   constructor(
     private publicChatbotService: PublicChatbotService,
-    private ChatbotCategoryService: ChatbotCategoryService
+    private chatbotCategoryService: ChatbotCategoryService
   ) {}
 
   ngOnInit() {
-    this.ChatbotCategoryService.getCategories().subscribe({
+    this.chatbotCategoryService.getCategories().subscribe({
       next: (data) => {
         this.categories = data;
       },
@@ -61,28 +62,24 @@ export class ExploreComponent implements OnInit {
   }
 
   applyFilter() {
-    const q = this.searchQuery.toLowerCase().trim();
+    const categoryFiltered = this.selectedCategory === 'All' 
+      ? this.chatbots 
+      : this.chatbots.filter(c => c.categoryName === this.selectedCategory);
 
-    this.filtered = this.chatbots.filter((c) => {
-      const matchesSearch =
-        !q ||
-        c.chatbotName.toLowerCase().includes(q) ||
-        c.influencerUsername.toLowerCase().includes(q) ||
-        c.channelHandle?.toLowerCase().includes(q) ||
-        c.chatbotDescription.toLowerCase().includes(q) ||
-        c.categoryName.toLowerCase().includes(q);
-
-      const matchesCategory =
-        this.selectedCategory === 'All' ||
-        c.categoryName === this.selectedCategory;
-
-      return matchesSearch && matchesCategory;
-    });
+    this.filtered = filterByQuery(
+      categoryFiltered,
+      this.searchQuery,
+      ['chatbotName', 'influencerUsername', 'channelHandle', 'chatbotDescription', 'categoryName']
+    );
   }
 
   clearSearch() {
     this.searchQuery = '';
     this.selectedCategory = 'All'
     this.applyFilter();
+  }
+
+  trackById(index: number, bot: PublicChatbot): string {
+    return bot.id;
   }
 }

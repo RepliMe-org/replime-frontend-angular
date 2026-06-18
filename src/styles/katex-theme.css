@@ -1,0 +1,42 @@
+.katex-display {
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 12px 0;
+    overflow-x: auto;
+}
+
+.light .katex {
+    color: var(--text-main);
+}
+
+.light .katex svg {
+    fill: var(--text-main);
+    stroke: var(--text-main);
+}
+
+.light .katex-display {
+    background: var(--subtle-bg);
+    border: 1px solid var(--border-color);
+}
+
+.light .katex-error {
+    color: #dc2626;
+}
+
+.dark .katex {
+    color: var(--text-main);
+}
+
+.dark .katex svg {
+    fill: var(--text-main);
+    stroke: var(--text-main);
+}
+
+.dark .katex-display {
+    background: var(--subtle-bg);
+    border: 1px solid var(--border-color);
+}
+
+.dark .katex-error {
+    color: #f87171;
+}

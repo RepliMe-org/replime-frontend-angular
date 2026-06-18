@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SearchInputComponent } from '../../../../shared/ui/search-input/search-input.component';
 import { ButtonComponent } from '../../../../shared/ui/button/button.component';
@@ -10,6 +10,7 @@ import { CardComponent } from '../../../../shared/ui/card/card.component';
   imports: [CommonModule, SearchInputComponent, ButtonComponent, CardComponent],
   templateUrl: './chatbot-filters.component.html',
   styleUrls: ['./chatbot-filters.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatbotFiltersComponent {
   @Input() searchQuery = '';

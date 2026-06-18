@@ -4,7 +4,6 @@
   [class.collapsed]="collapsed"
   aria-label="Main navigation"
 >
-  <!-- Header -->
   <div class="sidebar-header">
     <div class="sidebar-logo">
       <a [class]="config.logoIcon" routerLink="/"></a>
@@ -15,7 +14,6 @@
     </span>
   </div>
 
-  <!-- Nav -->
   <div class="sidebar-nav">
     <ng-container *ngFor="let section of config.sections">
       <span *ngIf="section.label" class="nav-section-label">
@@ -23,7 +21,6 @@
       </span>
 
       <ng-container *ngFor="let item of section.items">
-        <!-- Route-based item -->
         <a
           *ngIf="item.route"
           class="nav-item"
@@ -37,7 +34,6 @@
             {{ item.label }}
           </span>
 
-          <!-- tooltip -->
           <span class="nav-tooltip" *ngIf="collapsed">
             {{ item.label }}
           </span>
@@ -49,7 +45,6 @@
     </ng-container>
   </div>
 
-  <!-- Footer -->
   <div class="sidebar-footer">
     <div class="user-chip" [class.collapsed]="collapsed">
     <div class="user-avatar">
@@ -61,11 +56,14 @@
       <div class="user-role">{{ config.user.role }}</div>
     </div>
 
-    <!-- Tooltip when collapsed -->
     <span class="nav-tooltip" *ngIf="collapsed">
       {{ config.user.name }} ({{ config.user.role }})
     </span>
   </div>
+<!-- 
+    <div style="display: flex; justify-content: center; width: 100%; margin-bottom: 0.5rem;">
+      <app-theme-toggle></app-theme-toggle>
+    </div> -->
 
     <ng-container *ngFor="let action of config.footerActions">
       <button
@@ -81,7 +79,6 @@
           {{ action.label }}
         </span>
 
-        <!-- Tooltip -->
         <span class="nav-tooltip" *ngIf="collapsed">
           {{ action.label }}
         </span>
@@ -90,7 +87,6 @@
   </div>
 </nav>
 
-<!-- Collapse toggle -->
 <button
   class="toggle-btn"
   [class.collapsed]="collapsed"

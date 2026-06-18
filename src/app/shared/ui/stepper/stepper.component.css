@@ -11,12 +11,12 @@
 }
 
 .stepper-circle-completed {
-    @apply bg-cyan/20 text-cyan;
+    @apply bg-primary/20 text-primary;
 }
 
 .stepper-circle-active {
-    @apply text-cyan-text;
-    background: var(--gradient-primary);
+    @apply text-primary-text;
+    background: var(--primary);
 }
 
 .stepper-circle-default {
@@ -32,7 +32,7 @@
 }
 
 .stepper-line-completed {
-    @apply bg-cyan;
+    @apply bg-primary;
 }
 
 .stepper-line-default {

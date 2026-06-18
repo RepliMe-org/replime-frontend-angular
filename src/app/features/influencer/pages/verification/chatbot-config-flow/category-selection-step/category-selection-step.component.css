@@ -23,22 +23,22 @@
 }
 
 .category-card:hover {
-  border-color: var(--cyan);
+  border-color: var(--primary);
   color: var(--page-text);
-  background-color: rgba(var(--cyan-rgb), 0.05);
+  background-color: color-mix(in srgb, var(--primary) 5%, transparent);
 }
 
 .category-card.selected {
-  border-color: var(--cyan);
-  background-color: rgba(var(--cyan-rgb), 0.1);
-  color: var(--cyan);
+  border-color: var(--primary);
+  background-color: color-mix(in srgb, var(--primary) 10%, transparent);
+  color: var(--primary);
 }
 
 .category-icon-wrapper {
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 0.5rem;
-  background-color: rgba(var(--cyan-rgb), 0.1);
+  background-color: color-mix(in srgb, var(--primary) 10%, transparent);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -46,7 +46,7 @@
 }
 
 .category-card.selected .category-icon-wrapper {
-  background-color: rgba(var(--cyan-rgb), 0.2);
+  background-color: color-mix(in srgb, var(--primary) 20%, transparent);
 }
 
 .category-label {
@@ -62,8 +62,8 @@
   width: 1.1rem;
   height: 1.1rem;
   border-radius: 50%;
-  background-color: var(--cyan);
-  color: var(--cyan-text);
+  background-color: var(--primary);
+  color: var(--primary-text);
   display: flex;
   align-items: center;
   justify-content: center;

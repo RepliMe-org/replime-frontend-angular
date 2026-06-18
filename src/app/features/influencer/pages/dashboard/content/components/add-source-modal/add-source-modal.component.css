@@ -4,7 +4,7 @@
 
 input.is-error {
   border-color: var(--danger) !important;
-  box-shadow: 0 0 0 3px rgba(var(--danger-rgb), 0.15) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--danger) 15%, transparent) !important;
 }
 
 .error-msg {

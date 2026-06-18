@@ -53,7 +53,6 @@
     <app-welcome-message-step
       *ngIf="currentStep === 1"
       [chatbotName]="chatbotConfig.personaData.name"
-      [avatarNumber]="chatbotConfig.personaData.avatarNumber"
       (welcomeMessageSubmit)="onWelcomeMessageSubmit($event)"
       (back)="onBack()"
     ></app-welcome-message-step>
@@ -87,6 +86,7 @@
       [isSaving]="isSavingConfig"
       (confirm)="onConfirmSetup()"
       (back)="onBack()"
+      (editStep)="onEditStep($event)"
     ></app-chatbot-review-step>
   </div>
 </app-step-page>

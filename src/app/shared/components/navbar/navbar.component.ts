@@ -1,40 +1,40 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { filter, Subscription } from 'rxjs';
+import { filter } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AuthService } from '../../../core/services/auth.service';
 import { SharedModule } from '../../shared.module';
+import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule, ThemeToggleComponent],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent implements OnInit, OnDestroy {
+export class NavbarComponent implements OnInit {
   isAuthenticated = false;
   username: string;
   role: string;
   showUserMenu = false;
-  private routerSubscription?: Subscription;
 
   constructor(
     private authService: AuthService,
     private router: Router,
-  ) {}
-
-  ngOnInit() {
-    this.updateAuthState();
-    
-    this.routerSubscription = this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
+  ) {
+    this.router.events
+      .pipe(
+        filter((event) => event instanceof NavigationEnd),
+        takeUntilDestroyed()
+      )
       .subscribe(() => {
         this.updateAuthState();
       });
   }
 
-  ngOnDestroy() {
-    this.routerSubscription?.unsubscribe();
+  ngOnInit() {
+    this.updateAuthState();
   }
 
   updateAuthState() {

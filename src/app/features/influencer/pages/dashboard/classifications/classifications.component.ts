@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SharedModule } from '../../../../../shared/shared.module';
 import { ToastService } from '../../../../../core/services/toast.service';
 import { InfluencerClassificationsService } from '../../../services/influencer-classifications.service';
@@ -12,7 +12,7 @@ import { MessageClass } from '../../../../../core/models/chatbot-category.model'
   templateUrl: './classifications.component.html',
   styleUrl: './classifications.component.css',
 })
-export class ClassificationsComponent implements OnInit, OnDestroy {
+export class ClassificationsComponent implements OnInit {
   isLoading: boolean = false;
   isSaving: boolean = false;
   categoryName: string = '';
@@ -23,11 +23,11 @@ export class ClassificationsComponent implements OnInit, OnDestroy {
 
   customInput = '';
 
-  private subscription = new Subscription();
 
   constructor(
     private classificationsService: InfluencerClassificationsService,
     private toast: ToastService,
+    private destroyRef: DestroyRef,
   ) {}
 
   ngOnInit() {
@@ -37,7 +37,9 @@ export class ClassificationsComponent implements OnInit, OnDestroy {
   loadClassifications() {
     this.isLoading = true;
 
-    const loadSub = this.classificationsService.getMessageClasses().subscribe({
+    this.classificationsService.getMessageClasses()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
       next: (data) => {
         this.categoryName = data.category?.name ?? '';
         this.pickedClasses = data.pickedClasses ?? [];
@@ -51,7 +53,6 @@ export class ClassificationsComponent implements OnInit, OnDestroy {
       },
     });
 
-    this.subscription.add(loadSub);
   }
 
   totalSelected(): number {
@@ -203,7 +204,8 @@ export class ClassificationsComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+
+  trackById(index: number, cls: MessageClass): number {
+    return cls.id;
   }
 }

@@ -4,11 +4,12 @@ import { VerificationContainerComponent } from '../verification/verification-con
 import { SharedModule } from '../../../../shared/shared.module';
 import { InfluencerChatbotService } from '../../services/influencer-chatbot.service';
 import { LayoutService } from '../../../../layout/services/layout.service';
+import { LoaderComponent } from '../../../../shared/ui/loader/loader.component';
 
 @Component({
   selector: 'app-influencer-dashboard',
   standalone: true,
-  imports: [SharedModule, VerificationContainerComponent],
+  imports: [SharedModule, VerificationContainerComponent, LoaderComponent],
   templateUrl: './influencer-dashboard.component.html',
   styleUrl: './influencer-dashboard.component.css',
 })

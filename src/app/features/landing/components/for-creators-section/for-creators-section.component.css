@@ -1,0 +1,191 @@
+.creators-section {
+  @apply py-28 relative overflow-hidden;
+  background: var(--page-bg);
+  border-top: 1px solid var(--border-color);
+}
+
+.creators-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 50% 60% at 75% 50%, #00d4e80d 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.creators-inner {
+  @apply container mx-auto px-6 flex items-center gap-20 relative z-10;
+}
+
+.creators-left {
+  @apply flex-1;
+  max-width: 480px;
+}
+
+.creators-badge {
+  @apply text-xs font-semibold tracking-widest uppercase mb-5;
+  color: var(--primary);
+  letter-spacing: 0.2em;
+}
+
+.creators-title {
+  @apply text-5xl font-bold leading-[1.1] mb-8;
+  letter-spacing: -0.02em;
+}
+
+.creators-title-line1 {
+  color: var(--page-text);
+}
+
+.creators-title-line2 {
+  color: var(--primary);
+}
+
+.creators-bullets {
+  @apply flex flex-col gap-3 mb-10;
+}
+
+.creators-bullet {
+  @apply text-base;
+  color: var(--subtle-text);
+}
+
+.creators-cta {
+  @apply flex flex-col gap-3;
+}
+
+.creators-btn {
+  @apply inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-sm font-semibold border-0 cursor-pointer transition-all duration-200 w-fit;
+  background: var(--primary);
+  color: var(--primary-text);
+}
+
+.creators-btn:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 30px #00d4e866;
+}
+
+.creators-sub-text {
+  @apply text-xs;
+  color: var(--subtle-text);
+}
+
+.creators-right {
+  @apply flex-1 relative flex items-center justify-center;
+  min-height: 460px;
+}
+
+.floating-bubble {
+  @apply absolute px-4 py-3 rounded-2xl text-sm leading-relaxed;
+  background: var(--glass-background);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(10px);
+  color: var(--page-text);
+  max-width: 220px;
+  animation: float 4s ease-in-out infinite;
+}
+
+.floating-bubble.bubble-tl {
+  top: 8%;
+  right: 5%;
+  animation-delay: 0.5s;
+}
+
+.floating-bubble.bubble-ml {
+  top: 40%;
+  left: 0;
+  animation-delay: 1.8s;
+}
+
+.floating-bubble.bubble-bl {
+  bottom: 14%;
+  left: 2%;
+  animation-delay: 0.9s;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes phoneFloat {
+
+  0%,
+  100% {
+    transform:
+      perspective(600px) rotateY(-8deg) rotateX(5deg) translateY(0px);
+  }
+
+  50% {
+    transform:
+      perspective(600px) rotateY(-8deg) rotateX(5deg) translateY(-12px);
+  }
+}
+
+.creators-phone {
+  @apply relative;
+  width: 240px;
+  height: 440px;
+  border-radius: 28px;
+  background: var(--card-bg);
+  border: 1.5px solid var(--border-color);
+  box-shadow: var(--shadow-elevated);
+  overflow: hidden;
+  margin: auto;
+  animation: phoneFloat 4s ease-in-out infinite;
+}
+
+.phone-video-area {
+  @apply relative flex items-center justify-center;
+  height: 260px;
+  background: linear-gradient(180deg, #1a0808 0%, #2d0a0a 100%);
+}
+
+.phone-yt-play {
+  @apply w-14 h-14 rounded-full flex items-center justify-center text-white text-xl;
+  background: #ff0000;
+  box-shadow: 0 8px 30px #ff000066;
+}
+
+.phone-video-info {
+  @apply px-4 py-3;
+  border-top: 1px solid var(--border-color);
+}
+
+.phone-video-title {
+  @apply text-xs font-semibold mb-0.5;
+  color: var(--page-text);
+}
+
+.phone-video-meta {
+  @apply text-[10px] mb-2;
+  color: var(--subtle-text);
+}
+
+.phone-creator-row {
+  @apply flex items-center gap-2;
+}
+
+.phone-creator-ava {
+  @apply w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold;
+  background: #00d4e833;
+  color: var(--primary);
+}
+
+.phone-creator-name {
+  @apply text-[10px] font-medium;
+  color: var(--page-text);
+}
+
+.phone-creator-subs {
+  @apply text-[9px];
+  color: var(--subtle-text);
+}

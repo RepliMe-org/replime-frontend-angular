@@ -5,6 +5,8 @@ import { HeroSectionComponent } from './features/landing/components/hero-section
 import { FeaturesSectionComponent } from './features/landing/components/features-section/features-section.component';
 import { AllCommunityModule, ModuleRegistry, provideGlobalGridOptions } from 'ag-grid-community';
 import { ToastComponent } from './shared/ui/toast/toast.component';
+import { ThemeService } from './core/services/theme.service';
+import { inject } from '@angular/core';
 
 provideGlobalGridOptions({
     theme: "legacy",
@@ -22,4 +24,5 @@ ModuleRegistry.registerModules([
 })
 export class AppComponent {
   title = 'replime-frontend-angular';
+  private themeService = inject(ThemeService);
 }

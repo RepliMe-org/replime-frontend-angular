@@ -11,6 +11,8 @@ import {
   ChatSessionService,
 } from '../../../../core/services/chat-session.service';
 import { ChatSession } from '../../../../core/models/chatbot.model';
+import { formatDate } from '../../../../shared/utils/date.utils';
+import { ToastService } from '../../../../core/services/toast.service';
 
 @Component({
   selector: 'app-chat-sidebar',
@@ -38,7 +40,7 @@ export class ChatSidebarComponent implements OnChanges {
 
   limit = 20;
 
-  constructor(private chatSessionService: ChatSessionService) {}
+  constructor(private chatSessionService: ChatSessionService, private toast: ToastService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['chatbotId'] && this.chatbotId) {
@@ -149,7 +151,7 @@ export class ChatSidebarComponent implements OnChanges {
         this.sessionDeleted.emit(id);
       },
       error: () => {
-        console.error('Failed to delete session');
+        this.toast.error('Failed to delete session');
       },
     });
   }
@@ -158,24 +160,7 @@ export class ChatSidebarComponent implements OnChanges {
     this.newChat.emit();
   }
 
-  formatDate(dateStr: string): string {
-    const date = new Date(dateStr);
-
-    const now = new Date();
-
-    const diffDays = Math.floor(
-      (now.getTime() - date.getTime()) / 86_400_000,
-    );
-
-    if (diffDays === 0) return 'Today';
-
-    if (diffDays === 1) return 'Yesterday';
-
-    if (diffDays < 7) return `${diffDays}d ago`;
-
-    return date.toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-    });
+  getFormattedDate(dateStr: string): string {
+    return formatDate(dateStr);
   }
 }

@@ -1,14 +1,18 @@
 <div *ngIf="isPageLoading" class="chat-page-loader">
   <div class="chat-loader-spinner">
     <div class="chat-loader-ring"></div>
-    <div class="chat-loader-ring chat-loader-ring--inner"></div>
+    <div class="chat-loader-ring chat-loader-ring-inner"></div>
   </div>
-  <p class="chat-loader-text">Connecting to {{ chatbot?.chatbotName ?? 'chatbot' }}…</p>
+  <p class="chat-loader-text">
+    Connecting to {{ chatbot?.chatbotName ?? "chatbot" }}…
+  </p>
 </div>
 
 <div *ngIf="!isPageLoading" class="chat-layout">
-
-  <div class="chat-sidebar-wrap" [class.chat-sidebar-wrap--hidden]="!isSidebarOpen">
+  <div
+    class="chat-sidebar-wrap"
+    [class.chat-sidebar-wrap-hidden]="!isSidebarOpen"
+  >
     <app-chat-sidebar
       [chatbotId]="chatbotId"
       [chatbotName]="chatbot?.chatbotName"
@@ -22,10 +26,18 @@
   <div class="chat-main">
     <header class="chat-navbar">
       <div class="chat-navbar-left">
-        <button class="chat-navbar-btn" (click)="toggleSidebar()" aria-label="Toggle sidebar">
+        <button
+          class="chat-navbar-btn"
+          (click)="toggleSidebar()"
+          aria-label="Toggle sidebar"
+        >
           <i class="fa-solid fa-bars"></i>
         </button>
-        <button class="chat-navbar-btn" (click)="goBack()" aria-label="Back to Explore">
+        <button
+          class="chat-navbar-btn"
+          (click)="goBack()"
+          aria-label="Back to Explore"
+        >
           <i class="fa-solid fa-arrow-left"></i>
         </button>
       </div>
@@ -34,54 +46,57 @@
         <div class="chat-navbar-avatar">
           <img
             *ngIf="chatbot"
-            [src]="'assets/avatars/' + chatbot.avatarNumber + '.svg'"
+            [src]="chatbot.avatarUrl"
             [alt]="chatbot.chatbotName"
           />
         </div>
         <p class="chat-navbar-name">{{ chatbot?.chatbotName }}</p>
       </div>
 
-      <div class="chat-navbar-right">
-      </div>
+      <div class="chat-navbar-right"></div>
     </header>
 
     <div class="chat-messages-area" #messageArea>
-
-      <div *ngIf="isChatLoading" class="flex-1 flex flex-col items-center justify-center h-full">
+      <div
+        *ngIf="isChatLoading"
+        class="flex-1 flex flex-col items-center justify-center h-full"
+      >
         <div class="chat-loader-spinner scale-[0.6] opacity-70">
           <div class="chat-loader-ring"></div>
-          <div class="chat-loader-ring chat-loader-ring--inner"></div>
+          <div class="chat-loader-ring chat-loader-ring-inner"></div>
         </div>
       </div>
 
       <ng-container *ngIf="!isChatLoading">
         <app-chat-welcome
-          *ngIf="messages.length < 0"
+          *ngIf="messages.length === 0"
           [chatbotName]="chatbot?.chatbotName"
           [greetingMessage]="chatbot?.greetingMessage"
-          [avatarNumber]="chatbot?.avatarNumber"
+          [avatarUrl]="chatbot?.avatarUrl"
         ></app-chat-welcome>
 
         <ng-container *ngFor="let item of messages">
           <app-chat-message
             [message]="item.msg"
-            [avatarNumber]="chatbot?.avatarNumber || 1"
+            [avatarUrl]="chatbot?.avatarUrl"
             [sources]="item.sources || []"
             [isNewMessage]="item.isNew || false"
             (streamingFinished)="onStreamingFinished()"
           ></app-chat-message>
         </ng-container>
 
-        <app-chat-typing *ngIf="isTyping"></app-chat-typing>
+        <app-chat-typing
+          *ngIf="isTyping"
+          [avatarUrl]="chatbot?.avatarUrl"
+        ></app-chat-typing>
       </ng-container>
     </div>
 
     <div class="chat-input-wrap">
-      <app-chat-input 
+      <app-chat-input
         [isDisabled]="isTyping || isMessageStreaming"
         (messageSent)="onMessageSent($event)"
       ></app-chat-input>
     </div>
-
   </div>
 </div>

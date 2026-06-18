@@ -6,6 +6,7 @@ import { ChatbotFiltersComponent } from '../../components/chatbot-filters/chatbo
 import { ChatbotStatsComponent } from '../../components/chatbot-stats/chatbot-stats.component';
 import { SharedModule } from '../../../../shared/shared.module';
 import { AdminChatbotCardComponent } from '../../components/admin-chatbot-card/admin-chatbot-card.component';
+import { filterByQuery } from '../../../../shared/utils/filter.utils';
 
 @Component({
   selector: 'app-admin-chatbots',
@@ -109,18 +110,11 @@ export class AdminChatbotsComponent implements OnInit {
       });
     }
 
-    if (this.searchQuery.trim()) {
-      const query = this.searchQuery.toLowerCase();
-
-      filtered = filtered.filter(
-        (chatbot) =>
-          chatbot.chatbotName?.toLowerCase().includes(query) ||
-          chatbot.influencerUsername?.toLowerCase().includes(query) ||
-          chatbot.chatbotCategory?.toLowerCase().includes(query),
-      );
-    }
-
-    this.filteredChatbots = filtered;
+    this.filteredChatbots = filterByQuery(filtered, this.searchQuery, [
+      'chatbotName',
+      'influencerUsername',
+      'chatbotCategory'
+    ]);
   }
 
   toggleVisibility(bot: AdminChatbot): void {
@@ -136,5 +130,9 @@ export class AdminChatbotsComponent implements OnInit {
         this.toastService.error('Failed to update chatbot visibility');
       },
     });
+  }
+
+  trackById(index: number, bot: AdminChatbot): string {
+    return bot.id;
   }
 }

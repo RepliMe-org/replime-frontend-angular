@@ -1,6 +1,6 @@
 <app-dashboard-page>
   <app-dashboard-header title="Categories" subtitle="Manage content categories">
-    <app-button (click)="openAddForm()" [disabled]="showAddForm">
+    <app-button (click)="openAddForm()" [disabled]="formState.showAddForm">
       <i class="fa-solid fa-plus text-xs"></i> Add Categories
     </app-button>
   </app-dashboard-header>
@@ -9,7 +9,7 @@
       [value]="categories.length"
       label="Total Categories"
       iconClass="fa-solid fa-folder-tree"
-      iconColorClass="text-cyan bg-cyan/20"
+      iconColorClass="text-primary bg-primary/20"
     />
   </div>
 
@@ -23,18 +23,18 @@
   </app-card>
 
   <app-form-card
-    *ngIf="showAddForm"
+    *ngIf="formState.showAddForm"
     title="Add Categories"
-    [errorMessage]="formError"
-    [saving]="saving"
+    [errorMessage]="formState.formError"
+    [saving]="formState.saving"
     (save)="saveNewCategories()"
     (cancel)="discardAddForm()"
   >
     <app-dynamic-input-list
-      [items]="newCategoryItems"
-      [duplicateItemFlags]="duplicateItemFlags"
-      [existingItemFlags]="existingItemFlags"
-      [triggerValidation]="triggerListValidation"
+      [items]="formState.newItems"
+      [duplicateItemFlags]="formState.duplicateItemFlags"
+      [existingItemFlags]="formState.existingItemFlags"
+      [triggerValidation]="formState.triggerListValidation"
       placeholder="Category name"
       existingItemMessage="Already exists"
       (itemsChange)="onCategoryItemsChanged($event)"
@@ -49,15 +49,15 @@
     title="No categories yet"
     description="Create your first category to get started."
   >
-    <app-button (click)="openAddForm()" [disabled]="showAddForm">
+    <app-button (click)="openAddForm()" [disabled]="formState.showAddForm">
       <i class="fa-solid fa-plus text-xs"></i> Add Categories
     </app-button>
   </app-empty-state>
 
   <div *ngIf="!loading" class="category-list">
-    <div *ngFor="let category of filteredCategories" class="category-item">
+    <div *ngFor="let category of filteredCategories; trackBy: trackByCategoryId" class="category-item">
       <i
-        class="fa-solid fa-folder-tree text-cyan text-sm w-4 text-center shrink-0"
+        class="fa-solid fa-folder-tree text-primary text-sm w-4 text-center shrink-0"
       ></i>
       <span class="category-name">{{ category.name }}</span>
       <button

@@ -5,7 +5,7 @@ export interface PublicChatbot {
   chatbotDescription: string;
   categoryName: string;
   greetingMessage: string;
-  avatarNumber: number;
+  avatarUrl: string | null;
   channelHandle: string;
   status: 'CONFIGURING' | 'ACTIVE' | 'INACTIVE';
 }

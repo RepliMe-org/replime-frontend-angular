@@ -10,19 +10,19 @@ const STATUS_MAP= {
     label: 'Indexed',
     icon: 'fa-solid fa-circle-check',
     color: '#22c55e',
-    bg: 'rgba(34,197,94,0.12)',
+    bg: '#22c55e1f',
   },
   PROCESSING: {
     label: 'Learning',
     icon: 'fa-solid fa-spinner fa-spin',
     color: '#f59e0b',
-    bg: 'rgba(245,158,11,0.12)',
+    bg: '#f59e0b1f',
   },
   FAILED: {
     label: 'Failed',
     icon: 'fa-solid fa-circle-xmark',
     color: 'var(--danger)',
-    bg: 'rgba(239,67,67,0.12)',
+    bg: '#ef43431f',
   },
 };
 

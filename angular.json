@@ -31,17 +31,11 @@
               "src/styles.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "node_modules/ag-grid-community/styles/ag-grid.css",
-              "node_modules/ag-grid-community/styles/ag-theme-quartz.css"
+              "node_modules/ag-grid-community/styles/ag-theme-quartz.css",
+              "node_modules/prismjs/plugins/line-numbers/prism-line-numbers.css",
+              "node_modules/prismjs/plugins/toolbar/prism-toolbar.css"
             ],
-            "scripts": [
-              "node_modules/prismjs/prism.js",
-              "node_modules/prismjs/components/prism-javascript.min.js",
-              "node_modules/prismjs/components/prism-typescript.min.js",
-              "node_modules/prismjs/components/prism-css.min.js",
-              "node_modules/prismjs/components/prism-json.min.js",
-              "node_modules/katex/dist/katex.min.js",
-              "node_modules/mermaid/dist/mermaid.min.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -53,8 +47,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kB",
-                  "maximumError": "4kB"
+                  "maximumWarning": "8kB",
+                  "maximumError": "16kB"
                 }
               ],
               "outputHashing": "all"
@@ -90,8 +84,7 @@
           "options": {
             "polyfills": [
               "zone.js",
-              "zone.js/testing",
-              "src/polyfills.ts" 
+              "zone.js/testing"
             ],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
@@ -104,15 +97,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [
-              "node_modules/prismjs/prism.js",
-              "node_modules/prismjs/components/prism-javascript.min.js",
-              "node_modules/prismjs/components/prism-typescript.min.js",
-              "node_modules/prismjs/components/prism-css.min.js",
-              "node_modules/prismjs/components/prism-json.min.js",
-              "node_modules/katex/dist/katex.min.js",
-              "node_modules/mermaid/dist/mermaid.min.js"
-            ]
+            "scripts": []
           }
         }
       }

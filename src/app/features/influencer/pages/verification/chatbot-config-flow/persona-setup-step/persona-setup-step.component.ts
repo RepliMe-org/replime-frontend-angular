@@ -16,7 +16,6 @@ export class PersonaSetupStepComponent implements OnInit {
   @Output() personaSubmit = new EventEmitter<PersonaData>();
 
   personaForm: FormGroup;
-  avatarList: number[] = [1, 2, 3, 4, 5, 6, 7, 8];
 
   constructor(private fb: FormBuilder) {
     this.personaForm = this.fb.group({
@@ -27,7 +26,6 @@ export class PersonaSetupStepComponent implements OnInit {
       tone: ['friendly'],
       verbosity: ['balanced'],
       formality: ['neutral'],
-      avatarNumber: [1]
     });
   }
 
@@ -41,12 +39,11 @@ export class PersonaSetupStepComponent implements OnInit {
         tone: this.personaData.tone ?? 'friendly',
         verbosity: this.personaData.verbosity ?? 'balanced',
         formality: this.personaData.formality ?? 'neutral',
-        avatarNumber: this.personaData.avatarNumber ?? 1
+        fetchYoutubeProfilePicture: true,
       });
     }
   }
 
-  selectedAvatar() { return this.personaForm.get('avatarNumber')?.value; }
   talkLikeMe() { return this.personaForm.get('talkLikeMe')?.value; }
   fetchChannel() { return this.personaForm.get('fetchChannel')?.value; }
 
@@ -66,10 +63,6 @@ export class PersonaSetupStepComponent implements OnInit {
 
   toggleFetchChannel() {
     this.personaForm.patchValue({ fetchChannel: !this.fetchChannel() });
-  }
-
-  selectAvatar(n: number) { 
-    this.personaForm.patchValue({ avatarNumber: n });
   }
 
   onContinue() {

@@ -6,7 +6,7 @@ export interface PersonaData {
   tone: string;
   verbosity: string;
   formality: string;
-  avatarNumber: number;
+  fetchYoutubeProfilePicture: true;
 }
 export interface ChatbotConfig {
   personaData: PersonaData;

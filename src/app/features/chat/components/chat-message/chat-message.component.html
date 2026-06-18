@@ -1,10 +1,10 @@
 <div
   class="chat-msg"
-  [class.chat-msg--user]="isUser"
-  [class.chat-msg--bot]="!isUser"
+  [class.chat-msg-user]="isUser()"
+  [class.chat-msg-bot]="!isUser()"
 >
-  <div *ngIf="!isUser" class="chat-msg-avatar">
-    <img [src]="'assets/avatars/' + avatarNumber + '.svg'" alt="" />
+  <div *ngIf="!isUser()" class="chat-msg-avatar">
+    <img [src]="avatarUrl" alt="" />
   </div>
 
   <div class="chat-msg-body">
@@ -14,11 +14,13 @@
         [data]="renderedText"
         katex
         mermaid
+        lineNumbers
+        clipboard
       ></markdown>
     </div>
 
     <div
-      *ngIf="!isUser && sources && sources.length > 0"
+      *ngIf="!isUser() && sources && sources.length > 0"
       class="chat-msg-sources"
     >
       <p class="chat-msg-sources-label">
@@ -42,8 +44,8 @@
       </a>
     </div>
 
-    <span class="chat-msg-time" [class.chat-msg-time--user]="isUser">
-      {{ formatTime(message.sentAt) }}
+    <span class="chat-msg-time" [class.chat-msg-time-user]="isUser()">
+      {{ formattedTime() }}
     </span>
   </div>
 </div>

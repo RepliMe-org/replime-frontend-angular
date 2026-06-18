@@ -1,11 +1,13 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LoaderComponent } from '../loader/loader.component';
 
 @Component({
   selector: 'app-empty-state',
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './empty-state.component.html'
+  imports: [CommonModule, LoaderComponent],
+  templateUrl: './empty-state.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EmptyStateComponent {
   @Input() iconClass: string = 'fa-solid fa-folder-open';

@@ -1,0 +1,372 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;1,14..32,400&display=swap');
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+@import "ag-grid-community/styles/ag-grid.css";
+@import "ag-grid-community/styles/ag-theme-alpine.css";
+@import "prismjs/themes/prism.css";
+@import "./prism-theme.css";
+@import "katex/dist/katex.min.css";
+@import "./katex-theme.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+    .light {
+        --page-bg: #f8fafc;
+        --page-bg-rgb: 248 250 252;
+
+        --card-bg: #ffffff;
+        --card-bg-rgb: 255 255 255;
+
+        --dropdown-bg: #ffffff;
+        --dropdown-bg-rgb: 255 255 255;
+
+        --subtle-bg: #f1f5f9;
+        --subtle-bg-rgb: 241 245 249;
+
+        --active-bg: #e2e8f0;
+        --active-bg-rgb: 226 232 240;
+
+        --page-text: #0f172a;
+        --page-text-rgb: 15 23 42;
+
+        --text-main: #0f172a;
+        --text-secondary: #334155;
+        --text-muted: #64748b;
+        --text-placeholder: #94a3b8;
+
+        --subtle-text: #64748b;
+        --subtle-text-rgb: 100 116 139;
+
+        --primary: #0e7490;
+        --primary-rgb: 14 116 144;
+
+        --primary-hover: #155e75;
+        --primary-hover-rgb: 21 94 117;
+
+        --primary-pressed: #155e75;
+        --primary-pressed-rgb: 21 94 117;
+
+        --primary-text: #ffffff;
+        --primary-text-rgb: 255 255 255;
+
+        --primary-subtle: rgba(var(--primary-rgb), 0.08);
+
+        --secondary: #6366f1;
+        --secondary-rgb: 99 102 241;
+
+        --border-color: #e2e8f0;
+        --border-color-rgb: 226 232 240;
+
+        --card-border: #e2e8f0;
+        --card-border-rgb: 226 232 240;
+
+        --input-bg: #ffffff;
+        --input-bg-rgb: 255 255 255;
+
+        --input-border-color: #cbd5e1;
+        --input-border-color-rgb: 203 213 225;
+
+        --focus-ring: var(--primary);
+        --focus-ring-rgb: var(--primary-rgb);
+
+        --danger: #ef4444;
+        --danger-rgb: 239 68 68;
+
+        --sidebar-bg: #ffffff;
+        --sidebar-bg-rgb: 255 255 255;
+
+        --sidebar-text: #0f172a;
+        --sidebar-text-rgb: 15 23 42;
+
+        --sidebar-primary: var(--primary);
+        --sidebar-primary-rgb: var(--primary-rgb);
+
+        --sidebar-primary-text: #ffffff;
+        --sidebar-primary-text-rgb: 255 255 255;
+
+        --sidebar-subtle-bg: #f1f5f9;
+        --sidebar-subtle-bg-rgb: 241 245 249;
+
+        --sidebar-subtle-text: #64748b;
+        --sidebar-subtle-text-rgb: 100 116 139;
+
+        --sidebar-border: #e2e8f0;
+        --sidebar-border-rgb: 226 232 240;
+
+        --sidebar-ring: var(--primary);
+        --sidebar-ring-rgb: var(--primary-rgb);
+
+        --sidebar-active-bg: rgba(var(--primary-rgb), 0.08);
+        --sidebar-active-text: var(--primary);
+        --sidebar-active-border: var(--primary);
+
+        --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+
+        --gradient-hero:
+            radial-gradient(circle at top right,
+                rgba(var(--primary-rgb), 0.06),
+                transparent 40%),
+            linear-gradient(180deg, var(--page-bg) 0%, var(--subtle-bg) 100%);
+
+        --gradient-card: linear-gradient(180deg, var(--card-bg) 0%, var(--page-bg) 100%);
+
+        --shadow-card:
+            0 1px 3px rgba(15, 23, 42, 0.05),
+            0 1px 2px rgba(15, 23, 42, 0.03);
+
+        --shadow-elevated:
+            0 4px 12px rgba(15, 23, 42, 0.08);
+
+        --shadow-glow:
+            0 0 40px rgba(var(--primary-rgb), 0.15);
+
+        --shadow-btn:
+            0 1px 3px rgba(var(--primary-rgb), 0.3),
+            0 1px 2px rgba(0, 0, 0, 0.06);
+
+        --glass-background: rgba(255, 255, 255, 0.85);
+        --glass-border: rgba(226, 232, 240, 0.8);
+
+        --select-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%230e7490' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+
+        --chat-user-bg: #111827;
+        --chat-user-text: #f9fafb;
+        --chat-user-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+        --chat-user-border: rgba(255, 255, 255, 0.06);
+    }
+
+    .dark {
+
+        --page-bg: #0a0a0a;
+        --page-bg-rgb: 10 10 10;
+
+        --card-bg: #111111;
+        --card-bg-rgb: 17 17 17;
+
+        --dropdown-bg: #111111;
+        --dropdown-bg-rgb: 17 17 17;
+
+        --subtle-bg: #1a1a1a;
+        --subtle-bg-rgb: 26 26 26;
+
+        --active-bg: #222222;
+        --active-bg-rgb: 34 34 34;
+
+        --page-text: #fafafa;
+        --page-text-rgb: 250 250 250;
+
+        --text-main: #fafafa;
+        --text-secondary: #a1a1aa;
+        --text-muted: #71717a;
+        --text-placeholder: #52525b;
+
+        --subtle-text: #71717a;
+        --subtle-text-rgb: 113 113 122;
+
+
+        --primary: #22d3ee;
+        --primary-rgb: 34 211 238;
+
+        --primary-hover: #67e8f9;
+        --primary-hover-rgb: 103 232 249;
+
+        --primary-pressed: #06b6d4;
+        --primary-pressed-rgb: 6 182 212;
+
+        --primary-text: #0a0a0a;
+        --primary-text-rgb: 10 10 10;
+
+        --primary-subtle: rgba(34, 211, 238, 0.1);
+
+        --secondary: #a78bfa;
+        --secondary-rgb: 167 139 250;
+
+        --secondary-text: #fafafa;
+        --secondary-text-rgb: 250 250 250;
+
+        --border-color: #1a1a1a;
+        --border-color-rgb: 26 26 26;
+
+        --card-border: #2a2a2a;
+        --card-border-rgb: 42 42 42;
+
+        --input-bg: #111111;
+        --input-bg-rgb: 17 17 17;
+
+        --input-border-color: #2a2a2a;
+        --input-border-color-rgb: 42 42 42;
+
+        --focus-ring: #22d3ee;
+        --focus-ring-rgb: 34 211 238;
+
+        --danger: #f87171;
+        --danger-rgb: 248 113 113;
+
+        --danger-text: #fafafa;
+        --danger-text-rgb: 250 250 250;
+
+        --sidebar-bg: #000000;
+        --sidebar-bg-rgb: 0 0 0;
+
+        --sidebar-text: #fafafa;
+        --sidebar-text-rgb: 250 250 250;
+
+        --sidebar-primary: #22d3ee;
+        --sidebar-primary-rgb: 34 211 238;
+
+        --sidebar-primary-text: #0a0a0a;
+        --sidebar-primary-text-rgb: 10 10 10;
+
+        --sidebar-subtle-bg: #111111;
+        --sidebar-subtle-bg-rgb: 17 17 17;
+
+        --sidebar-subtle-text: #a1a1aa;
+        --sidebar-subtle-text-rgb: 161 161 170;
+
+        --sidebar-border: #1a1a1a;
+        --sidebar-border-rgb: 26 26 26;
+
+        --sidebar-ring: #22d3ee;
+        --sidebar-ring-rgb: 34 211 238;
+
+        --gradient-primary: linear-gradient(135deg, #22d3ee 0%, #a78bfa 100%);
+
+        --gradient-hero:
+            radial-gradient(ellipse at 60% 0%,
+                rgba(34, 211, 238, 0.08) 0%,
+                transparent 50%),
+            radial-gradient(ellipse at 90% 80%,
+                rgba(167, 139, 250, 0.06) 0%,
+                transparent 50%),
+            linear-gradient(180deg, #0a0a0a 0%, #0a0a0a 100%);
+
+        --gradient-card:
+            linear-gradient(180deg,
+                rgba(255, 255, 255, 0.03) 0%,
+                rgba(255, 255, 255, 0.00) 100%);
+
+        --gradient-glow:
+            radial-gradient(ellipse at center,
+                rgba(34, 211, 238, 0.12) 0%,
+                transparent 70%);
+
+        --shadow-card: 0 0 0 1px rgba(255, 255, 255, 0.06);
+        --shadow-elevated: 0 8px 32px rgba(0, 0, 0, 0.8),
+            0 0 0 1px rgba(255, 255, 255, 0.06);
+        --shadow-glow: 0 0 60px rgba(34, 211, 238, 0.15);
+
+        --glass-background: rgba(0, 0, 0, 0.75);
+        --glass-border: rgba(255, 255, 255, 0.08);
+
+        --select-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2322d3ee' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+
+        --chat-user-bg: #fafafa;
+        --chat-user-text: #0a0a0a;
+        --chat-user-shadow: none;
+        --chat-user-border: rgba(255, 255, 255, 0.1);
+    }
+
+    * {
+        @apply border-border-color;
+    }
+
+    body {
+        @apply bg-page-bg text-page-text antialiased;
+        font-family: 'Inter', system-ui, sans-serif;
+    }
+}
+
+@layer components {
+
+    .glass-card {
+        background: var(--glass-background);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--shadow-card);
+    }
+
+    .gradient-text {
+        color: var(--primary);
+    }
+
+    .text-h1 {
+        color: var(--text-main);
+        letter-spacing: -0.02em;
+    }
+
+    .text-h2 {
+        color: var(--text-secondary);
+    }
+
+    .text-body {
+        color: var(--text-muted);
+    }
+
+    .text-caption {
+        color: var(--text-placeholder);
+    }
+
+    input {
+        @apply h-11 px-4 text-sm w-full rounded-[8px] transition-all duration-300 outline-none border border-solid focus:ring-2;
+        background: var(--input-bg);
+        border: 1px solid var(--input-border-color);
+        color: var(--text-main);
+        --tw-ring-color: rgba(var(--focus-ring-rgb), 0.3);
+    }
+
+    input::placeholder {
+        color: var(--text-placeholder);
+    }
+
+    .hero-gradient {
+        background: var(--gradient-hero);
+    }
+
+    .sidebar {
+        @apply w-60 min-h-screen p-4;
+        background: var(--sidebar-bg);
+        color: var(--sidebar-text);
+        border-right: 1px solid var(--sidebar-border);
+    }
+
+    .sidebar-item {
+        @apply px-3 py-2.5 rounded-lg cursor-pointer transition-colors duration-200;
+    }
+
+    .sidebar-item:hover {
+        background: var(--sidebar-subtle-bg);
+    }
+
+    .sidebar-item.active {
+        background: var(--sidebar-active-bg);
+        color: var(--sidebar-active-text);
+        border-left: 2px solid var(--sidebar-active-border);
+        border-radius: 0 8px 8px 0;
+    }
+
+    .animate-fade-up {
+        animation: fade-up 0.6s ease-out forwards;
+    }
+
+    @keyframes fade-up {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .section-label {
+        @apply text-xs font-semibold uppercase;
+        color: var(--primary);
+        letter-spacing: 0.18em;
+    }
+}

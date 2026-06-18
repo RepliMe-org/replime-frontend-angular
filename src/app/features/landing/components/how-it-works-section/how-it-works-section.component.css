@@ -1,0 +1,48 @@
+.how-section {
+  @apply py-28;
+  background: var(--page-bg);
+  border-top: 1px solid var(--border-color);
+}
+
+.how-inner {
+  @apply container mx-auto px-6 text-center;
+}
+
+.how-title {
+  @apply text-4xl md:text-5xl font-bold mb-20;
+  color: var(--page-text);
+  letter-spacing: -0.02em;
+}
+
+.how-steps {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-12 max-w-4xl mx-auto;
+}
+
+.how-step {
+  @apply flex flex-col items-center text-center;
+}
+
+.how-step-icon {
+  @apply w-16 h-16 rounded-full flex items-center justify-center mb-6 text-xl;
+  background: #00d4e81a;
+  border: 1.5px solid #00d4e833;
+  color: var(--primary);
+}
+
+.how-step-label {
+  @apply text-xs font-semibold tracking-widest uppercase mb-3;
+  color: var(--primary);
+  letter-spacing: 0.2em;
+}
+
+.how-step-title {
+  @apply text-xl font-bold mb-4;
+  color: var(--page-text);
+}
+
+.how-step-desc {
+  @apply text-sm leading-relaxed;
+  color: var(--subtle-text);
+  max-width: 240px;
+  margin: 0 auto;
+}

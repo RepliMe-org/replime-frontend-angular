@@ -29,15 +29,15 @@
 
 .chat-new-btn {
   @apply flex items-center gap-2 mx-3 my-3 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200;
-  background: var(--gradient-primary);
-  color: var(--cyan-text);
-  box-shadow: 0 2px 12px rgba(33, 213, 237, 0.25);
+  background: var(--chat-user-bg);
+  color: var(--chat-user-text);
+  box-shadow: var(--chat-user-shadow);
 }
 
 .chat-new-btn:hover {
   opacity: 0.9;
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(33, 213, 237, 0.35);
+  box-shadow: var(--shadow-elevated);
 }
 
 .chat-sessions-list {
@@ -65,10 +65,10 @@
   color: var(--page-text);
 }
 
-.chat-session-item--active {
-  background: rgba(33, 213, 237, 0.08);
+.chat-session-item-active {
+  background: var(--primary-subtle);
   color: var(--page-text);
-  border: 1px solid rgba(33, 213, 237, 0.2);
+  border: 1px solid var(--border-color);
 }
 
 .chat-session-icon {
@@ -76,9 +76,9 @@
   background: var(--subtle-bg);
 }
 
-.chat-session-item--active .chat-session-icon {
-  background: rgba(33, 213, 237, 0.12);
-  color: var(--cyan);
+.chat-session-item-active .chat-session-icon {
+  background: var(--primary-subtle);
+  color: var(--primary);
 }
 
 .chat-session-info {
@@ -96,7 +96,7 @@
 
 .chat-session-active-dot {
   @apply absolute right-2.5 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full;
-  background: var(--cyan);
+  background: var(--primary);
 }
 
 .chat-session-delete-btn {
@@ -111,7 +111,7 @@
 
 .chat-session-delete-btn:hover {
   color: var(--danger);
-  background: rgba(239, 67, 67, 0.1);
+  background: color-mix(in srgb, var(--danger) 10%, transparent);
 }
 
 .chat-session-item:hover .chat-session-active-dot {
@@ -127,10 +127,10 @@
   background: var(--subtle-bg);
 }
 
-.sk-line--title {
+.sk-line-title {
   @apply h-3 w-3/4;
 }
 
-.sk-line--sub {
+.sk-line-sub {
   @apply h-2 w-1/2;
 }

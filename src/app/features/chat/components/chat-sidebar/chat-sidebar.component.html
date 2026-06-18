@@ -11,8 +11,8 @@
   <div class="chat-sessions-list" (scroll)="onScroll($event)">
     <ng-container *ngIf="isLoading">
       <div *ngFor="let s of [1, 2, 3]" class="chat-session-skeleton">
-        <div class="sk-line sk-line--title"></div>
-        <div class="sk-line sk-line--sub"></div>
+        <div class="sk-line sk-line-title"></div>
+        <div class="sk-line sk-line-sub"></div>
       </div>
     </ng-container>
 
@@ -28,7 +28,7 @@
     <button
       *ngFor="let session of sessions"
       class="chat-session-item"
-      [class.chat-session-item--active]="session.id === activeSessionId"
+      [class.chat-session-item-active]="session.id === activeSessionId"
       (click)="selectSession(session.id)"
     >
       <div class="chat-session-icon">
@@ -39,7 +39,7 @@
           {{ session.sessionTopic || "New conversation" }}
         </p>
         <span class="chat-session-date">{{
-          formatDate(session.lastMessageAt)
+          getFormattedDate(session.lastMessageAt)
         }}</span>
       </div>
       <span

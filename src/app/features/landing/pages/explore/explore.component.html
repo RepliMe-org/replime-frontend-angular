@@ -1,8 +1,6 @@
 <div class="explore-page">
   <div class="explore-hero">
-    <h1 class="explore-title">
-      Explore <span class="gradient-text">Creators</span>
-    </h1>
+    <h1 class="explore-title">Explore <span>Creators</span></h1>
     <p class="explore-subtitle">
       Discover and chat with AI versions of your favorite content creators. Each
       chatbot is trained on their unique content and style.
@@ -73,7 +71,7 @@
 
   <div *ngIf="!isLoading && !errorMessage" class="explore-grid">
     <app-chatbot-card
-      *ngFor="let chatbot of filtered"
+      *ngFor="let chatbot of filtered; trackBy: trackById"
       [chatbot]="chatbot"
     ></app-chatbot-card>
   </div>

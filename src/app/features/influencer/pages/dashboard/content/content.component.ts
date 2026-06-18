@@ -47,6 +47,7 @@ export class ContentComponent implements OnInit, OnDestroy {
       field: 'title',
       flex: 1,
       cellRenderer: VideoDetailsCellRendererComponent,
+      filter: 'agTextColumnFilter',
       sortable: false,
     },
     {
@@ -86,7 +87,6 @@ export class ContentComponent implements OnInit, OnDestroy {
           const chatbotId = chatbot?.chatbotInfo?.id;
 
           if (!chatbotId) {
-            console.error('[WS] No chatbotId found — skipping WebSocket');
             return this.trainingSourceService.getAllVideos();
           }
 

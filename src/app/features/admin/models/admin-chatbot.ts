@@ -5,9 +5,23 @@ export interface AdminChatbot {
   chatbotDescription: string;
   chatbotCategory: string;
   greetingMessage: string;
-  avatarNumber: number;
+  avatarUrl: string | null;
   channelHandle: string;
   isPublic: boolean;
   numberOfIngestedVideos: number;
   status: 'CONFIGURING' | 'TRAINING' | 'ACTIVE' | 'FAILED' | 'INACTIVE';
+}
+
+export type UserRole = 'USER' | 'CREATOR' | 'ADMIN';
+export type UserStatus = 'ACTIVE' | 'PENDING' | 'SUSPENDED' | 'INACTIVE';
+
+export interface AdminUser {
+  username: string;
+  email: string;
+  role: UserRole;
+  status: UserStatus;
+  chatbotName: string | null;
+  conversationsCount: number;
+  joinedAt: string;
+  avatarUrl?: string | null;
 }

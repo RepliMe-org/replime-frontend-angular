@@ -11,9 +11,9 @@ import { CommonModule } from '@angular/common';
 export class ChatWelcomeComponent {
   @Input() chatbotName:string;
   @Input() greetingMessage:string;
-  @Input() avatarNumber: number = 1;
+  @Input() avatarUrl: string | null;
 
   get avatarSrc(): string {
-    return `assets/avatars/${this.avatarNumber}.svg`;
+    return `${this.avatarUrl}`;
   }
 }
