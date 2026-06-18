@@ -30,7 +30,7 @@
 
   <div *ngIf="!loading && filteredChatbots.length > 0" class="chatbot-grid">
     <app-admin-chatbot-card
-      *ngFor="let bot of filteredChatbots"
+      *ngFor="let bot of filteredChatbots; trackBy: trackById"
       [bot]="bot"
       (visibilityToggle)="toggleVisibility($event)"
     ></app-admin-chatbot-card>

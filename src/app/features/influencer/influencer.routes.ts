@@ -27,6 +27,13 @@ export const INFLUENCER_ROUTES: Routes = [
             (m) => m.ClassificationsComponent,
           ),
       },
+      {
+        path: 'bot-settings',
+        loadComponent: () =>
+          import('./pages/dashboard/bot-settings/bot-settings.component').then(
+            (m) => m.BotSettingsComponent,
+          ),
+      },
     ],
   },
 ];

@@ -16,7 +16,7 @@ export class ChatbotCardComponent {
   constructor(private router: Router) {}
 
   avatarSrc(): string {
-    return `assets/avatars/${this.chatbot.avatarNumber}.svg`;
+    return `${this.chatbot.avatarUrl}`;
   }
 
   navigateToChat(): void {

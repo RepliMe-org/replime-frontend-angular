@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 import { AdminChatbot } from '../../models/admin-chatbot';
 import { SharedModule } from '../../../../shared/shared.module';
 
@@ -8,6 +8,7 @@ import { SharedModule } from '../../../../shared/shared.module';
   imports: [SharedModule],
   templateUrl: './admin-chatbot-card.component.html',
   styleUrl: './admin-chatbot-card.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AdminChatbotCardComponent {
   @Input() bot: AdminChatbot;
@@ -18,7 +19,4 @@ export class AdminChatbotCardComponent {
     this.visibilityToggle.emit(this.bot);
   }
 
-  get avatarUrl(): string {
-    return `assets/avatars/${this.bot.avatarNumber}.svg`;
-  }
 }

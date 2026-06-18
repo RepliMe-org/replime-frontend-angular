@@ -1,0 +1,80 @@
+<section class="trending-section">
+  <div class="trending-inner">
+    <div class="trending-header">
+      <h2 class="trending-title">Trending right now</h2>
+      <a class="see-all-link" routerLink="/explore"> See all &nbsp;→ </a>
+    </div>
+
+    <div class="trending-grid" *ngIf="isLoading">
+      <div class="creator-card skeleton-card" *ngFor="let i of [1, 2, 3, 4]">
+        <div class="creator-cover skeleton-block"></div>
+        <div class="creator-info">
+          <div class="creator-identity">
+            <div class="creator-avatar skeleton-block"></div>
+            <div class="skeleton-line"></div>
+          </div>
+          <div class="skeleton-btn"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="trending-empty" *ngIf="!isLoading && hasError">
+      <p>Couldn't load chatbots right now. Please try again later.</p>
+    </div>
+
+    <div
+      class="trending-empty"
+      *ngIf="!isLoading && !hasError && chatbots.length === 0"
+    >
+      <p>No chatbots available yet.</p>
+    </div>
+
+    <div
+      class="trending-grid"
+      *ngIf="!isLoading && !hasError && chatbots.length > 0"
+    >
+      <div
+        *ngFor="let bot of chatbots; trackBy: trackById"
+        class="creator-card"
+        [routerLink]="['/chat', bot.id]"
+      >
+        <div class="creator-cover">
+          <img
+            *ngIf="bot.avatarUrl"
+            [src]="bot.avatarUrl"
+            [alt]="bot.chatbotName"
+            class="creator-cover-img"
+          />
+          <span
+            class="creator-status-badge"
+            [class.is-active]="bot.status === 'ACTIVE'"
+          >
+            {{ bot.status === "ACTIVE" ? "Online" : bot.status }}
+          </span>
+        </div>
+
+        <div class="creator-info">
+          <div class="creator-identity">
+            <div class="creator-avatar">
+              <img
+                *ngIf="bot.avatarUrl"
+                [src]="bot.avatarUrl"
+                [alt]="bot.chatbotName"
+              />
+            </div>
+            <div class="creator-text">
+              <div class="creator-name">{{ bot.chatbotName }}</div>
+              <div class="creator-tags">{{ bot.categoryName }}</div>
+            </div>
+          </div>
+
+          <p class="creator-description" *ngIf="bot.chatbotDescription">
+            {{ bot.chatbotDescription }}
+          </p>
+
+          <button class="creator-talk-btn">Talk Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

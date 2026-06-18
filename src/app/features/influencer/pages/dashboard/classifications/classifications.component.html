@@ -34,7 +34,10 @@
       </div>
 
       <div class="chips-row">
-        <div *ngFor="let cls of pickedClasses" class="chip chip--picked">
+        <div
+          *ngFor="let cls of pickedClasses; trackBy: trackById"
+          class="chip chip-picked"
+        >
           <i class="fa-solid fa-check chip-icon"></i>
           <span>{{ cls.name }}</span>
           <button
@@ -57,12 +60,15 @@
       </div>
 
       <div class="chips-row">
-        <div *ngFor="let cls of customClasses" class="chip chip--custom">
+        <div
+          *ngFor="let cls of customClasses; trackBy: trackById"
+          class="chip chip-custom"
+        >
           <i class="fa-solid fa-sparkles chip-icon"></i>
           <span>{{ cls.name }}</span>
           <button
             type="button"
-            class="chip-remove chip-remove--purple"
+            class="chip-remove chip-remove-secondary"
             title="Remove"
             [disabled]="isSaving"
             (click)="removeCustomClass(cls)"
@@ -81,9 +87,9 @@
 
       <div class="chips-row">
         <button
-          *ngFor="let cls of availableClasses"
+          *ngFor="let cls of availableClasses; trackBy: trackById"
           type="button"
-          class="chip chip--available"
+          class="chip chip-available"
           [disabled]="isSaving"
           (click)="pickClass(cls)"
         >
@@ -104,7 +110,7 @@
     </div>
 
     <div class="add-custom-section">
-      <div class="section-label section-label--spaced">
+      <div class="section-label section-label-spaced">
         <span>Add a Custom Class</span>
       </div>
 

@@ -31,7 +31,7 @@
 }
 
 .group-badge {
-  @apply ml-1 text-xs font-semibold bg-cyan/10 text-cyan border border-cyan/20 px-2.5 py-0.5 rounded-full;
+  @apply ml-1 text-xs font-semibold bg-primary/10 text-primary border border-primary/20 px-2.5 py-0.5 rounded-full;
 }
 
 .empty-classes-msg {

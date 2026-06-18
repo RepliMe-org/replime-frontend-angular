@@ -1,76 +1,95 @@
-<nav class="navbar glass-card">
+<nav class="navbar">
   <div class="navbar-container">
     <div class="navbar-content">
-      <a routerLink="/">
-        <div class="navbar-logo gradient-text">
-          <i class="fa-solid fa-message"></i>
-          RepliMe
-        </div>
+      <a routerLink="/" class="navbar-logo">
+        <span class="navbar-logo-text">repli<span>me</span></span>
       </a>
+
       <div class="navbar-links">
-        <a class="navbar-link" routerLink="/explore">
-          <app-button variant="ghost" size="sm">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            Explore
-          </app-button>
-        </a>
+        <a class="navbar-link-item" routerLink="/explore">Browse</a>
         <a
           *ngIf="role === 'ADMIN'; else creatorDashboard"
-          class="navbar-link"
+          class="navbar-link-item"
           routerLink="dashboard/admin"
         >
-          <app-button variant="ghost" size="sm">
-            <i class="material-icons"></i>
-            Admin Dashboard
-          </app-button>
-        </a>
+          Admin Dashboard</a
+        >
+
         <ng-template #creatorDashboard>
-          <a class="navbar-link" routerLink="dashboard/influencer">
-            <app-button variant="ghost" size="sm">
-              <i class="material-icons"></i>
-              Creator Dashboard
-            </app-button>
-          </a>
+          <a class="navbar-link-item" routerLink="dashboard/influencer"
+            >For Creators</a
+          >
         </ng-template>
+
+        <a class="navbar-link-item" [routerLink]="[]" fragment="how-it-works"
+          >How it works</a
+        >
       </div>
 
-      <a *ngIf="!isAuthenticated" class="navbar-link" routerLink="auth">
-        <app-button variant="default" size="default">
-          <span class="text-cyan-text"> Get Started </span>
-        </app-button>
-      </a>
+      <div class="navbar-actions">
+        <app-theme-toggle style="margin-right: 1rem"></app-theme-toggle>
 
-      <div *ngIf="isAuthenticated">
-        <button class="user-menu-button" (click)="toggleUserMenu()">
-          <div class="user-avatar">
-            <i class="fa-solid fa-user"></i>
-          </div>
-          <span class="username">{{ username }}</span>
-          <i
-            class="fa-solid fa-chevron-down chevron-icon"
-            [class.rotate]="showUserMenu"
-          ></i>
-        </button>
-
-        <div
-          *ngIf="showUserMenu"
-          class="user-dropdown glass-card"
-          (click)="$event.stopPropagation()"
-        >
-          <div class="dropdown-header">
-            <div class="dropdown-username">{{ username }}</div>
-            <div class="dropdown-role">{{ role }}</div>
-          </div>
-
-          <div class="dropdown-divider"></div>
-
-          <button
-            class="dropdown-item logout"
-            (click)="logout(); $event.stopPropagation()"
-          >
-            <i class="fa-solid fa-right-from-bracket"></i>
-            Logout
+        <ng-container *ngIf="!isAuthenticated">
+          <button class="navbar-login-btn" routerLink="auth">Log in</button>
+          <button class="navbar-get-started-btn" routerLink="auth">
+            Get started
           </button>
+        </ng-container>
+
+        <div *ngIf="isAuthenticated" style="position: relative">
+          <button class="user-menu-button" (click)="toggleUserMenu()">
+            <div class="user-avatar">
+              <span>{{ username?.charAt(0)?.toUpperCase() }}</span>
+            </div>
+            <span class="username">{{ username }}</span>
+            <i
+              class="fa-solid fa-chevron-down chevron-icon"
+              [class.rotate]="showUserMenu"
+            ></i>
+          </button>
+
+          <div
+            *ngIf="showUserMenu"
+            class="user-dropdown"
+            (click)="$event.stopPropagation()"
+          >
+            <div class="dropdown-header">
+              <div class="dropdown-username">{{ username }}</div>
+              <div class="dropdown-role">{{ role }}</div>
+            </div>
+
+            <div class="dropdown-divider"></div>
+
+            <ng-container *ngIf="role === 'ADMIN'">
+              <a
+                class="dropdown-item"
+                routerLink="dashboard/admin"
+                (click)="closeUserMenu()"
+              >
+                <i class="fa-solid fa-shield-halved"></i>
+                Admin Dashboard
+              </a>
+            </ng-container>
+
+            <ng-container *ngIf="role !== 'ADMIN'">
+              <a
+                class="dropdown-item"
+                routerLink="dashboard/influencer"
+                (click)="closeUserMenu()"
+              >
+                <i class="fa-solid fa-chart-line"></i>
+                Creator Dashboard
+              </a>
+            </ng-container>
+
+            <button
+              class="dropdown-item logout"
+              (click)="logout(); $event.stopPropagation()"
+            >
+              <i class="fa-solid fa-right-from-bracket"></i>
+              Logout
+            </button>
+          </div>
         </div>
       </div>
     </div>

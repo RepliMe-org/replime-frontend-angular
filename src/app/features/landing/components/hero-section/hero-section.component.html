@@ -1,58 +1,133 @@
-<section class="hero-section hero-gradient">
+<section class="hero">
+  <div class="hero-bg-icons">
+    <i
+      class="fa-solid fa-play hero-bg-icon"
+      style="top: 20%; left: 4%; font-size: 0.9"
+    ></i>
+    <i
+      class="fa-solid fa-microphone hero-bg-icon"
+      style="top: 68%; left: 3%; font-size: 1rem"
+    ></i>
+    <i
+      class="fa-solid fa-circle-dot hero-bg-icon"
+      style="top: 44%; left: 7%; font-size: 0.7rem"
+    ></i>
+    <i
+      class="fa-solid fa-share-nodes hero-bg-icon"
+      style="top: 15%; right: 3%; font-size: 0.9rem"
+    ></i>
+    <i
+      class="fa-solid fa-play hero-bg-icon"
+      style="top: 38%; right: 5%; font-size: 0.7rem"
+    ></i>
+    <i
+      class="fa-solid fa-chart-bar hero-bg-icon"
+      style="bottom: 18%; right: 2%; font-size: 1.1rem"
+    ></i>
+    <i
+      class="fa-solid fa-chart-simple hero-bg-icon"
+      style="bottom: 10%; right: 4%; font-size: 0.8rem"
+    ></i>
+    <i
+      class="fa-solid fa-star hero-bg-icon"
+      style="top: 8%; right: 12%; font-size: 0.65rem"
+    ></i>
+    <i
+      class="fa-solid fa-plus hero-bg-icon"
+      style="top: 5%; right: 30%; font-size: 0.55rem"
+    ></i>
+  </div>
 
-  <div class="hero-container">
-    <div class="hero-content">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge">Your Creator, Always Here</div>
 
-      <div class="hero-badge glass-card">
-        <span class="text-sm text-subtle-text">
-          AI-Powered Creator Conversations
-        </span>
-      </div>
-
-      <h1 class="hero-title animate-fade-up [animation-delay:100ms]">
-        Talk to Your <span class="gradient-text">Favorite Creators</span>
+      <h1 class="hero-title">
+        Your favorite creator,<br />
+        <strong>always online.</strong>
       </h1>
 
-      <p class="hero-description animate-fade-up [animation-delay:200ms]">
-        RepliMe lets you have real conversations with AI versions of content
-        creators, trained on their videos, podcasts, and public content.
+      <p class="hero-desc">
+        RepliMe builds AI chatbots from creator content — so fans always have
+        someone to talk to.
       </p>
 
       <div class="hero-actions">
+        <button class="hero-btn-primary" routerLink="/explore">
+          Start chatting
+        </button>
+        <button class="hero-btn-ghost" routerLink="/dashboard/influencer">
+          I'm a creator &nbsp;→
+        </button>
+      </div>
+    </div>
 
-        <app-button variant="default" size="lg">
-          <span class="text-cyan-text font-semibold">
-            Start Chatting <i class="fa-solid fa-arrow-right"></i>
-          </span>
-        </app-button>
-
-        <app-button variant="glass" size="lg">
-          <i class="fa-solid fa-play"></i>
-          Watch Demo
-        </app-button>
-
+    <div class="hero-right">
+      <div class="hero-stat-bubble bubble-top">
+        <span class="dot"></span>
+        2.4K chatting now
       </div>
 
-      <div class="hero-stats">
-
-        <div class="text-center">
-          <div class="hero-stat-number gradient-text">500+</div>
-          <div class="hero-stat-label">Creators</div>
-        </div>
-
-        <div class="text-center">
-          <div class="hero-stat-number gradient-text">2M+</div>
-          <div class="hero-stat-label">Conversations</div>
-        </div>
-
-        <div class="text-center">
-          <div class="hero-stat-number gradient-text">98%</div>
-          <div class="hero-stat-label">Accuracy</div>
-        </div>
-
+      <div class="hero-stat-bubble bubble-mid">
+        <span
+          class="dot"
+          style="background: #00d4e8; box-shadow: 0 0 6px #00d4e899"
+        ></span>
+        AI Processing...
       </div>
 
+      <div class="hero-yt-card">
+        <div class="yt-thumb">
+          <i class="fa-brands fa-youtube"></i>
+        </div>
+        <div class="yt-info">
+          <div class="yt-title">How I grew to...</div>
+          <div class="yt-views">2.3M views</div>
+        </div>
+      </div>
+
+      <div class="hero-phone">
+        <div class="phone-bar"></div>
+
+        <div class="phone-header">
+          <div class="phone-header-avatar">AI</div>
+          <div class="phone-header-info">
+            <div class="phone-header-name">RepliMe AI</div>
+            <div class="phone-header-status">Online</div>
+          </div>
+        </div>
+
+        <div class="phone-messages">
+          <div class="chat-msg user">
+            <div class="chat-bubble user">What's your best tip?</div>
+          </div>
+          <div class="chat-msg bot">
+            <div class="chat-bubble bot">
+              Based on my video from March, index funds beat timing every
+              time...
+            </div>
+          </div>
+          <div class="chat-msg user">
+            <div class="chat-bubble user">Amazing, thanks!</div>
+          </div>
+        </div>
+
+        <div class="phone-input-bar">
+          <input
+            class="phone-input-field"
+            placeholder="Ask anything..."
+            readonly
+          />
+          <div class="phone-send-btn">
+            <i class="fa-solid fa-arrow-right" style="font-size: 9px"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-subscriber-stat">
+        <div class="subscriber-number">482K</div>
+        <div class="subscriber-label">subscribers</div>
+      </div>
     </div>
   </div>
-
 </section>

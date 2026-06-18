@@ -7,7 +7,7 @@
 }
 
 .verify-progress-fill {
-  @apply h-full bg-gradient-to-r from-cyan to-purple animate-pulse;
+  @apply h-full bg-gradient-to-r from-primary to-secondary animate-pulse;
   width: 70%;
 }
 

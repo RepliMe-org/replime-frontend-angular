@@ -22,7 +22,7 @@
 .search-spinner {
   position: absolute;
   right: 0.875rem;
-  color: var(--cyan);
+  color: var(--primary);
   font-size: 0.8rem;
 }
 
@@ -105,7 +105,7 @@
   border: 1px solid var(--border-color);
 
   background-color: var(--subtle-bg);
-  color: var(--cyan);
+  color: var(--primary);
 
   display: flex;
   align-items: center;
@@ -116,8 +116,8 @@
 }
 
 .add-btn:hover:not(:disabled) {
-  background-color: rgba(var(--cyan-rgb), 0.15);
-  border-color: var(--cyan);
+  background-color: color-mix(in srgb, var(--primary) 15%, transparent);
+  border-color: var(--primary);
 }
 
 .add-btn:disabled {
@@ -165,8 +165,8 @@ kbd.kbd {
 
   border-radius: 9999px;
 
-  background-color: rgba(var(--cyan-rgb), 0.15);
-  color: var(--cyan);
+  background-color: color-mix(in srgb, var(--primary) 15%, transparent);
+  color: var(--primary);
 }
 
 .tags-container {
@@ -184,11 +184,11 @@ kbd.kbd {
 
   border-radius: 9999px;
 
-  background-color: rgba(var(--cyan-rgb), 0.1);
-  border: 1px solid rgba(var(--cyan-rgb), 0.3);
+  background-color: color-mix(in srgb, var(--primary) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--primary) 30%, transparent);
 
   font-size: 0.8rem;
-  color: var(--cyan);
+  color: var(--primary);
 
   font-weight: 500;
 }
@@ -206,7 +206,7 @@ kbd.kbd {
   background: transparent;
   border: none;
 
-  color: var(--cyan);
+  color: var(--primary);
 
   cursor: pointer;
   padding: 0;
@@ -242,19 +242,19 @@ kbd.kbd {
 }
 
 .class-chip {
-  @apply flex items-center gap-2 px-3 py-2 rounded-lg border border-border-color bg-input-bg text-subtle-text text-sm cursor-pointer transition-all duration-200 hover:border-cyan hover:text-page-text;
+  @apply flex items-center gap-2 px-3 py-2 rounded-lg border border-border-color bg-input-bg text-subtle-text text-sm cursor-pointer transition-all duration-200 hover:border-primary hover:text-page-text;
 }
 
 .class-chip.selected {
-  @apply border-cyan bg-cyan/10 text-cyan;
+  @apply border-primary bg-primary/10 text-primary;
 }
 
 .system-tag {
-  @apply border-cyan/40 text-cyan;
+  @apply border-primary/40 text-primary;
 }
 
 .custom-tag {
-  @apply border-purple/40 text-purple;
+  @apply border-secondary/40 text-secondary;
 }
 
 .loading-state {

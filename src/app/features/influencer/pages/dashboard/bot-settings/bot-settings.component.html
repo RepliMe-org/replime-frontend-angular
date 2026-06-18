@@ -1,0 +1,180 @@
+<app-dashboard-page>
+  <app-dashboard-header
+    title="Bot Settings"
+    subtitle="Update your chatbot's persona, greeting, and personality at any time."
+  ></app-dashboard-header>
+
+  <app-empty-state
+    *ngIf="isLoading"
+    [isLoading]="true"
+    loadingMessage="Loading your chatbot settings..."
+  ></app-empty-state>
+
+  <app-empty-state
+    *ngIf="!isLoading && loadError"
+    iconClass="fa-solid fa-triangle-exclamation"
+    title="Couldn't load settings"
+    description="Something went wrong while fetching your chatbot configuration."
+  >
+    <app-button variant="default" size="default" (click)="loadConfig()">
+      Try Again
+    </app-button>
+  </app-empty-state>
+
+  <app-card *ngIf="!isLoading && !loadError" variant="default">
+    <form [formGroup]="settingsForm">
+      <div class="grid grid-cols-1 gap-4 text-left mb-4">
+        <div class="form-group">
+          <label class="form-label block">Bot Name</label>
+          <input
+            type="text"
+            formControlName="name"
+            placeholder="e.g. YourChannel AI, Ask YourChannel"
+            class="form-input w-full"
+          />
+          <p class="form-help mt-1">
+            This is how your chatbot is presented to your audience.
+          </p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label block">Chatbot Description</label>
+          <textarea
+            formControlName="description"
+            rows="2"
+            placeholder="e.g. Helps viewers understand my tutorials and answers questions about my content"
+            class="form-input w-full resize-none"
+          ></textarea>
+          <p class="form-help mt-1">Describe what your chatbot is meant to do.</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label block">Welcome Message</label>
+          <textarea
+            formControlName="greetingMessage"
+            maxlength="500"
+            rows="3"
+            placeholder="Hey there! 👋 I'm an AI trained on all my videos. Ask me anything!"
+            class="form-input w-full resize-none"
+          ></textarea>
+          <p class="form-help mt-1">
+            The first message users see when they start a conversation with your bot.
+          </p>
+        </div>
+      </div>
+
+      <div
+        class="rounded-xl border border-border-color/50 bg-input-bg p-4 flex flex-col gap-3 mb-5"
+      >
+        <div class="flex items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0"
+            >
+              <i class="fa-solid fa-microphone text-sm"></i>
+            </div>
+            <div class="text-left">
+              <h3 class="font-semibold text-page-text text-sm m-0">Talk Like Me</h3>
+              <p class="text-xs text-subtle-text m-0">Mimic your speaking style</p>
+            </div>
+          </div>
+          <button
+            type="button"
+            role="switch"
+            [attr.aria-checked]="talkLikeMe()"
+            (click)="toggleTalkLikeMe()"
+            [ngClass]="talkLikeMe() ? 'bg-primary' : 'bg-page-bg'"
+            class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          >
+            <span
+              [ngClass]="
+                talkLikeMe()
+                  ? 'translate-x-5 bg-input-bg'
+                  : 'translate-x-0 bg-subtle-text'
+              "
+              class="pointer-events-none block h-5 w-5 rounded-full shadow-lg ring-0 transition-transform"
+            ></span>
+          </button>
+        </div>
+
+        <div
+          class="bg-primary/5 border border-primary/20 rounded-lg px-3 py-2 flex gap-2 text-left transition-all duration-300 overflow-hidden"
+          [ngClass]="
+            talkLikeMe() ? 'max-h-24 opacity-100' : 'max-h-0 opacity-0 p-0 border-0'
+          "
+        >
+          <i class="fa-solid fa-wand-magic-sparkles text-primary text-xs mt-0.5 shrink-0"></i>
+          <p class="text-xs text-subtle-text leading-relaxed m-0">
+            Analyzes your video transcripts to learn your tone and phrases.
+          </p>
+        </div>
+      </div>
+
+      <div
+        *ngIf="fetchChannel"
+        class="rounded-xl border border-border-color/50 bg-input-bg p-3 flex items-center gap-3 mb-5"
+      >
+        <i class="fa-brands fa-youtube text-primary"></i>
+        <p class="text-xs text-subtle-text m-0">
+          Fetch All Videos is enabled for this chatbot and can't be changed here.
+        </p>
+      </div>
+
+      <div class="border border-border-color/50 rounded-xl p-4 mb-5">
+        <p class="text-xs font-semibold text-subtle-text uppercase tracking-wider text-left mb-3">
+          Personality
+        </p>
+        <div class="grid grid-cols-3 gap-3 text-left">
+          <div class="form-group">
+            <label class="form-label block mb-1 text-xs">Tone</label>
+            <select formControlName="tone" class="form-input w-full text-sm">
+              <option value="friendly">Friendly</option>
+              <option value="encouraging">Encouraging</option>
+              <option value="neutral">Neutral</option>
+              <option value="humorous">Humorous</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label block mb-1 text-xs">Response Length</label>
+            <select formControlName="verbosity" class="form-input w-full text-sm">
+              <option value="balanced">Balanced</option>
+              <option value="concise">Concise</option>
+              <option value="detailed">Detailed</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label block mb-1 text-xs">Formality</label>
+            <select formControlName="formality" class="form-input w-full text-sm">
+              <option value="neutral">Neutral</option>
+              <option value="casual">Casual</option>
+              <option value="formal">Formal</option>
+            </select>
+          </div>
+        </div>
+
+        <p
+          *ngIf="talkLikeMe()"
+          class="text-xs text-subtle-text mt-3 flex items-center gap-1.5 text-left"
+        >
+          <i class="fa-solid fa-circle-info text-primary"></i>
+          Tone and Formality are managed by your speaking style when Talk Like Me is on.
+        </p>
+      </div>
+
+      <div class="flex justify-end">
+        <app-button
+          size="lg"
+          [disabled]="!isFormValid() || !hasChanges() || isSaving"
+          [isLoading]="isSaving"
+          (click)="onSave()"
+        >
+          <span loading class="ml-2">Saving...</span>
+          <i class="fa-solid fa-floppy-disk btn-icon"></i>
+          <span class="font-semibold">Save Changes</span>
+        </app-button>
+      </div>
+    </form>
+  </app-card>
+</app-dashboard-page>

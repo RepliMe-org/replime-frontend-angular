@@ -12,13 +12,13 @@
 .chat-loader-ring {
   @apply absolute inset-0 rounded-full border-2;
   border-color: transparent;
-  border-top-color: var(--cyan);
+  border-top-color: var(--primary);
   animation: spin 1s linear infinite;
 }
 
-.chat-loader-ring--inner {
+.chat-loader-ring-inner {
   @apply inset-2;
-  border-top-color: var(--purple);
+  border-top-color: var(--secondary);
   animation-direction: reverse;
   animation-duration: 0.7s;
 }
@@ -66,8 +66,8 @@
 }
 
 .chat-error-back:hover {
-  border-color: rgba(33, 213, 237, 0.4);
-  color: var(--cyan);
+  border-color: var(--primary);
+  color: var(--primary);
 }
 
 .chat-layout {
@@ -84,7 +84,7 @@
   width: 260px;
 }
 
-.chat-sidebar-wrap--hidden {
+.chat-sidebar-wrap-hidden {
   width: 0;
   opacity: 0;
   pointer-events: none;
@@ -123,7 +123,7 @@
 .chat-navbar-avatar {
   @apply w-9 h-9 rounded-full overflow-hidden flex items-center justify-center;
   background: var(--subtle-bg);
-  border: 1px solid rgba(33, 213, 237, 0.25);
+  border: 1px solid var(--border-color);
 }
 
 .chat-navbar-avatar img {
@@ -142,7 +142,6 @@
 
 .chat-messages-area {
   @apply flex flex-col flex-1 overflow-y-auto px-4 py-6;
-  scroll-behavior: smooth;
 }
 
 .chat-input-wrap {

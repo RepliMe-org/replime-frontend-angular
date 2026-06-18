@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StatCardComponent } from '../../../../shared/ui/stat-card/stat-card.component';
 
@@ -8,6 +8,7 @@ import { StatCardComponent } from '../../../../shared/ui/stat-card/stat-card.com
   imports: [CommonModule, StatCardComponent],
   templateUrl: './chatbot-stats.component.html',
   styleUrls: ['./chatbot-stats.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatbotStatsComponent {
   @Input() total = 0;

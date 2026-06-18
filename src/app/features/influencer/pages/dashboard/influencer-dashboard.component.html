@@ -11,9 +11,6 @@
 
 <ng-template #loadingTemplate>
   <div class="flex items-center justify-center min-h-[50vh]">
-    <app-empty-state
-      [isLoading]="true"
-      loadingMessage="Loading dashboard…"
-    ></app-empty-state>
+    <app-loader message="Loading dashboard..."></app-loader>
   </div>
 </ng-template>

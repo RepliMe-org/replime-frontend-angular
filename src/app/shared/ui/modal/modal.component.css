@@ -1,6 +1,6 @@
 .modal-overlay {
   @apply fixed inset-0 z-50 flex items-center justify-center px-4;
-  background: rgba(0, 0, 0, 0.65);
+  background: #000000a6;
   backdrop-filter: blur(6px);
   animation: overlay-in 0.15s ease;
 }
@@ -8,7 +8,7 @@
 .modal-box {
   @apply w-full rounded-2xl border border-border-color;
   background: var(--card-bg);
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 24px 64px #00000080;
   animation: box-in 0.2s ease;
 }
 

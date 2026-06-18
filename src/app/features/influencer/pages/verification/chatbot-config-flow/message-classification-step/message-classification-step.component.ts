@@ -2,11 +2,12 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnDestroy,
-  OnInit,
+  DestroyRef,
   Output,
+  OnInit
 } from '@angular/core';
-import { Subject, Subscription, of } from 'rxjs';
+import { Subject, of } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime, distinctUntilChanged, catchError } from 'rxjs/operators';
 import { SharedModule } from '../../../../../../shared/shared.module';
 import {
@@ -22,7 +23,7 @@ import { ChatbotClassificationsService } from '../../../../../../core/services/c
   templateUrl: './message-classification-step.component.html',
   styleUrl: './message-classification-step.component.css',
 })
-export class MessageClassificationStepComponent implements OnInit, OnDestroy {
+export class MessageClassificationStepComponent implements OnInit {
   @Input() selectedSystemIds: number[] = [];
   @Input() selectedCustomNames: string[] = [];
   @Input() category: number | null = null;
@@ -38,13 +39,13 @@ export class MessageClassificationStepComponent implements OnInit, OnDestroy {
 
   searchQuery = '';
   searchSubject = new Subject<string>();
-  subscription = new Subscription();
 
   customClassInput = '';
 
   constructor(
     private chatbotClassificationsService: ChatbotClassificationsService,
-  ) {}
+    private destroyRef: DestroyRef,
+  ) { }
 
   ngOnInit() {
     this.customClasses = [...(this.selectedCustomNames ?? [])];
@@ -53,20 +54,23 @@ export class MessageClassificationStepComponent implements OnInit, OnDestroy {
       this.loadSystemClassifications();
     }
 
-    const searchSub = this.searchSubject
-      .pipe(debounceTime(300), distinctUntilChanged())
+    this.searchSubject
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        takeUntilDestroyed(this.destroyRef)
+      )
       .subscribe((query) => {
         this.filterClasses(query);
       });
-
-    this.subscription.add(searchSub);
   }
 
   loadSystemClassifications() {
     this.isLoadingClasses = true;
 
-    const loadSub = this.chatbotClassificationsService
+    this.chatbotClassificationsService
       .getMessageClasses(this.category)
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (classes) => {
           this.allSystemClasses = Array.isArray(classes)
@@ -86,8 +90,6 @@ export class MessageClassificationStepComponent implements OnInit, OnDestroy {
           this.isLoadingClasses = false;
         },
       });
-
-    this.subscription.add(loadSub);
   }
 
   onSearchInput(value: string) {
@@ -100,8 +102,8 @@ export class MessageClassificationStepComponent implements OnInit, OnDestroy {
     this.filteredSystemClasses = !lower
       ? [...this.allSystemClasses]
       : this.allSystemClasses.filter((c) =>
-          c.name.toLowerCase().includes(lower),
-        );
+        c.name.toLowerCase().includes(lower),
+      );
   }
 
   isSystemSelected(cls: MessageClass): boolean {
@@ -185,7 +187,4 @@ export class MessageClassificationStepComponent implements OnInit, OnDestroy {
     this.back.emit();
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
 }

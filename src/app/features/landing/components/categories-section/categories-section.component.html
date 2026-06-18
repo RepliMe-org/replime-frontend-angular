@@ -1,0 +1,33 @@
+<section class="categories-section">
+  <div class="categories-watermark">repliMe</div>
+
+  <div class="categories-inner">
+
+    <div class="categories-header">
+      <div class="section-label">Explore</div>
+      <h2 class="categories-title">What do you want to know?</h2>
+    </div>
+
+    <div class="categories-grid">
+      <div
+        *ngFor="let cat of categories; let i = index"
+        class="category-card"
+        routerLink="/explore"
+      >
+        <div
+          class="category-bar"
+          [style.background]="colors[i]"
+        ></div>
+        <div class="category-info">
+          <div class="category-name">{{ cat.name }}</div>
+          <div class="category-count">X creators</div>
+        </div>
+      </div>
+    </div>
+
+    <a class="explore-all-link" routerLink="/explore">
+      Explore all categories &nbsp;→
+    </a>
+
+  </div>
+</section>

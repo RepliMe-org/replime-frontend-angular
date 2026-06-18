@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
     <div class="typing-indicator">
       <div class="typing-avatar">
         <img
-          [src]="botAvatar"
+          [src]="avatarUrl"
           alt="Bot Avatar"
           class="w-full h-full object-cover rounded-full"
         />
@@ -36,9 +36,9 @@ import { Component, Input } from '@angular/core';
         justify-content: center;
         font-size: 0.75rem;
         flex-shrink: 0;
-        background: rgba(33, 213, 237, 0.12);
-        color: var(--cyan);
-        border: 1px solid rgba(33, 213, 237, 0.25);
+        background: #21d5ed1f;
+        color: var(--primary);
+        border: 1px solid #21d5ed40;
       }
       .typing-bubble {
         display: flex;
@@ -82,9 +82,6 @@ import { Component, Input } from '@angular/core';
   ],
 })
 export class ChatTypingComponent {
-  @Input() avatarNumber: number = 1;
+  @Input() avatarUrl: string | null;
 
-  get botAvatar(): string {
-    return `/assets/avatars/${this.avatarNumber}.svg`;
-  }
 }

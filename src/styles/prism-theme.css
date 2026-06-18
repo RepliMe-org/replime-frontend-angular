@@ -1,0 +1,131 @@
+pre[class*="language-"],
+code[class*="language-"] {
+    background: transparent;
+    text-shadow: none;
+}
+
+
+.light .token.comment,
+.light .token.prolog,
+.light .token.doctype,
+.light .token.cdata {
+    color: #6b7280;
+    font-style: italic;
+}
+
+.light .token.punctuation {
+    color: #64748b;
+}
+
+.light .token.keyword,
+.light .token.tag,
+.light .token.operator,
+.light .token.important,
+.light .token.atrule {
+    color: #7c3aed;
+}
+
+.light .token.property,
+.light .token.constant,
+.light .token.symbol,
+.light .token.deleted {
+    color: #b45309;
+}
+
+.light .token.string,
+.light .token.attr-value,
+.light .token.char,
+.light .token.inserted {
+    color: #0369a1;
+}
+
+.light .token.function,
+.light .token.class-name .token.function {
+    color: #0e7490;
+}
+
+.light .token.class-name,
+.light .token.builtin,
+.light .token.selector {
+    color: #047857;
+}
+
+.light .token.number,
+.light .token.boolean,
+.light .token.regex,
+.light .token.unit {
+    color: #b45309;
+}
+
+.light .token.attr-name,
+.light .token.namespace {
+    color: #7c3aed;
+}
+
+.light .token.url,
+.light .token.variable {
+    color: #0369a1;
+}
+
+.dark .token.comment,
+.dark .token.prolog,
+.dark .token.doctype,
+.dark .token.cdata {
+    color: #7588a3;
+    font-style: italic;
+}
+
+.dark .token.punctuation {
+    color: #7588a3;
+}
+
+.dark .token.keyword,
+.dark .token.tag,
+.dark .token.operator,
+.dark .token.important,
+.dark .token.atrule {
+    color: #a78bfa;
+    background-color: transparent;
+}
+
+.dark .token.property,
+.dark .token.constant,
+.dark .token.symbol,
+.dark .token.deleted {
+    color: #fbbf24;
+}
+
+.dark .token.string,
+.dark .token.attr-value,
+.dark .token.char,
+.dark .token.inserted {
+    color: #7dd3fc;
+}
+
+.dark .token.function,
+.dark .token.class-name .token.function {
+    color: #21d5ed;
+}
+
+.dark .token.class-name,
+.dark .token.builtin,
+.dark .token.selector {
+    color: #34d399;
+}
+
+.dark .token.number,
+.dark .token.boolean,
+.dark .token.regex,
+.dark .token.unit {
+    color: #fbbf24;
+}
+
+.dark .token.attr-name,
+.dark .token.namespace {
+    color: #a78bfa;
+}
+
+.dark .token.url,
+.dark .token.variable {
+    color: #7dd3fc;
+}

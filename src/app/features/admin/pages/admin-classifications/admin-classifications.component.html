@@ -3,7 +3,7 @@
     title="Classifications"
     subtitle="Manage classifications within each category"
   >
-    <app-button (click)="openAddForm()" [disabled]="showAddForm">
+    <app-button (click)="openAddForm()" [disabled]="formState.showAddForm">
       <i class="fa-solid fa-plus text-xs"></i> Add Classifications
     </app-button>
   </app-dashboard-header>
@@ -12,7 +12,7 @@
       [value]="totalClassificationCount()"
       label="Total Classifications"
       iconClass="fa-solid fa-tags"
-      iconColorClass="text-purple bg-purple/20"
+      iconColorClass="text-secondary bg-secondary/20"
     ></app-stat-card>
   </div>
 
@@ -34,21 +34,21 @@
   </app-card>
 
   <app-form-card
-    *ngIf="showAddForm"
+    *ngIf="formState.showAddForm"
     title="Add Classifications"
-    [errorMessage]="formError"
-    [saving]="saving"
+    [errorMessage]="formState.formError"
+    [saving]="formState.saving"
     (save)="saveNewClassifications()"
     (cancel)="discardAddForm()"
   >
     <div class="form-group">
       <label class="form-label">
-        Target Category <span class="text-cyan">*</span>
+        Target Category <span class="text-primary">*</span>
       </label>
       <select
         class="form-input"
         [(ngModel)]="targetCategoryId"
-        (ngModelChange)="formError = ''"
+        (ngModelChange)="formState.formError = ''; updateValidationFlags()"
       >
         <option [ngValue]="null" disabled>Select a category</option>
         <option *ngFor="let category of allCategories" [ngValue]="category.id">
@@ -58,10 +58,10 @@
     </div>
 
     <app-dynamic-input-list
-      [items]="newClassificationItems"
-      [duplicateItemFlags]="duplicateItemFlags"
-      [existingItemFlags]="existingItemFlags"
-      [triggerValidation]="triggerListValidation"
+      [items]="formState.newItems"
+      [duplicateItemFlags]="formState.duplicateItemFlags"
+      [existingItemFlags]="formState.existingItemFlags"
+      [triggerValidation]="formState.triggerListValidation"
       placeholder="Classification name"
       existingItemMessage="Already exists in this category"
       (itemsChange)="onClassificationItemsChanged($event)"
@@ -76,7 +76,7 @@
     iconClass="fa-solid fa-tags"
     description="Select a category and add classifications to it."
   >
-    <app-button (click)="openAddForm()" [disabled]="showAddForm">
+    <app-button (click)="openAddForm()" [disabled]="formState.showAddForm">
       <i class="fa-solid fa-plus text-xs"></i> Add Classifications
     </app-button>
   </app-empty-state>
@@ -87,7 +87,7 @@
       class="group-card"
     >
       <div class="group-header">
-        <i class="fa-solid fa-folder-tree text-cyan text-sm w-4 shrink-0"></i>
+        <i class="fa-solid fa-folder-tree text-primary text-sm w-4 shrink-0"></i>
         <span class="group-name">{{ category.name }}</span>
         <span class="group-badge">
           {{ category.messageClasses.length }} classifications

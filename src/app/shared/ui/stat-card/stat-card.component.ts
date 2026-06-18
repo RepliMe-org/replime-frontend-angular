@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -7,10 +7,11 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   templateUrl: './stat-card.component.html',
   styleUrls: ['./stat-card.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StatCardComponent {
   @Input() value: string | number = '0';
   @Input() label: string = '';
   @Input() iconClass: string = 'fa-solid fa-chart-bar';
-  @Input() iconColorClass: string = 'text-cyan bg-cyan/20';
+  @Input() iconColorClass: string = 'text-primary bg-primary/20';
 }

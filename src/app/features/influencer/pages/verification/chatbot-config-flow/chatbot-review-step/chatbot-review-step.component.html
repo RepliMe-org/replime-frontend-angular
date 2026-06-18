@@ -1,5 +1,5 @@
 <div class="page-container">
-  <div class="page-icon icon-cyan">
+  <div class="page-icon icon-primary">
     <i class="fa-solid fa-clipboard-check page-icon-i"></i>
   </div>
 
@@ -8,129 +8,86 @@
   </h1>
 
   <p class="page-subtitle">
-    Everything looks good? Click "Setup My Chatbot" to go live, or go back to
-    adjust anything.
+    Here's how your chatbot will look and behave. Tap any card to make changes.
   </p>
 
-  <app-card variant="default">
-    <div class="review-section">
-      <div class="review-section-header">
-        <div class="review-section-icon">
-          <i class="fa-solid fa-robot text-cyan"></i>
-        </div>
-        <h3 class="review-section-title">AI Persona</h3>
+  <div
+    class="review-card review-identity"
+    (click)="jumpTo('persona')"
+    tabindex="0"
+    role="button"
+  >
+    <div class="review-avatar">{{ botInitial() }}</div>
+
+    <div class="review-identity-text">
+      <div class="review-identity-top">
+        <h2 class="review-bot-name">
+          {{ personaData?.name || "Unnamed bot" }}
+        </h2>
+        <span class="review-edit"><i class="fa-solid fa-pen"></i> Edit</span>
       </div>
 
-      <div class="review-fields">
-        <div class="review-field">
-          <span class="review-field-label">Name</span>
-          <span class="review-field-value">{{ personaData.name }}</span>
-        </div>
-        <div class="review-field">
-          <span class="review-field-label">Description</span>
-          <span class="review-field-value review-field-desc">
-            {{ personaData.description }}
-          </span>
-        </div>
-        <div class="review-field">
-          <span class="review-field-label">Talk Like Me</span>
-          <span class="review-field-value">
-            <span
-              class="status-badge"
-              [ngClass]="personaData.talkLikeMe ? 'badge-on' : 'badge-off'"
-            >
-              {{ personaData.talkLikeMe ? "Enabled" : "Disabled" }}
-            </span>
-          </span>
-        </div>
-        <div class="review-field" *ngIf="!personaData?.talkLikeMe">
-          <span class="review-field-label">Tone</span>
-          <span class="review-field-value capitalize">{{
-            personaData.tone
-          }}</span>
-        </div>
-        <div class="review-field" *ngIf="!personaData?.talkLikeMe">
-          <span class="review-field-label">Response Length</span>
-          <span class="review-field-value capitalize">{{
-            personaData.verbosity
-          }}</span>
-        </div>
-        <div class="review-field" *ngIf="!personaData?.talkLikeMe">
-          <span class="review-field-label">Formality</span>
-          <span class="review-field-value capitalize">{{
-            personaData.formality
-          }}</span>
-        </div>
+      <p class="review-bot-desc">{{ personaData?.description }}</p>
+
+      <div class="review-chip-row" *ngIf="personalityChips().length">
+        <span class="review-chip" *ngFor="let chip of personalityChips()">{{
+          chip
+        }}</span>
       </div>
     </div>
+  </div>
 
-    <div class="review-divider"></div>
-
-    <div class="review-section">
-      <div class="review-section-header">
-        <div class="review-section-icon">
-          <i class="fa-solid fa-message text-cyan"></i>
-        </div>
-        <h3 class="review-section-title">Welcome Message</h3>
-      </div>
-
-      <div class="review-fields">
-        <div class="review-field">
-          <span class="review-field-value review-field-desc review-welcome">
-            "{{ welcomeMessage }}"
-          </span>
-        </div>
-      </div>
+  <div
+    class="review-card review-welcome"
+    (click)="jumpTo('welcome')"
+    tabindex="0"
+    role="button"
+  >
+    <div class="review-card-header">
+      <span class="review-card-label"
+        ><i class="fa-solid fa-message"></i> First message</span
+      >
+      <span class="review-edit"><i class="fa-solid fa-pen"></i> Edit</span>
     </div>
 
-    <div class="review-divider"></div>
+    <div class="review-chat-preview">
+      <div class="review-chat-avatar">{{ botInitial() }}</div>
+      <div class="review-chat-bubble">{{ welcomeMessage }}</div>
+    </div>
+  </div>
 
-    <div class="review-section">
-      <div class="review-section-header">
-        <div class="review-section-icon">
-          <i class="fa-solid fa-layer-group text-cyan"></i>
-        </div>
-        <h3 class="review-section-title">Category</h3>
-      </div>
-
-      <div class="review-fields">
-        <div class="review-field">
-          <span class="review-field-value">{{ categoryName }}</span>
-        </div>
-      </div>
+  <div
+    class="review-card review-tags"
+    (click)="jumpTo('category')"
+    tabindex="0"
+    role="button"
+  >
+    <div class="review-card-header">
+      <span class="review-card-label"
+        ><i class="fa-solid fa-layer-group"></i> {{ categoryName }}</span
+      >
+      <span class="review-edit"><i class="fa-solid fa-pen"></i> Edit</span>
     </div>
 
-    <div class="review-divider"></div>
-
-    <div class="review-section">
-      <div class="review-section-header">
-        <div class="review-section-icon">
-          <i class="fa-solid fa-tags text-cyan"></i>
-        </div>
-        <h3 class="review-section-title">
-          Classifications
-          <span class="selected-count ml-2">{{ totalClasses }}</span>
-        </h3>
-      </div>
-
-      <div class="tags-container mt-3">
-        <div
-          *ngFor="let name of systemClassNames"
-          class="classification-tag system-tag"
-        >
-          <i class="fa-solid fa-tag text-xs"></i>
-          <span>{{ name }}</span>
-        </div>
-        <div
-          *ngFor="let name of customClassNames"
-          class="classification-tag custom-tag"
-        >
-          <i class="fa-solid fa-sparkles text-xs"></i>
-          <span>{{ name }}</span>
-        </div>
-      </div>
+    <div
+      class="review-tags-row"
+      (click)="$event.stopPropagation(); jumpTo('classifications')"
+    >
+      <span
+        class="review-tag review-tag-system"
+        *ngFor="let name of systemClassNames"
+      >
+        <i class="fa-solid fa-tag"></i>{{ name }}
+      </span>
+      <span
+        class="review-tag review-tag-custom"
+        *ngFor="let name of customClassNames"
+      >
+        <i class="fa-solid fa-sparkles"></i>{{ name }}
+      </span>
+      <span class="review-tag-count">{{ totalClasses() }} selected</span>
     </div>
-  </app-card>
+  </div>
 
   <div class="flex justify-between items-center mt-6">
     <app-button

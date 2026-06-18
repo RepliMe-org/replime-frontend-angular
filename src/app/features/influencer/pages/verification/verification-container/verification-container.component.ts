@@ -13,7 +13,7 @@ import { PersonaSetupStepComponent } from '../chatbot-config-flow/persona-setup-
 import {PersonaData, ChatbotConfig} from '../../../models/chatbot-config.model';
 import { WelcomeMessageStepComponent } from '../chatbot-config-flow/welcome-message-step/welcome-message-step.component';
 import { CategorySelectionStepComponent } from '../chatbot-config-flow/category-selection-step/category-selection-step.component';
-import { ChatbotReviewStepComponent } from '../chatbot-config-flow/chatbot-review-step/chatbot-review-step.component';
+import { ChatbotReviewStepComponent, ReviewStepTarget } from '../chatbot-config-flow/chatbot-review-step/chatbot-review-step.component';
 import { ChatbotCategory } from '../../../../../core/models/chatbot-category.model';
 import { InfluencerChatbotService } from '../../../services/influencer-chatbot.service';
 import { MessageClassificationStepComponent } from '../chatbot-config-flow/message-classification-step/message-classification-step.component';
@@ -61,7 +61,7 @@ export class VerificationContainerComponent {
       tone: 'friendly',
       verbosity: 'balanced',
       formality: 'neutral',
-      avatarNumber: 1,
+      fetchYoutubeProfilePicture: true,
     },
     welcomeMessage: '',
     category: '',
@@ -76,6 +76,13 @@ export class VerificationContainerComponent {
 
   verificationSteps = ['Verify Channel', 'Add Token', 'Confirm', 'Complete'];
   chatbotSteps = [ 'AI Persona', 'Welcome Message', 'Category', 'Classifications', 'Review'];
+
+  reviewStepIndex = {
+    persona: 0,
+    welcome: 1,
+    category: 2,
+    classifications: 3,
+  };
 
   constructor(
     private verificationService: VerificationService,
@@ -154,6 +161,11 @@ export class VerificationContainerComponent {
     this.stepForward();
   }
 
+  onEditStep(target: ReviewStepTarget) {
+    this.currentStep = this.reviewStepIndex[target];
+    this.errorMessage = '';
+  }
+
   onConfirmSetup() {
     this.isSavingConfig = true;
     this.errorMessage = '';
@@ -172,7 +184,6 @@ export class VerificationContainerComponent {
       tone: personaData.tone.toUpperCase(),
       verbosity: personaData.verbosity.toUpperCase(),
       formality: personaData.formality.toUpperCase(),
-      avatarNumber: personaData.avatarNumber,
     };
 
     this.chatbotService.createConfig(payload).subscribe({
