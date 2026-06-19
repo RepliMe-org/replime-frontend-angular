@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { oauthGuard } from './core/guards/oauth.guard';
 import { authGuard } from './core/guards/auth.guard';
+import { roleGuard } from './core/guards/role.guard';
 
 export const routes: Routes = [
   {
@@ -62,6 +63,7 @@ export const routes: Routes = [
     children: [
       {
         path: 'influencer',
+        // canMatch: [roleGuard('INFLUENCER')],
         loadChildren: () =>
           import('./features/influencer/influencer.routes').then(
             (m) => m.INFLUENCER_ROUTES,
@@ -69,6 +71,7 @@ export const routes: Routes = [
       },
       {
         path: 'admin',
+        // canMatch: [roleGuard('ADMIN')],
         loadChildren: () =>
           import('./features/admin/admin.routes').then((m) => m.ADMIN_ROUTES),
       },
