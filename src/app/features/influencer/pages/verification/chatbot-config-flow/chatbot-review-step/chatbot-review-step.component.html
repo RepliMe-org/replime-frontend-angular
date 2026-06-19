@@ -17,7 +17,7 @@
     tabindex="0"
     role="button"
   >
-    <div class="review-avatar">{{ botInitial() }}</div>
+    <img class="review-avatar" [src]="avatarUrl" alt="">
 
     <div class="review-identity-text">
       <div class="review-identity-top">
@@ -51,7 +51,7 @@
     </div>
 
     <div class="review-chat-preview">
-      <div class="review-chat-avatar">{{ botInitial() }}</div>
+      <img class="review-chat-avatar" [src]="avatarUrl" alt="">
       <div class="review-chat-bubble">{{ welcomeMessage }}</div>
     </div>
   </div>

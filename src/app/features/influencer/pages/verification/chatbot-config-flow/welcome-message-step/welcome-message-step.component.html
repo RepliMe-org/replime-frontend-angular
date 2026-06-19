@@ -35,14 +35,15 @@
       <label class="mt-4 input-label">preview</label>
       <app-card class="preview-card">
         <div class="flex items-start gap-3">
-          <div
+          <img
             class="preview-icon w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
-          >
-          </div>
+            [src]="chatbotConfig?.avatarUrl"
+            alt=""
+          />
 
           <div>
             <p class="text-xs font-medium gradient-text mb-1">
-              {{ chatbotName }}
+              {{ chatbotConfig?.personaData?.name }}
             </p>
             <p class="text-xs text-subtle-text">
               {{ welcomeMessage || "Your welcome message will appear here..." }}

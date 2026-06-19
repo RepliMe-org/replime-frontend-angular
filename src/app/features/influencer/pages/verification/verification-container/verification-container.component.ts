@@ -64,6 +64,7 @@ export class VerificationContainerComponent {
       fetchYoutubeProfilePicture: true,
     },
     welcomeMessage: '',
+    avatarUrl: '',
     category: '',
     systemClassIds: [],
     customClassNames: [],
@@ -127,7 +128,7 @@ export class VerificationContainerComponent {
         this.stepForward();
       },
       error: (err) =>
-        this.handleError(err,'Verification failed. Ensure token is correct.'),
+        this.handleError(err, 'Verification failed. Ensure token is correct.'),
     });
   }
 
@@ -138,8 +139,21 @@ export class VerificationContainerComponent {
     this.isLoading = false;
   }
 
+  fetchAvatarUrl() {
+    this.chatbotService.getChatbotConfig().subscribe({
+      next: (res) => {
+        this.chatbotConfig = {
+          ...this.chatbotConfig,
+          avatarUrl: res?.configInfo?.avatarUrl,
+        };
+      },
+    });
+  }
+
   onPersonaSubmit(data: PersonaData) {
     this.chatbotConfig.personaData = data;
+    if (this.chatbotConfig.avatarUrl === '')
+      this.fetchAvatarUrl();
     this.stepForward();
   }
 

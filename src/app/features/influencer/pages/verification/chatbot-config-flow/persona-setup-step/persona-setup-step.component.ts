@@ -1,15 +1,19 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SharedModule } from '../../../../../../shared/shared.module';
-import { PersonaData } from '../../../../models/chatbot-config.model'; 
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-
+import { PersonaData } from '../../../../models/chatbot-config.model';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-persona-setup-step',
   standalone: true,
   imports: [SharedModule, ReactiveFormsModule],
   templateUrl: './persona-setup-step.component.html',
-  styleUrl: './persona-setup-step.component.css'
+  styleUrl: './persona-setup-step.component.css',
 })
 export class PersonaSetupStepComponent implements OnInit {
   @Input() personaData?: PersonaData;
@@ -41,11 +45,20 @@ export class PersonaSetupStepComponent implements OnInit {
         formality: this.personaData.formality ?? 'neutral',
         fetchYoutubeProfilePicture: true,
       });
+
+      if (this.personaData.talkLikeMe) {
+        this.personaForm.get('tone')?.disable();
+        this.personaForm.get('formality')?.disable();
+      }
     }
   }
 
-  talkLikeMe() { return this.personaForm.get('talkLikeMe')?.value; }
-  fetchChannel() { return this.personaForm.get('fetchChannel')?.value; }
+  talkLikeMe() {
+    return this.personaForm.get('talkLikeMe')?.value;
+  }
+  fetchChannel() {
+    return this.personaForm.get('fetchChannel')?.value;
+  }
 
   toggleTalkLikeMe() {
     const talkLikeMe = !this.talkLikeMe();
