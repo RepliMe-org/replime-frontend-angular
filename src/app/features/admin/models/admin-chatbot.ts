@@ -12,7 +12,7 @@ export interface AdminChatbot {
   status: 'CONFIGURING' | 'TRAINING' | 'ACTIVE' | 'FAILED' | 'INACTIVE';
 }
 
-export type UserRole = 'USER' | 'CREATOR' | 'ADMIN';
+export type UserRole = 'USER' | 'INFLUENCER' | 'ADMIN';
 export type UserStatus = 'ACTIVE' | 'PENDING' | 'SUSPENDED' | 'INACTIVE';
 
 export interface AdminUser {

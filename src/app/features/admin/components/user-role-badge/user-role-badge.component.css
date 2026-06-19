@@ -1,0 +1,29 @@
+.role-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    border: 1px solid transparent;
+    white-space: nowrap;
+}
+
+.role-influencer {
+    background: color-mix(in srgb, var(--secondary) 14%, transparent);
+    color: var(--secondary);
+    border-color: color-mix(in srgb, var(--secondary) 35%, transparent);
+}
+
+.role-admin {
+    background: color-mix(in srgb, var(--danger) 14%, transparent);
+    color: var(--danger);
+    border-color: color-mix(in srgb, var(--danger) 35%, transparent);
+}
+
+.role-user {
+    background: var(--subtle-bg);
+    color: var(--subtle-text);
+    border-color: var(--border-color);
+}

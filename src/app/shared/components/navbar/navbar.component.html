@@ -10,7 +10,7 @@
         <a
           *ngIf="role === 'ADMIN'; else creatorDashboard"
           class="navbar-link-item"
-          routerLink="dashboard/admin"
+          routerLink="dashboard/admin/users"
         >
           Admin Dashboard</a
         >
@@ -63,7 +63,7 @@
             <ng-container *ngIf="role === 'ADMIN'">
               <a
                 class="dropdown-item"
-                routerLink="dashboard/admin"
+                routerLink="dashboard/admin/users"
                 (click)="closeUserMenu()"
               >
                 <i class="fa-solid fa-shield-halved"></i>

@@ -34,6 +34,13 @@ export const INFLUENCER_ROUTES: Routes = [
             (m) => m.BotSettingsComponent,
           ),
       },
+      {
+        path: 'analytics',
+        loadComponent: () =>
+          import('./pages/dashboard/analytics/analytics.component').then(
+            (m) => m.AnalyticsComponent,
+          ),
+      },
     ],
   },
 ];

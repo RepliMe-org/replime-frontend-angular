@@ -1,0 +1,102 @@
+<app-dashboard-page>
+  <app-dashboard-header
+    title="User Management"
+    subtitle="Manage users, creators, and administrators"
+  >
+  </app-dashboard-header>
+
+  <div class="user-stats-grid">
+    <app-stat-card
+      [value]="totalUsers"
+      label="Total Users"
+      iconClass="fa-solid fa-users"
+      iconColorClass="text-primary bg-primary/20"
+    ></app-stat-card>
+
+    <app-stat-card
+      [value]="activeUsers"
+      label="Active"
+      iconClass="fa-solid fa-circle-check"
+      iconColorClass="text-emerald-500 bg-emerald-500/20"
+    ></app-stat-card>
+
+    <app-stat-card
+      [value]="influencerUsers"
+      label="Influencers"
+      iconClass="fa-solid fa-circle-play"
+      iconColorClass="text-secondary bg-secondary/20"
+    ></app-stat-card>
+
+    <app-stat-card
+      [value]="adminUsers"
+      label="Admins"
+      iconClass="fa-solid fa-shield-halved"
+      iconColorClass="text-amber-500 bg-amber-500/20"
+    ></app-stat-card>
+  </div>
+
+  <app-card>
+    <div class="filters-row">
+      <div class="filter-item">
+        <app-search-input
+          [fullWidth]="true"
+          placeholder="Search users..."
+          [value]="searchQuery"
+          (valueChange)="onSearchChange($event)"
+        ></app-search-input>
+      </div>
+
+      <div class="filter-item">
+        <div class="filter-buttons">
+          <app-button
+            [variant]="activeFilter === 'All' ? 'active' : 'glass'"
+            (click)="setFilter('All')"
+          >
+            All
+          </app-button>
+
+          <app-button
+            [variant]="activeFilter === 'Admin' ? 'active' : 'glass'"
+            (click)="setFilter('Admin')"
+          >
+            Admin
+          </app-button>
+
+          <app-button
+            [variant]="activeFilter === 'Influencer' ? 'active' : 'glass'"
+            (click)="setFilter('Influencer')"
+          >
+            Influencer
+          </app-button>
+
+          <app-button
+            [variant]="activeFilter === 'User' ? 'active' : 'glass'"
+            (click)="setFilter('User')"
+          >
+            User
+          </app-button>
+        </div>
+      </div>
+    </div>
+  </app-card>
+
+  <app-empty-state
+    *ngIf="loading || (!loading && filteredUsers.length === 0)"
+    [isLoading]="loading"
+    loadingMessage="Loading users…"
+    iconClass="fa-solid fa-users"
+    title="No users found"
+    description="No users match your current filters."
+  ></app-empty-state>
+
+  <div *ngIf="!loading && filteredUsers.length > 0" class="grid-container">
+    <app-data-grid
+      [rowData]="filteredUsers"
+      [columnDefs]="columnDefs"
+      [context]="gridContext"
+      [rowHeight]="60"
+      [headerHeight]="44"
+      (gridReady)="onGridReady($event)"
+    ></app-data-grid>
+  </div>
+</app-dashboard-page>
