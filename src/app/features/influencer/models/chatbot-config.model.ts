@@ -11,6 +11,7 @@ export interface PersonaData {
 export interface ChatbotConfig {
   personaData: PersonaData;
   welcomeMessage: string;
+  avatarUrl?: string;
   category: string;
   systemClassIds: number[];
   customClassNames: string[];

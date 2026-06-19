@@ -21,6 +21,7 @@ export class ChatbotReviewStepComponent {
   @Input() categoryName!: string;
   @Input() systemClassNames: string[] = [];
   @Input() customClassNames: string[] = [];
+  @Input() avatarUrl: string | null = null;
   @Input() isSaving = false;
 
   @Output() confirm = new EventEmitter<void>();
@@ -32,10 +33,6 @@ export class ChatbotReviewStepComponent {
     return this.systemClassNames.length + this.customClassNames.length;
   }
 
-  botInitial(): string {
-    const name = this.personaData?.name?.trim();
-    return name ? name.charAt(0).toUpperCase() : '?';
-  }
 
   personalityChips(): string[] {
     if (!this.personaData) return [];

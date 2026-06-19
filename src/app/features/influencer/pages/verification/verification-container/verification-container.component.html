@@ -52,7 +52,7 @@
     <!-- Step 1 -->
     <app-welcome-message-step
       *ngIf="currentStep === 1"
-      [chatbotName]="chatbotConfig.personaData.name"
+      [chatbotConfig]="chatbotConfig"
       (welcomeMessageSubmit)="onWelcomeMessageSubmit($event)"
       (back)="onBack()"
     ></app-welcome-message-step>
@@ -83,6 +83,7 @@
       [categoryName]="selectedCategoryName"
       [systemClassNames]="selectedSystemClassNames"
       [customClassNames]="chatbotConfig.customClassNames"
+      [avatarUrl]="chatbotConfig.avatarUrl"
       [isSaving]="isSavingConfig"
       (confirm)="onConfirmSetup()"
       (back)="onBack()"

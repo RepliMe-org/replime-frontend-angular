@@ -6,6 +6,7 @@ import { ChatbotConfig } from '../models/chatbot-config.model';
 export interface ChatbotConfigResponse {
   configInfo?: {
     configId: number;
+    avatarUrl: string;
   };
 }
 

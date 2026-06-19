@@ -14,11 +14,6 @@ export const ADMIN_SIDEBAR_CONFIG = (
     {
       items: [
         {
-          label: 'Overview',
-          icon: 'fa-solid fa-grid',
-          route: '/dashboard/admin/overview',
-        },
-        {
           label: 'Users',
           icon: 'fa-solid fa-users',
           route: '/dashboard/admin/users',
@@ -72,30 +67,20 @@ export const INFLUENCER_SIDEBAR_CONFIG = (
   userInfo: UserInfo,
 ): SidebarConfig => ({
   title: 'Creator Dashboard',
-  logoIcon: 'fa-solid fa-play',
+  logoIcon: 'fa-brands fa-youtube',
   sections: [
     {
       label: 'Dashboard',
       items: [
-        {
-          label: 'Overview',
-          icon: 'fa-solid fa-grid-2',
-          route: '/dashboard/influencer/overview',
-        },
-        {
-          label: 'Analytics',
-          icon: 'fa-solid fa-chart-line',
-          route: '/dashboard/influencer/analytics',
-        },
         {
           label: 'Content',
           icon: 'fa-solid fa-video',
           route: '/dashboard/influencer/content',
         },
         {
-          label: 'Conversations',
-          icon: 'fa-solid fa-message',
-          route: '/dashboard/influencer/conversations',
+          label: 'Analytics',
+          icon: 'fa-solid fa-chart-line',
+          route: '/dashboard/influencer/analytics',
         },
       ],
     },
