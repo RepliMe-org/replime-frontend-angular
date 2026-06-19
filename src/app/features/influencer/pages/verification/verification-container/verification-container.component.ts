@@ -152,8 +152,7 @@ export class VerificationContainerComponent {
 
   onPersonaSubmit(data: PersonaData) {
     this.chatbotConfig.personaData = data;
-    if (this.chatbotConfig.avatarUrl === '')
-      this.fetchAvatarUrl();
+    this.fetchAvatarUrl();
     this.stepForward();
   }
 
