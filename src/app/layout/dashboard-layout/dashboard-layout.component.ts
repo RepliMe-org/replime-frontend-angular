@@ -11,7 +11,7 @@ import { ADMIN_SIDEBAR_CONFIG, INFLUENCER_SIDEBAR_CONFIG } from '../../shared/co
   standalone: true,
   imports: [SidebarComponent, RouterOutlet],
   templateUrl: './dashboard-layout.component.html',
-  styleUrl: './dashboard-layout.component.scss',
+  styleUrl: './dashboard-layout.component.css',
 })
 export class DashboardLayoutComponent {
   private authService = inject(AuthService);

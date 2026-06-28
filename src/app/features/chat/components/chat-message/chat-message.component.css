@@ -100,6 +100,19 @@
   @apply opacity-100 text-primary;
 }
 
+:host(.chat-msg-highlight) .chat-msg-bubble {
+  animation: highlight-pulse 1.8s ease-out;
+}
+
+@keyframes highlight-pulse {
+  0% {
+    box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.5);
+  }
+  100% {
+    box-shadow: 0 4px 15px #0000001a;
+  }
+}
+
 :host ::ng-deep .markdown-content p {
   @apply mb-3 last:mb-0;
 }

@@ -20,6 +20,7 @@
       (sessionSelected)="onSessionSelected($event)"
       (newChat)="onNewChat()"
       (sessionDeleted)="onSessionDeleted($event)"
+      (searchClick)="isSearchOpen = true"
     ></app-chat-sidebar>
   </div>
 
@@ -100,3 +101,10 @@
     </div>
   </div>
 </div>
+
+<app-chat-search-modal
+  [show]="isSearchOpen"
+  [chatbotId]="chatbotId"
+  (closeModal)="isSearchOpen = false"
+  (resultSelected)="onSearchResultSelected($event)"
+></app-chat-search-modal>

@@ -1,0 +1,65 @@
+<app-modal
+  [show]="show"
+  title="Search messages"
+  subtitle="Find old messages across all your conversations with this chatbot."
+  maxWidth="max-w-xl"
+  (closeModal)="close()"
+>
+  <div modal-body>
+    <div class="search-input-wrap">
+      <i class="fa-solid fa-magnifying-glass search-input-icon"></i>
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Search for a message…"
+        [ngModel]="query"
+        (ngModelChange)="onQueryChange($event)"
+        autocomplete="off"
+        autofocus
+      />
+      <i
+        *ngIf="isLoading"
+        class="fa-solid fa-spinner fa-spin search-input-spinner"
+      ></i>
+    </div>
+
+    <div class="search-results">
+      <ng-container *ngIf="!isLoading && hasSearched && results.length > 0">
+        <p class="search-match-count">
+          {{ matchCount }} {{ matchCount === 1 ? 'match' : 'matches' }}
+        </p>
+
+        <button
+          *ngFor="let result of results"
+          class="search-result-item"
+          (click)="selectResult(result)"
+        >
+          <div class="search-result-icon" [class.search-result-icon-bot]="result.sender === 'BOT'">
+            <i class="fa-solid" [class.fa-user]="result.sender === 'USER'" [class.fa-robot]="result.sender === 'BOT'"></i>
+          </div>
+          <div class="search-result-info">
+            <p class="search-result-text" [innerHTML]="highlight(result.matchedMessage)"></p>
+            <span class="search-result-meta">
+              {{ result.sessionTitle || 'New conversation' }} · {{ getFormattedDate(result.sentAt) }}
+            </span>
+          </div>
+          <i class="fa-solid fa-chevron-right search-result-arrow"></i>
+        </button>
+      </ng-container>
+
+      <div *ngIf="!isLoading && hasSearched && results.length === 0" class="search-empty">
+        <i class="fa-solid fa-magnifying-glass search-empty-icon"></i>
+        <p>No messages found for "{{ query }}"</p>
+      </div>
+
+      <div *ngIf="!hasSearched && !isLoading && query.trim().length > 0 && query.trim().length < 2" class="search-hint">
+        Keep typing… search needs at least 2 characters.
+      </div>
+
+      <div *ngIf="!hasSearched && !isLoading && query.trim().length === 0" class="search-empty">
+        <i class="fa-solid fa-comments search-empty-icon"></i>
+        <p>Start typing to search through your past messages.</p>
+      </div>
+    </div>
+  </div>
+</app-modal>

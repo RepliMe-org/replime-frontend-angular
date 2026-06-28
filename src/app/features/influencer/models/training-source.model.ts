@@ -1,6 +1,6 @@
 export type AddSourceMode = 'VIDEO' | 'PLAYLIST';
 
-export type SyncStatus = 'PROCESSING' | 'COMPLETED' | 'FAILED';
+export type SyncStatus = 'PROCESSING' | 'COMPLETED' | 'FAILED' | 'DEAD';
 
 export interface AddSourcePayload {
   sourceValue: string;
@@ -15,4 +15,5 @@ export interface VideoResponseDTO {
   thumbnail: string;
   syncStatus: SyncStatus;
   duration: string;
+  failureReason?: string | null;
 }

@@ -9,7 +9,7 @@ import {
 import { CommonModule } from '@angular/common';
 import {
   ChatSessionService,
-} from '../../../../core/services/chat-session.service';
+} from '../../services/chat-session.service';
 import { ChatSession } from '../../../../core/models/chatbot.model';
 import { formatDate } from '../../../../shared/utils/date.utils';
 import { ToastService } from '../../../../core/services/toast.service';
@@ -29,6 +29,7 @@ export class ChatSidebarComponent implements OnChanges {
   @Output() sessionSelected = new EventEmitter<number>();
   @Output() newChat = new EventEmitter<void>();
   @Output() sessionDeleted = new EventEmitter<number>();
+  @Output() searchClick = new EventEmitter<void>();
 
   sessions: ChatSession[] = [];
 
@@ -158,6 +159,10 @@ export class ChatSidebarComponent implements OnChanges {
 
   onNewChat(): void {
     this.newChat.emit();
+  }
+
+  onSearchClick(): void {
+    this.searchClick.emit();
   }
 
   getFormattedDate(dateStr: string): string {

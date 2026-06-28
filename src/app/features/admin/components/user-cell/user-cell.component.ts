@@ -9,7 +9,7 @@ import { AdminUser } from '../../models/admin-chatbot';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './user-cell.component.html',
-  styleUrls: ['./user-cell.component.scss'],
+  styleUrls: ['./user-cell.component.css'],
 })
 export class UserCellComponent implements ICellRendererAngularComp {
   username = '';

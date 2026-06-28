@@ -13,7 +13,7 @@ export interface UserActionsContext {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './user-actions-cell.component.html',
-  styleUrls: ['./user-actions-cell.component.scss'],
+  styleUrls: ['./user-actions-cell.component.css'],
 })
 export class UserActionsCellComponent implements ICellRendererAngularComp {
   private user: AdminUser | null = null;

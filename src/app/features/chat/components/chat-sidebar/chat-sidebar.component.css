@@ -28,7 +28,7 @@
 }
 
 .chat-new-btn {
-  @apply flex items-center gap-2 mx-3 my-3 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200;
+  @apply flex items-center gap-2 mx-3 mt-3 mb-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200;
   background: var(--chat-user-bg);
   color: var(--chat-user-text);
   box-shadow: var(--chat-user-shadow);
@@ -38,6 +38,18 @@
   opacity: 0.9;
   transform: translateY(-1px);
   box-shadow: var(--shadow-elevated);
+}
+
+.chat-search-btn {
+  @apply flex items-center gap-2 mx-3 mb-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-150;
+  background: var(--subtle-bg);
+  color: var(--sidebar-text);
+  border: 1px solid var(--sidebar-border);
+}
+
+.chat-search-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
 }
 
 .chat-sessions-list {

@@ -1,7 +1,7 @@
 export interface ChatbotCategory {
   id: number;
   name: string;
-  chatbotCount: number;
+  chatbotCount?: number;
 }
 
 export interface MessageClass {

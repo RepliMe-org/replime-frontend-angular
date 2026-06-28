@@ -7,4 +7,5 @@ export interface WsSyncMessage {
   sourceId: number;
   videoId: number | null;
   status: SyncStatus;
+  errorMessage?: string | null;
 }

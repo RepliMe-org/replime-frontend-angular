@@ -8,4 +8,11 @@
     <i [class]="config.icon"></i>
     {{ config.label }}
   </span>
+
+  <i
+    *ngIf="failureReason"
+    class="fa-solid fa-circle-info text-xs ml-1.5 cursor-help"
+    style="color: var(--subtle-text)"
+    [title]="failureReason"
+  ></i>
 </div>
