@@ -95,7 +95,7 @@ export class ContentComponent implements OnInit, OnDestroy {
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((msg: WsSyncMessage) => {
               if (msg.type === 'VIDEO_UPDATE' && msg.videoId != null) {
-                this.updateRowStatus(msg.videoId, msg.status);
+                this.updateRowStatus(msg.videoId, msg.status, msg.errorMessage);
               }
             });
 
@@ -107,13 +107,14 @@ export class ContentComponent implements OnInit, OnDestroy {
       });
   }
 
-  updateRowStatus(videoId: number, status: string) {
+  updateRowStatus(videoId: number, status: string, failureReason?: string | null) {
     const rowIndex = this.rowData.findIndex((r) => r.videoId === videoId);
     if (rowIndex === -1) return;
 
     this.rowData[rowIndex] = {
       ...this.rowData[rowIndex],
       syncStatus: status as VideoResponseDTO['syncStatus'],
+      failureReason: failureReason ?? null,
     };
 
     this.gridApi?.getRowNode(String(rowIndex))?.setData(this.rowData[rowIndex]);

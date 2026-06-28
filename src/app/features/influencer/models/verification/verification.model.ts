@@ -17,4 +17,5 @@ export interface VerificationConfirmResponse {
 export interface VerificationResponse {
   verificationToken: string;
   expirationDateAt: string;
+  message?: string | null;
 }
