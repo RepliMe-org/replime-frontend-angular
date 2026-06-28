@@ -14,7 +14,10 @@ import * as Prism from 'prismjs';
   imports: [CommonModule, MarkdownModule],
   templateUrl: './chat-message.component.html',
   styleUrls: ['./chat-message.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[attr.id]': "'msg-' + message?.id",
+  },
 })
 export class ChatMessageComponent implements OnInit, AfterViewChecked {
   @Input() message: ChatMessage;

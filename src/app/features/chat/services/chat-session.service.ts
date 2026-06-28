@@ -6,7 +6,7 @@ import {
   SendMessageResponse,
   SessionDetail,
   SessionsResponse,
-} from '../models/chatbot.model';
+} from '../../../core/models/chatbot.model';
 
 @Injectable({ providedIn: 'root' })
 export class ChatSessionService {

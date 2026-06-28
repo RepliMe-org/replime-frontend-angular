@@ -10,14 +10,16 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { ChatMessage, DisplayMessage, SessionDetail } from '../../../core/models/chatbot.model';
-import { ChatSessionService } from '../../../core/services/chat-session.service';
+import { ChatSessionService } from '../services/chat-session.service';
 import { PublicChatbotService } from '../../../core/services/public-chatbot.service';
 import { PublicChatbot } from '../../../core/models/public-chatbot.model';
+import { MessageSearchResult } from '../models/chat-search.model';
 import { ChatSidebarComponent } from '../components/chat-sidebar/chat-sidebar.component';
 import { ChatMessageComponent } from '../components/chat-message/chat-message.component';
 import { ChatInputComponent } from '../components/chat-input/chat-input.component';
 import { ChatWelcomeComponent } from '../components/chat-welcome/chat-welcome.component';
 import { ChatTypingComponent } from '../components/chat-typing/chat-typing.component';
+import { ChatSearchModalComponent } from '../components/chat-search-modal/chat-search-modal.component';
 
 
 @Component({
@@ -31,6 +33,7 @@ import { ChatTypingComponent } from '../components/chat-typing/chat-typing.compo
     ChatInputComponent,
     ChatWelcomeComponent,
     ChatTypingComponent,
+    ChatSearchModalComponent,
   ],
   templateUrl: './chat-page.component.html',
   styleUrls: ['./chat-page.component.css'],
@@ -51,8 +54,11 @@ export class ChatPageComponent implements OnInit, AfterViewChecked{
   isTyping = false;
   isMessageStreaming = false;
   isSidebarOpen = true;
+  isSearchOpen = false;
 
   shouldScroll = false;
+
+  pendingScrollMessageId: number | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -91,29 +97,7 @@ export class ChatPageComponent implements OnInit, AfterViewChecked{
   onSessionSelected(sessionId: number): void {
     if (sessionId === this.activeSessionId) return;
 
-    this.activeSessionId = sessionId;
-    this.messages = [];
-    this.isChatLoading = true;
-    this.isMessageStreaming = false;
-
-    forkJoin({
-      detail: this.chatSessionService.getSessionDetail(sessionId),
-      msgs: this.chatSessionService.getMessages(sessionId),
-    }).subscribe({
-      next: ({ detail, msgs }) => {
-        this.sessionDetail = detail;
-        this.messages = msgs.map((m) => ({
-          msg: m,
-          sources: m?.sources,
-          isNew: false,
-        }));
-        this.isChatLoading = false;
-        this.shouldScroll = true;
-      },
-      error: () => {
-        this.isChatLoading = false;
-      },
-    });
+    this.loadSession(sessionId);
   }
 
   onNewChat(): void {
@@ -229,6 +213,18 @@ export class ChatPageComponent implements OnInit, AfterViewChecked{
     this.isMessageStreaming = false;
   }
 
+  onSearchResultSelected(result: MessageSearchResult): void {
+    this.isSearchOpen = false;
+
+    if (result.sessionId === this.activeSessionId) {
+      this.scrollToMessage(result.messageId);
+      return;
+    }
+
+    this.pendingScrollMessageId = result.messageId;
+    this.loadSession(result.sessionId);
+  }
+
   toggleSidebar(): void {
     this.isSidebarOpen = !this.isSidebarOpen;
   }
@@ -247,6 +243,53 @@ export class ChatPageComponent implements OnInit, AfterViewChecked{
         top: el.scrollHeight,
         behavior: 'auto',
       });
+    });
+  }
+
+  loadSession(sessionId: number): void {
+    this.activeSessionId = sessionId;
+    this.messages = [];
+    this.isChatLoading = true;
+    this.isMessageStreaming = false;
+
+    forkJoin({
+      detail: this.chatSessionService.getSessionDetail(sessionId),
+      msgs: this.chatSessionService.getMessages(sessionId),
+    }).subscribe({
+      next: ({ detail, msgs }) => {
+        this.sessionDetail = detail;
+        this.messages = msgs.map((m) => ({
+          msg: m,
+          sources: m?.sources,
+          isNew: false,
+        }));
+        this.isChatLoading = false;
+
+        if (this.pendingScrollMessageId != null) {
+          const targetId = this.pendingScrollMessageId;
+          this.pendingScrollMessageId = null;
+          this.scrollToMessage(targetId);
+        } else {
+          this.shouldScroll = true;
+        }
+      },
+      error: () => {
+        this.isChatLoading = false;
+        this.pendingScrollMessageId = null;
+      },
+    });
+  }
+
+  scrollToMessage(messageId: number): void {
+    requestAnimationFrame(() => {
+      const el = document.getElementById('msg-' + messageId);
+      if (!el) {
+        this.shouldScroll = true;
+        return;
+      }
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      el.classList.add('chat-msg-highlight');
+      setTimeout(() => el.classList.remove('chat-msg-highlight'), 1800);
     });
   }
 }

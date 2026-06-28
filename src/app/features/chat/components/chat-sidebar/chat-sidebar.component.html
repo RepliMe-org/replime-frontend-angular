@@ -8,6 +8,11 @@
     New Chat
   </button>
 
+  <button class="chat-search-btn" (click)="onSearchClick()">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    Search messages
+  </button>
+
   <div class="chat-sessions-list" (scroll)="onScroll($event)">
     <ng-container *ngIf="isLoading">
       <div *ngFor="let s of [1, 2, 3]" class="chat-session-skeleton">
