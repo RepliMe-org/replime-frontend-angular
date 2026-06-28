@@ -90,6 +90,8 @@ describe('ContentComponent Integration', () => {
   });
 
   it('should initialize and connect to WS and fetch videos if chatbotId exists', () => {
+    fixture.detectChanges();
+
     const reqConfig = httpMock.expectOne('/api/v1/influencer/chatbot');
     expect(reqConfig.request.method).toBe('GET');
     reqConfig.flush({ chatbotInfo: { id: '123' } });
@@ -110,6 +112,7 @@ describe('ContentComponent Integration', () => {
     fixture.detectChanges();
 
     const reqConfig = httpMock.expectOne('/api/v1/influencer/chatbot');
+    reqConfig.flush({});
 
     expect(mockWsClient.connect).not.toHaveBeenCalled();
 
@@ -204,6 +207,7 @@ describe('ContentComponent Integration', () => {
 
   it('should disconnect WS on destroy even if topic is null', () => {
     fixture.detectChanges();
+    httpMock.expectOne('/api/v1/influencer/chatbot').flush({});
     httpMock.expectOne('/api/v1/influencer/chatbot/videos').flush(mockVideos);
 
     component.ngOnDestroy();
@@ -308,6 +312,7 @@ describe('ContentComponent Integration', () => {
 
     expect(component.isSubmitting).toBeFalse();
     expect(mockToastService.error).toHaveBeenCalledWith('Upload failed');
+    expect(component.showModal).toBeTrue();
   });
 
   it('should show default error if add source fails without message', () => {
