@@ -1,0 +1,47 @@
+<div class="card history-tracker" *ngIf="history?.length > 1">
+  <div class="widget-header" style="margin-bottom: 0.85rem">
+    <div>
+      <h3 class="widget-title">
+        <i class="fa-solid fa-clock-rotate-left widget-title-icon"></i>
+        Report History
+      </h3>
+      <p class="widget-subtitle">
+        Jump to a previous report to see how things looked then
+      </p>
+    </div>
+    <span class="widget-meta" *ngIf="hasError" role="alert">
+      <i class="fa-solid fa-triangle-exclamation"></i> Failed to load
+    </span>
+  </div>
+
+  <div
+    class="history-track"
+    [class.is-loading]="isLoading"
+    role="list"
+    aria-label="Report history"
+  >
+    <button
+      *ngFor="let ts of history; let i = index"
+      type="button"
+      role="listitem"
+      class="history-point"
+      [class.is-active]="i === activeIndex"
+      [disabled]="isLoading"
+      [attr.aria-pressed]="i === activeIndex"
+      [attr.aria-label]="
+        'View report from ' +
+        (ts | date: 'MMM d, h:mm a') +
+        (isLatestEntry(i) ? ' (latest)' : '')
+      "
+      (click)="select(i)"
+    >
+      <span class="history-dot" aria-hidden="true"></span>
+      <span class="history-label">
+        {{ ts | date: "MMM d, h:mm a" }}
+        <span class="history-latest-badge" *ngIf="isLatestEntry(i)"
+          >Latest</span
+        >
+      </span>
+    </button>
+  </div>
+</div>

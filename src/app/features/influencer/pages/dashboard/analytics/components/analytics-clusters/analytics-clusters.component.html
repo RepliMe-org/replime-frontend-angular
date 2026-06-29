@@ -1,0 +1,65 @@
+<div class="card">
+  <div class="widget-header">
+    <div>
+      <h3 class="widget-title">
+        <i class="fa-solid fa-ranking-star widget-title-icon"></i>
+        Most Asked Topics
+      </h3>
+      <p class="widget-subtitle">
+        Recurring clusters since the previous report
+      </p>
+    </div>
+  </div>
+
+  <div *ngIf="clusters?.length; else noClusters" class="cluster-list">
+    <div
+      *ngFor="let cluster of clusters; let i = index"
+      class="cluster-row"
+      [class.is-expanded]="expandedClusterIndex === i"
+    >
+      <button
+        type="button"
+        class="cluster-row-header"
+        [attr.aria-expanded]="expandedClusterIndex === i"
+        [attr.aria-controls]="'cluster-examples-' + i"
+        (click)="toggleCluster(i)"
+      >
+        <span class="cluster-rank">{{ i + 1 }}</span>
+
+        <div class="cluster-bar-wrap">
+          <span class="cluster-theme">{{ cluster.theme }}</span>
+          <div class="cluster-bar-track">
+            <div
+              class="cluster-bar-fill"
+              [style.width.%]="(cluster.count / maxClusterCount()) * 100"
+            ></div>
+          </div>
+        </div>
+
+        <span class="cluster-count-badge">{{ cluster.count }}</span>
+        <i
+          class="fa-solid fa-chevron-down cluster-chevron"
+          [class.is-rotated]="expandedClusterIndex === i"
+        ></i>
+      </button>
+
+      <div
+        [id]="'cluster-examples-' + i"
+        class="cluster-examples"
+        *ngIf="expandedClusterIndex === i"
+      >
+        <p class="cluster-examples-label">Example questions</p>
+        <ul>
+          <li *ngFor="let q of cluster.exampleQuestions">{{ q }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noClusters>
+    <div class="widget-empty">
+      <i class="fa-solid fa-comments widget-empty-icon"></i>
+      <p>No question clusters yet.</p>
+    </div>
+  </ng-template>
+</div>

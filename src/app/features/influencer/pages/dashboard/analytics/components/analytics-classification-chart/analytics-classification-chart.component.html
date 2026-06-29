@@ -1,0 +1,46 @@
+<div class="card">
+  <div class="widget-header">
+    <div>
+      <h3 class="widget-title">
+        <i class="fa-solid fa-layer-group widget-title-icon"></i>
+        By Classification
+      </h3>
+      <p class="widget-subtitle">
+        How incoming messages break down by intent (all-time)
+      </p>
+    </div>
+    <span class="widget-meta">{{ totalMessages() }} total</span>
+  </div>
+
+  <div
+    *ngIf="breakdown?.length; else noClassifications"
+    role="img"
+    aria-label="Classification breakdown bar chart"
+  >
+    <apx-chart
+      [series]="series"
+      [chart]="chartOptions"
+      [plotOptions]="plotOptions"
+      [dataLabels]="dataLabels"
+      [xaxis]="xaxis"
+      [yaxis]="yaxis"
+      [grid]="grid"
+      [tooltip]="tooltip"
+      [colors]="colors"
+      [legend]="{ show: false }"
+    ></apx-chart>
+    <p class="sr-only">
+      {{ totalMessages() }} total messages:
+      <ng-container *ngFor="let d of breakdown">
+        {{ d.messageClass }}: {{ d.percentage }}% ({{ d.count }}).
+      </ng-container>
+    </p>
+  </div>
+
+  <ng-template #noClassifications>
+    <div class="widget-empty">
+      <i class="fa-solid fa-chart-bar widget-empty-icon"></i>
+      <p>No classification data yet.</p>
+    </div>
+  </ng-template>
+</div>

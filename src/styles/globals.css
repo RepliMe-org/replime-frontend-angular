@@ -136,6 +136,15 @@
         --chat-user-text: #f9fafb;
         --chat-user-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
         --chat-user-border: rgba(255, 255, 255, 0.06);
+
+        --chart-color-1: #3b82f6;
+        --chart-color-2: #a78bfa;
+        --chart-color-3: #22c55e;
+        --chart-color-4: #f59e0b;
+        --chart-color-5: #94a3b8;
+        --chart-color-6: #ef4444;
+        --chart-color-7: #06b6d4;
+        --chart-color-8: #ec4899;
     }
 
     .dark {
@@ -267,6 +276,15 @@
         --chat-user-text: #0a0a0a;
         --chat-user-shadow: none;
         --chat-user-border: rgba(255, 255, 255, 0.1);
+
+        --chart-color-1: #60a5fa;
+        --chart-color-2: #c084fc;
+        --chart-color-3: #4ade80;
+        --chart-color-4: #fbbf24;
+        --chart-color-5: #a1a1aa;
+        --chart-color-6: #f87171;
+        --chart-color-7: #22d3ee;
+        --chart-color-8: #f472b6;
     }
 
     * {
