@@ -1,0 +1,83 @@
+:host {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.history-track {
+  display: flex;
+  align-items: stretch;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+  transition: opacity 0.15s ease;
+}
+
+.history-track.is-loading {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.history-track::-webkit-scrollbar {
+  height: 4px;
+}
+
+.history-point {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  padding: 0.5rem 0.85rem;
+  border-radius: 9999px;
+  border: 1px solid var(--card-border);
+  background: var(--subtle-bg);
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.history-point:hover:not(:disabled) {
+  border-color: var(--primary);
+  color: var(--page-text);
+}
+
+.history-point:disabled {
+  cursor: not-allowed;
+}
+
+.history-point.is-active {
+  background: var(--primary-subtle);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.history-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: var(--text-placeholder);
+  flex-shrink: 0;
+}
+
+.history-point.is-active .history-dot {
+  background: var(--primary);
+}
+
+.history-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.history-latest-badge {
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.1rem 0.4rem;
+  border-radius: 9999px;
+  background: var(--primary);
+  color: #ffffff;
+}

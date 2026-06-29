@@ -1,0 +1,124 @@
+<div class="card span-full">
+  <div class="widget-header">
+    <div>
+      <h3 class="widget-title">
+        <i class="fa-solid fa-chart-line widget-title-icon"></i>
+        Content Gaps Over Time
+      </h3>
+      <p class="widget-subtitle">
+        Click a point to see what your audience asked about that period
+      </p>
+    </div>
+  </div>
+
+  <div
+    *ngIf="series.length; else noGaps"
+    role="img"
+    aria-label="Content gaps trend line chart"
+  >
+    <apx-chart
+      [series]="series"
+      [chart]="chartOptions"
+      [stroke]="stroke"
+      [markers]="markers"
+      [dataLabels]="dataLabels"
+      [xaxis]="xaxis"
+      [yaxis]="yaxis"
+      [grid]="grid"
+      [tooltip]="tooltip"
+      [colors]="colors"
+      [legend]="{ show: false }"
+    ></apx-chart>
+
+    <p class="gap-hint" *ngIf="!selectedTimestamp">
+      <i class="fa-solid fa-arrow-pointer" aria-hidden="true"></i>
+      Click any point on the line above to see details for that period.
+    </p>
+
+    <div
+      class="gap-detail"
+      *ngIf="selectedTimestamp"
+      role="region"
+      aria-label="Content gap detail panel"
+    >
+      <button
+        type="button"
+        class="gap-detail-close"
+        title="Close"
+        aria-label="Close content gap detail"
+        (click)="onCloseDetail()"
+      >
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+      </button>
+
+      <div
+        *ngIf="isLoadingDetail"
+        class="gap-detail-loading"
+        aria-live="polite"
+      >
+        <i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>
+        <span>Loading detail for this period…</span>
+      </div>
+
+      <div
+        *ngIf="!isLoadingDetail && hasDetailError"
+        class="gap-detail-error"
+        aria-live="assertive"
+        role="alert"
+      >
+        <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+        <span>Couldn't load this period's detail.</span>
+        <button
+          type="button"
+          class="gap-detail-retry"
+          (click)="retryDetail.emit()"
+        >
+          Try again
+        </button>
+      </div>
+
+      <div
+        *ngIf="!isLoadingDetail && !hasDetailError && gapDetail"
+        class="gap-detail-content"
+      >
+        <div class="gap-detail-header">
+          <span class="gap-detail-topic">{{
+            selectedTimestamp | date: "MMM d, y, h:mm a"
+          }}</span>
+          <span class="gap-detail-freq">
+            {{ gapDetail.length }} gap{{ gapDetail.length === 1 ? "" : "s" }}
+          </span>
+        </div>
+
+        <div
+          *ngIf="gapDetail.length; else noSampleQuestions"
+          class="gap-detail-questions"
+        >
+          <ul>
+            <li *ngFor="let item of gapDetail">
+              <strong>{{ gapItemTopic(item) }}</strong>
+              <span *ngIf="gapItemFrequency(item)">
+                — {{ gapItemFrequency(item) }} mentions</span
+              >
+            </li>
+          </ul>
+        </div>
+        <ng-template #noSampleQuestions>
+          <p class="gap-detail-no-questions">
+            No content gaps were recorded for this period.
+          </p>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noGaps>
+    <div class="widget-empty">
+      <i
+        class="fa-solid fa-chart-line widget-empty-icon"
+        aria-hidden="true"
+      ></i>
+      <p>No content gaps identified yet.</p>
+    </div>
+  </ng-template>
+</div>

@@ -272,3 +272,73 @@ select.form-input option {
 .delete-btn:hover {
     background: rgba(var(--danger-rgb), 0.1);
 }
+
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 0.85rem;
+    padding: 1.25rem;
+    min-width: 0;
+}
+
+.widget-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.widget-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--page-text);
+    margin: 0 0 0.25rem 0;
+}
+
+.widget-title-icon {
+    color: var(--primary);
+    font-size: 0.85rem;
+}
+
+.widget-subtitle {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.widget-meta {
+    flex-shrink: 0;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.3rem 0.65rem;
+    border-radius: 9999px;
+    background: var(--subtle-bg);
+    color: var(--text-muted);
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.widget-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 2.5rem 1rem;
+    text-align: center;
+    border: 1px solid var(--card-border);
+    border-radius: 0.65rem;
+    background: var(--subtle-bg);
+    color: var(--text-muted);
+}
+
+.widget-empty-icon {
+    font-size: 1.5rem;
+    color: var(--text-placeholder);
+}

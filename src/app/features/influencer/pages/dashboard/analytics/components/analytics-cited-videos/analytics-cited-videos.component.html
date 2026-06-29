@@ -1,0 +1,68 @@
+<div class="card span-full">
+  <div class="widget-header">
+    <div>
+      <h3 class="widget-title">
+        <i class="fa-brands fa-youtube widget-title-icon"></i>
+        Most Referenced Videos
+      </h3>
+      <p class="widget-subtitle">
+        Videos your chatbot cited most often in answers (all-time)
+      </p>
+    </div>
+  </div>
+
+  <div *ngIf="videos?.length; else noVideos" class="cited-table">
+    <div class="cited-table-header" aria-hidden="true">
+      <span class="col-rank">#</span>
+      <span class="col-video">Video</span>
+      <span class="col-citations">Citations</span>
+    </div>
+
+    <div *ngFor="let video of videos; let i = index" class="cited-row">
+      <span class="col-rank rank-badge" aria-hidden="true">{{ i + 1 }}</span>
+
+      <div class="col-video video-info">
+        <img
+          [src]="thumbnailUrl(video.videoId)"
+          [alt]="video.title + ' thumbnail'"
+          class="video-thumb"
+          (error)="hideBrokenThumbnail($event)"
+        />
+        <div class="video-meta">
+          <a
+            [href]="youtubeUrl(video.videoId)"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="video-title"
+            [attr.aria-label]="video.title + ' (opens on YouTube)'"
+            (click)="$event.stopPropagation()"
+          >
+            {{ video.title }}
+          </a>
+          <span class="video-id" aria-hidden="true"
+            >youtu.be/{{ video.videoId }}</span
+          >
+
+          <div class="video-bar-track" aria-hidden="true">
+            <div
+              class="video-bar-fill"
+              [style.width.%]="(video.count / maxCitations()) * 100"
+            ></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-citations citations-cell">
+        <span class="citations-count">{{ video.count }}</span>
+        <span class="citations-label" aria-hidden="true">refs</span>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noVideos>
+    <div class="widget-empty">
+      <i class="fa-solid fa-film widget-empty-icon"></i>
+      <p>No cited videos yet.</p>
+    </div>
+  </ng-template>
+</div>

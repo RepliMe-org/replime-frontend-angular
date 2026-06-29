@@ -1,314 +1,114 @@
 <app-dashboard-page>
-  <!-- ===================== PAGE HEADER ===================== -->
-
-   <app-dashboard-header
+  <app-dashboard-header
     title="AI Insights"
-    subtitle="Understand your audience — what they ask, where your content falls
-        short, and which videos drive the most answers."
+    subtitle="Understand your audience — what they ask, where your content falls short, and which videos drive the most answers."
   >
     <app-button
       size="default"
       [isLoading]="isRegenerating"
-      [disabled]="isRegenerating || isLoading"
+      [disabled]="isRegenerating || isLoading || cooldownSecondsRemaining > 0"
       (click)="regenerate()"
     >
       <span loading>Generating...</span>
-      <i class="fa-solid fa-rotate btn-icon"></i>
-      <span>Re-generate Analysis</span>
+      <i class="fa-solid fa-rotate btn-icon" aria-hidden="true"></i>
+      <span *ngIf="cooldownSecondsRemaining === 0">Re-generate Analysis</span>
+      <span *ngIf="cooldownSecondsRemaining > 0"
+        >Available in {{ cooldownSecondsRemaining }}s</span
+      >
     </app-button>
   </app-dashboard-header>
 
-  <!-- ===================== INITIAL LOAD STATE ===================== -->
-  <div *ngIf="isLoading" class="state-box">
-    <i class="fa-solid fa-circle-notch fa-spin state-icon"></i>
+  <div *ngIf="isLoading" class="state-box" aria-live="polite" aria-busy="true">
+    <i
+      class="fa-solid fa-circle-notch fa-spin state-icon"
+      aria-hidden="true"
+    ></i>
     <p>Loading your AI analysis…</p>
   </div>
 
-  <!-- ===================== ERROR STATE ===================== -->
-  <div *ngIf="!isLoading && loadError" class="state-box state-box-error">
-    <i class="fa-solid fa-triangle-exclamation state-icon"></i>
-    <p>Couldn't load analysis. Something went wrong while fetching your chatbot insights.</p>
+  <div
+    *ngIf="!isLoading && loadError"
+    class="state-box state-box-error"
+    role="alert"
+  >
+    <i
+      class="fa-solid fa-triangle-exclamation state-icon"
+      aria-hidden="true"
+    ></i>
+    <p>
+      Couldn't load analysis. Something went wrong while fetching your chatbot
+      insights.
+    </p>
     <button type="button" class="btn btn-primary" (click)="loadAnalysis()">
       Try Again
     </button>
   </div>
 
-  <!-- ===================== CONTENT ===================== -->
-  <div *ngIf="!isLoading && !loadError && analysis" class="insights-grid">
+  <ng-container *ngIf="!isLoading && !loadError && analysis">
+    <app-analytics-report-history
+      [history]="analysis.generatedAtHistory"
+      [activeIndex]="activeHistoryIndex"
+      [isLoading]="isLoadingHistoryReport"
+      [hasError]="historyReportError"
+      (reportSelected)="onReportSelected($event)"
+    />
 
-    <!-- ============================================================
-         WIDGET #3 — EXECUTIVE SUMMARY (full width)
-         ============================================================ -->
-    <div class="card span-full">
-      <div class="summary-card">
-        <div class="summary-icon">
-          <i class="fa-solid fa-crown "></i>
-        </div>
-        <div class="summary-body">
-          <div class="widget-header" style="margin-bottom: 0.6rem;">
-            <h3 class="widget-title" style="margin: 0;">Executive Summary</h3>
-            <span class="widget-meta" *ngIf="analysis.generatedAt">
-              Updated {{ analysis.generatedAt | date: 'MMM d, h:mm a' }}
-            </span>
+    <div class="insights-grid">
+      <div class="card span-full">
+        <div class="summary-card">
+          <div class="summary-icon" aria-hidden="true">
+            <i class="fa-solid fa-crown"></i>
           </div>
-          <p class="summary-text">{{ analysis.executiveSummary }}</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- ============================================================
-         WIDGET #1 — CLASSIFICATION BREAKDOWN (horizontal bar)
-         ============================================================ -->
-    <div class="card">
-      <div class="widget-header">
-        <div>
-          <h3 class="widget-title">
-            <i class="fa-solid fa-layer-group widget-title-icon"></i>
-            By Classification
-          </h3>
-          <p class="widget-subtitle">
-            How incoming messages break down by intent
-          </p>
-        </div>
-        <span class="widget-meta">{{ totalMessages() }} total</span>
-      </div>
-
-      <div *ngIf="analysis.classifications?.length; else noClassifications">
-        <apx-chart
-          [series]="classificationSeries"
-          [chart]="classificationChart"
-          [plotOptions]="classificationPlotOptions"
-          [dataLabels]="classificationDataLabels"
-          [xaxis]="classificationXaxis"
-          [yaxis]="classificationYaxis"
-          [grid]="classificationGrid"
-          [tooltip]="classificationTooltip"
-          [colors]="classificationColors"
-          [legend]="{ show: false }"
-        ></apx-chart>
-      </div>
-      <ng-template #noClassifications>
-        <div class="widget-empty">
-          <i class="fa-solid fa-chart-bar widget-empty-icon"></i>
-          <p>No classification data yet.</p>
-        </div>
-      </ng-template>
-    </div>
-
-    <!-- ============================================================
-         WIDGET #2 — MOST ASKED QUESTIONS (ranked list)
-         ============================================================ -->
-    <div class="card">
-      <div class="widget-header">
-        <div>
-          <h3 class="widget-title">
-            <i class="fa-solid fa-ranking-star widget-title-icon"></i>
-            Most Asked Questions
-          </h3>
-          <p class="widget-subtitle">Recurring themes across viewer messages</p>
-        </div>
-      </div>
-
-      <div *ngIf="analysis.mostAskedClusters?.length; else noClusters" class="cluster-list">
-        <div
-          *ngFor="let cluster of analysis.mostAskedClusters; let i = index"
-          class="cluster-row"
-          [class.is-expanded]="expandedClusterIndex === i"
-        >
-          <button type="button" class="cluster-row-header" (click)="toggleCluster(i)">
-            <span class="cluster-rank">{{ i + 1 }}</span>
-
-            <div class="cluster-bar-wrap">
-              <span class="cluster-theme">{{ cluster.theme }}</span>
-              <div class="cluster-bar-track">
-                <div
-                  class="cluster-bar-fill"
-                  [style.width.%]="(cluster.count / maxClusterCount()) * 100"
-                ></div>
-              </div>
+          <div class="summary-body">
+            <div class="widget-header" style="margin-bottom: 0.6rem">
+              <h3 class="widget-title" style="margin: 0">Executive Summary</h3>
+              <span class="widget-meta" *ngIf="analysis.generatedAt">
+                {{ activeHistoryIndex === 0 ? "Updated" : "Report from" }}
+                {{ analysis.generatedAt | date: "MMM d, h:mm a" }}
+              </span>
             </div>
-
-            <span class="cluster-count-badge">{{ cluster.count }}</span>
-            <i
-              class="fa-solid fa-chevron-down cluster-chevron"
-              [class.is-rotated]="expandedClusterIndex === i"
-            ></i>
-          </button>
-
-          <div class="cluster-examples" *ngIf="expandedClusterIndex === i">
-            <p class="cluster-examples-label">Example questions</p>
-            <ul>
-              <li *ngFor="let q of cluster.exampleQuestions">{{ q }}</li>
-            </ul>
+            <p class="summary-text" *ngIf="analysis.executiveSummary">
+              {{ analysis.executiveSummary }}
+            </p>
+            <p
+              class="summary-text summary-text-empty"
+              *ngIf="!analysis.executiveSummary"
+            >
+              No summary yet — check back after your audience sends a few more
+              messages.
+            </p>
           </div>
         </div>
       </div>
-      <ng-template #noClusters>
-        <div class="widget-empty">
-          <i class="fa-solid fa-comments widget-empty-icon"></i>
-          <p>No question clusters yet.</p>
-        </div>
-      </ng-template>
+
+      <app-analytics-classification-chart
+        [breakdown]="analysis.classificationBreakdown"
+      />
+
+      <app-analytics-clusters [clusters]="analysis.mostAskedClusters" />
+
+      <app-analytics-content-gaps
+        class="span-full"
+        [generatedAtHistory]="analysis.generatedAtHistory"
+        [contentGapCountHistory]="analysis.contentGapCountHistory"
+        [gapDetail]="gapDetail"
+        [selectedTimestamp]="selectedGapTimestamp"
+        [isLoadingDetail]="isLoadingGapDetail"
+        [hasDetailError]="gapDetailError"
+        (pointClicked)="onGapPointClicked($event)"
+        (closeDetail)="onGapDetailClose()"
+        (retryDetail)="onGapDetailRetry()"
+      />
+
+      <app-analytics-cited-videos
+        class="span-full"
+        [videos]="analysis.mostCitedVideos"
+      />
     </div>
+  </ng-container>
 
-    <!-- ============================================================
-         WIDGET #4 — CONTENT GAPS OVER TIME (line chart + drilldown)
-         ============================================================ -->
-    <div class="card span-full">
-      <div class="widget-header">
-        <div>
-          <h3 class="widget-title">
-            <i class="fa-solid fa-chart-line widget-title-icon"></i>
-            Content Gaps Over Time
-          </h3>
-          <p class="widget-subtitle">
-            Click a point to see what your audience asked about that period
-          </p>
-        </div>
-      </div>
-
-      <div *ngIf="analysis.contentGaps?.length; else noGaps">
-        <apx-chart
-          [series]="contentGapsSeries"
-          [chart]="contentGapsChart"
-          [stroke]="contentGapsStroke"
-          [markers]="contentGapsMarkers"
-          [dataLabels]="contentGapsDataLabels"
-          [xaxis]="contentGapsXaxis"
-          [yaxis]="contentGapsYaxis"
-          [grid]="contentGapsGrid"
-          [tooltip]="contentGapsTooltip"
-          [colors]="contentGapsColors"
-          [legend]="{ show: false }"
-        ></apx-chart>
-
-        <!-- A quiet visual nudge so it's discoverable that points are clickable -->
-        <p class="gap-hint" *ngIf="!selectedGapPoint">
-          <i class="fa-solid fa-arrow-pointer"></i>
-          Click any point on the line above to see details for that period.
-        </p>
-
-        <!-- Drill-down detail panel -->
-        <div class="gap-detail" *ngIf="selectedGapPoint">
-          <button type="button" class="gap-detail-close" (click)="clearGapSelection()" title="Close">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-
-          <div *ngIf="isLoadingGapDetail" class="gap-detail-loading">
-            <i class="fa-solid fa-circle-notch fa-spin"></i>
-            <span>Loading detail for this period…</span>
-          </div>
-
-          <div *ngIf="!isLoadingGapDetail && gapDetailError" class="gap-detail-error">
-            <i class="fa-solid fa-triangle-exclamation"></i>
-            <span>Couldn't load this period's detail.</span>
-            <button type="button" class="gap-detail-retry" (click)="retryGapDetail()">
-              Try again
-            </button>
-          </div>
-
-          <div *ngIf="!isLoadingGapDetail && !gapDetailError && gapDetail" class="gap-detail-content">
-            <div class="gap-detail-header">
-              <span class="gap-detail-topic">{{ gapDetail.topic }}</span>
-              <span class="gap-detail-freq">{{ gapDetail.frequency }} mentions</span>
-            </div>
-
-            <p *ngIf="gapDetail.summary" class="gap-detail-summary">{{ gapDetail.summary }}</p>
-
-            <div *ngIf="gapDetail.sampleQuestions?.length; else noSampleQuestions" class="gap-detail-questions">
-              <p class="gap-detail-questions-label">Sample questions</p>
-              <ul>
-                <li *ngFor="let q of gapDetail.sampleQuestions">{{ q }}</li>
-              </ul>
-            </div>
-            <ng-template #noSampleQuestions>
-              <p class="gap-detail-no-questions">
-                No sample questions were recorded for this period.
-              </p>
-            </ng-template>
-          </div>
-        </div>
-      </div>
-      <ng-template #noGaps>
-        <div class="widget-empty">
-          <i class="fa-solid fa-chart-line widget-empty-icon"></i>
-          <p>No content gaps identified yet.</p>
-        </div>
-      </ng-template>
-    </div>
-
-    <!-- ============================================================
-         WIDGET #5 — MOST REFERENCED VIDEOS (ranked table)
-         ============================================================ -->
-    <div class="card span-full">
-      <div class="widget-header">
-        <div>
-          <h3 class="widget-title">
-            <i class="fa-brands fa-youtube widget-title-icon"></i>
-            Most Referenced Videos
-          </h3>
-          <p class="widget-subtitle">Videos your chatbot cited most often in answers</p>
-        </div>
-      </div>
-
-      <div *ngIf="analysis.mostCitedVideos?.length; else noVideos" class="cited-table">
-        <div class="cited-table-header">
-          <span class="col-rank">#</span>
-          <span class="col-video">Video</span>
-          <span class="col-citations">Citations</span>
-        </div>
-
-        <div *ngFor="let video of analysis.mostCitedVideos; let i = index" class="cited-row">
-          <span class="col-rank rank-badge">{{ i + 1 }}</span>
-
-          <div class="col-video video-info">
-            <img
-              [src]="thumbnailUrl(video.youtubeVideoId)"
-              [alt]="video.videoTitle"
-              class="video-thumb"
-              (error)="hideBrokenThumbnail($event)"
-            />
-            <div class="video-meta">
-              <a
-                [href]="youtubeUrl(video.youtubeVideoId)"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="video-title"
-                (click)="$event.stopPropagation()"
-              >
-                {{ video.videoTitle }}
-              </a>
-              <span class="video-id">youtu.be/{{ video.youtubeVideoId }}</span>
-
-              <div class="video-bar-track">
-                <div
-                  class="video-bar-fill"
-                  [style.width.%]="(video.citationCount / maxCitations()) * 100"
-                ></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-citations citations-cell">
-            <span class="citations-count">{{ video.citationCount }}</span>
-            <span class="citations-label">refs</span>
-          </div>
-        </div>
-      </div>
-      <ng-template #noVideos>
-        <div class="widget-empty">
-          <i class="fa-solid fa-film widget-empty-icon"></i>
-          <p>No cited videos yet.</p>
-        </div>
-      </ng-template>
-    </div>
-
-  </div>
-
-  <!-- ===================== REGENERATING BANNER ===================== -->
-  <div *ngIf="isRegenerating" class="regenerating-banner">
-    <i class="fa-solid fa-circle-notch fa-spin"></i>
+  <div *ngIf="isRegenerating" class="regenerating-banner" aria-live="polite">
+    <i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>
     <span>Regenerating insights — this may take a moment…</span>
   </div>
-
 </app-dashboard-page>
