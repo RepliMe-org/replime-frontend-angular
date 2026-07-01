@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterModule } from '@angular/router';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { StatusCellRendererComponent } from './status-cell-renderer.component';
 
@@ -8,7 +10,7 @@ describe('StatusCellRendererComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [StatusCellRendererComponent]
+      imports: [StatusCellRendererComponent, HttpClientTestingModule, RouterModule.forRoot([])]
     })
     .compileComponents();
 

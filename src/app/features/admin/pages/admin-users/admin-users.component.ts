@@ -9,7 +9,6 @@ import { DataGridComponent } from '../../../../shared/ui/data-grid/data-grid.com
 
 import { UserCellComponent } from '../../components/user-cell/user-cell.component';
 import { UserRoleBadgeComponent } from '../../components/user-role-badge/user-role-badge.component';
-import { UserActionsCellComponent, UserActionsContext } from '../../components/user-actions-cell/user-actions-cell.component';
 import { filterByQuery } from '../../../../shared/utils/filter.utils';
 
 type RoleFilter = 'All' | 'Admin' | 'Influencer' | 'User';
@@ -46,10 +45,14 @@ export class AdminUsersComponent implements OnInit {
       sortable: true,
       filter: false,
     },
+
+    // display: flex;
+    // align-items: center;
     {
       headerName: 'Role',
       field: 'role',
       cellRenderer: UserRoleBadgeComponent,
+      cellStyle: { display: 'flex', alignItems: 'center' },
       width: 120,
       sortable: true,
       filter: false,
@@ -62,7 +65,7 @@ export class AdminUsersComponent implements OnInit {
       sortable: true,
       filter: false,
       valueFormatter: (params) => params.value ?? '—',
-      cellStyle: { color: 'var(--text-main)', fontSize: '13px' },
+      cellStyle: { color: 'var(--text-main)', fontSize: '13px', display: 'flex', alignItems: 'center'  },
     },
     {
       headerName: 'Conversations',
@@ -74,27 +77,15 @@ export class AdminUsersComponent implements OnInit {
         color: 'var(--text-main)',
         fontSize: '13px',
         fontWeight: '500',
+        display: 'flex',
+        alignItems: 'center' 
       },
       valueFormatter: (params) =>
         params.value != null
           ? Number(params.value).toLocaleString()
           : '0',
-    },
-    {
-      headerName: '',
-      field: 'actions',
-      cellRenderer: UserActionsCellComponent,
-      width: 64,
-      sortable: false,
-      filter: false,
-      pinned: 'right',
-      resizable: false,
-    },
+    }
   ];
-
-  gridContext: UserActionsContext = {
-    onDelete: (user) => this.deleteUser(user),
-  };
 
   constructor(
     private userAdminService: UserAdminService,
@@ -165,17 +156,5 @@ export class AdminUsersComponent implements OnInit {
 
   onGridReady(api: GridApi): void {
     this.gridApi = api;
-  }
-
-  deleteUser(user: AdminUser): void {
-    this.userAdminService.deleteUser(user.username).subscribe({
-      next: () => {
-        this.users = this.users.filter((u) => u.username !== user.username);
-        this.calculateStats();
-        this.applyFilters();
-        this.toastService.success(`${user.username} deleted`);
-      },
-      error: () => this.toastService.error('Failed to delete user'),
-    });
   }
 }

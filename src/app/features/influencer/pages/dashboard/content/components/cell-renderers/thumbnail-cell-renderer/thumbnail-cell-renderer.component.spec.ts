@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterModule } from '@angular/router';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { ThumbnailCellRendererComponent } from './thumbnail-cell-renderer.component';
 
@@ -8,7 +10,7 @@ describe('ThumbnailCellRendererComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ThumbnailCellRendererComponent]
+      imports: [ThumbnailCellRendererComponent, HttpClientTestingModule, RouterModule.forRoot([])]
     })
     .compileComponents();
 

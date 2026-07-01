@@ -1,8 +1,24 @@
-import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  OnChanges,
+  SimpleChanges,
+  OnInit,
+  OnDestroy,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Subject, of } from 'rxjs';
-import { debounceTime, distinctUntilChanged, switchMap, tap, catchError } from 'rxjs/operators';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  switchMap,
+  tap,
+  catchError,
+  takeUntil,
+} from 'rxjs/operators';
 
 import { ModalComponent } from '../../../../shared/ui/modal/modal.component';
 import { ChatSearchService } from '../../services/chat-search.service';
@@ -17,7 +33,7 @@ import { formatDate } from '../../../../shared/utils/date.utils';
   templateUrl: './chat-search-modal.component.html',
   styleUrl: './chat-search-modal.component.css',
 })
-export class ChatSearchModalComponent implements OnChanges {
+export class ChatSearchModalComponent implements OnChanges, OnInit, OnDestroy {
   @Input() show = false;
   @Input() chatbotId: string;
 
@@ -30,15 +46,18 @@ export class ChatSearchModalComponent implements OnChanges {
   isLoading = false;
   hasSearched = false;
 
-  querySubject = new Subject<string>();
+  readonly querySubject = new Subject<string>();
+  readonly destroy$ = new Subject<void>();
 
   constructor(
     private chatSearchService: ChatSearchService,
     private toast: ToastService,
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     this.querySubject
       .pipe(
-        debounceTime(4000),
+        debounceTime(400),
         distinctUntilChanged(),
         tap((q) => {
           if (q.trim().length < 4) {
@@ -52,7 +71,9 @@ export class ChatSearchModalComponent implements OnChanges {
           if (q.trim().length < 4 || !this.chatbotId) {
             return of(null);
           }
+
           this.isLoading = true;
+
           return this.chatSearchService.search(this.chatbotId, q.trim()).pipe(
             catchError((err) => {
               this.isLoading = false;
@@ -64,6 +85,7 @@ export class ChatSearchModalComponent implements OnChanges {
             }),
           );
         }),
+        takeUntil(this.destroy$),
       )
       .subscribe((res) => {
         if (!res) return;
@@ -95,7 +117,7 @@ export class ChatSearchModalComponent implements OnChanges {
 
   highlight(text: string): string {
     const q = this.query.trim();
-    if (!q) return text;
+     if (!q) return text;
 
     const escaped = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const regex = new RegExp(`(${escaped})`, 'ig');
@@ -112,5 +134,10 @@ export class ChatSearchModalComponent implements OnChanges {
     this.matchCount = 0;
     this.isLoading = false;
     this.hasSearched = false;
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

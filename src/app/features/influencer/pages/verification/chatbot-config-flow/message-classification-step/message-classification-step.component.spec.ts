@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterModule } from '@angular/router';
 
 import { MessageClassificationStepComponent } from './message-classification-step.component';
 
@@ -8,7 +10,7 @@ describe('MessageClassificationStepComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MessageClassificationStepComponent]
+      imports: [MessageClassificationStepComponent, HttpClientTestingModule, RouterModule.forRoot([])]
     })
     .compileComponents();
 

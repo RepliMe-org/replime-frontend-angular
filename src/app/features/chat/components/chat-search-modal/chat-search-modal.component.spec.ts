@@ -35,10 +35,15 @@ describe('ChatSearchModalComponent', () => {
       'search',
     ]);
 
-    toastSpy = jasmine.createSpyObj('ToastService', [
-      'error',
-      'success',
-    ]);
+    chatSearchServiceSpy.search.and.returnValue(
+      of({
+        query: '',
+        matchCount: 0,
+        data: [],
+      }),
+    );
+
+    toastSpy = jasmine.createSpyObj('ToastService', ['error', 'success']);
 
     await TestBed.configureTestingModule({
       imports: [ChatSearchModalComponent],
@@ -85,7 +90,7 @@ describe('ChatSearchModalComponent', () => {
 
       component.onQueryChange('hello');
 
-      tick(4000);
+      tick(400);
 
       expect(chatSearchServiceSpy.search).toHaveBeenCalledWith(
         'bot-1',
@@ -100,7 +105,7 @@ describe('ChatSearchModalComponent', () => {
     it('should not search when query length is less than 4', fakeAsync(() => {
       component.onQueryChange('abc');
 
-      tick(4000);
+      tick(400);
 
       expect(chatSearchServiceSpy.search).not.toHaveBeenCalled();
       expect(component.results).toEqual([]);
@@ -114,7 +119,7 @@ describe('ChatSearchModalComponent', () => {
 
       component.onQueryChange('hello');
 
-      tick(4000);
+      tick(400);
 
       expect(chatSearchServiceSpy.search).not.toHaveBeenCalled();
     }));
@@ -130,7 +135,7 @@ describe('ChatSearchModalComponent', () => {
 
       component.onQueryChange('hello');
 
-      tick(4000);
+      tick(400);
 
       expect(component.results).toEqual([]);
       expect(component.matchCount).toBe(0);
@@ -141,13 +146,11 @@ describe('ChatSearchModalComponent', () => {
     }));
 
     it('should show default error message when backend error is missing', fakeAsync(() => {
-      chatSearchServiceSpy.search.and.returnValue(
-        throwError(() => ({})),
-      );
+      chatSearchServiceSpy.search.and.returnValue(throwError(() => ({})));
 
       component.onQueryChange('hello');
 
-      tick(4000);
+      tick(400);
 
       expect(toastSpy.error).toHaveBeenCalledWith(
         'Search failed. Please try again.',
@@ -255,9 +258,7 @@ describe('ChatSearchModalComponent', () => {
 
   describe('getFormattedDate()', () => {
     it('should return a formatted date', () => {
-      const result = component.getFormattedDate(
-        '2024-01-01T00:00:00Z',
-      );
+      const result = component.getFormattedDate('2024-01-01T00:00:00Z');
 
       expect(result).toBeTruthy();
     });

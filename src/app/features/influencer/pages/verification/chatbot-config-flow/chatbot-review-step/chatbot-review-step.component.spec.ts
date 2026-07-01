@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterModule } from '@angular/router';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { ChatbotReviewStepComponent } from './chatbot-review-step.component';
 
@@ -8,7 +10,7 @@ describe('ChatbotReviewStepComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ChatbotReviewStepComponent]
+      imports: [ChatbotReviewStepComponent, HttpClientTestingModule, RouterModule.forRoot([])]
     })
     .compileComponents();
 
