@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterModule } from '@angular/router';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { UserRoleBadgeComponent } from './user-role-badge.component';
 
@@ -8,7 +10,7 @@ describe('UserRoleBadgeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UserRoleBadgeComponent]
+      imports: [UserRoleBadgeComponent, HttpClientTestingModule, RouterModule.forRoot([])]
     })
     .compileComponents();
 

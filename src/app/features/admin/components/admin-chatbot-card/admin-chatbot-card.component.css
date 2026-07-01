@@ -30,8 +30,16 @@
   @apply text-xs text-subtle-text;
 }
 
+.chatbot-card-actions {
+  @apply flex items-center gap-3;
+}
+
 .chatbot-visibility-btn {
   @apply text-subtle-text hover:text-page-text transition-colors;
+}
+
+.chatbot-delete-btn {
+  @apply text-subtle-text hover:text-red-500 transition-colors;
 }
 
 .chatbot-card-details {

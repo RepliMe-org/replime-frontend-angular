@@ -1,3 +1,11 @@
 .chatbot-grid {
   @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6;
 }
+
+.delete-modal-text {
+  @apply text-sm text-subtle-text leading-relaxed;
+}
+
+.delete-modal-warning {
+  @apply text-sm text-danger font-medium mt-3;
+}

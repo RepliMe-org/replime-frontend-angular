@@ -14,9 +14,13 @@ export class AdminChatbotCardComponent {
   @Input() bot: AdminChatbot;
 
   @Output() visibilityToggle = new EventEmitter<AdminChatbot>();
+  @Output() deleteChatbot = new EventEmitter<AdminChatbot>();
 
   onToggleVisibility() {
     this.visibilityToggle.emit(this.bot);
   }
 
+  onDelete() {
+    this.deleteChatbot.emit(this.bot);
+  }
 }

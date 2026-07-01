@@ -6,7 +6,8 @@
     "start": "npm cache clean --force && ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "testCoverage": "ng test --code-coverage"
   },
   "private": true,
   "dependencies": {

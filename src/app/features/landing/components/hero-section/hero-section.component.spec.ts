@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterModule } from '@angular/router';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { HeroSectionComponent } from './hero-section.component';
 
@@ -8,7 +10,7 @@ describe('HeroSectionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HeroSectionComponent]
+      imports: [HeroSectionComponent, HttpClientTestingModule, RouterModule.forRoot([])]
     })
     .compileComponents();
 

@@ -27,9 +27,4 @@ export class UserAdminService {
     });
   }
 
-  deleteUser(username: string): Observable<string> {
-    return this.http.delete(`${this.baseUrl}/${username}`, {
-      responseType: 'text',
-    });
-  }
 }

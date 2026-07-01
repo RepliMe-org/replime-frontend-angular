@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterModule } from '@angular/router';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { ActionCellRendererComponent } from './action-cell-renderer.component';
 
@@ -8,7 +10,7 @@ describe('ActionCellRendererComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ActionCellRendererComponent]
+      imports: [ActionCellRendererComponent, HttpClientTestingModule, RouterModule.forRoot([])]
     })
     .compileComponents();
 

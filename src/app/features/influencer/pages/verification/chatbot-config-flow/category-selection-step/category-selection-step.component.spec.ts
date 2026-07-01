@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterModule } from '@angular/router';
 
 import { CategorySelectionStepComponent } from './category-selection-step.component';
 
@@ -8,7 +10,7 @@ describe('CategorySelectionStepComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CategorySelectionStepComponent]
+      imports: [CategorySelectionStepComponent, HttpClientTestingModule, RouterModule.forRoot([])]
     })
     .compileComponents();
 

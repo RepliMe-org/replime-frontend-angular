@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterModule } from '@angular/router';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { StepperComponent } from './stepper.component';
 
@@ -8,7 +10,7 @@ describe('StepperComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [StepperComponent]
+      imports: [StepperComponent, HttpClientTestingModule, RouterModule.forRoot([])]
     })
     .compileComponents();
 

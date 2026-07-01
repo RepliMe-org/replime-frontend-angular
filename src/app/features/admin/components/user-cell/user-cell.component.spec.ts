@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterModule } from '@angular/router';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { UserCellComponent } from './user-cell.component';
 
@@ -8,7 +10,7 @@ describe('UserCellComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UserCellComponent]
+      imports: [UserCellComponent, HttpClientTestingModule, RouterModule.forRoot([])]
     })
     .compileComponents();
 

@@ -19,4 +19,10 @@ export class ChatbotAdminService {
       responseType: 'text',
     });
   }
+
+  deleteChatbot(id: string) {
+    return this.http.delete(`${this.baseUrl}/${id}`, {
+      responseType: 'text',
+    });
+  }
 }

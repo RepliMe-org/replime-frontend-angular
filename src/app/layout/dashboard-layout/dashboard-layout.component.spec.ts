@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterModule } from '@angular/router';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { DashboardLayoutComponent } from './dashboard-layout.component';
 
@@ -8,7 +10,7 @@ describe('DashboardLayoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DashboardLayoutComponent]
+      imports: [DashboardLayoutComponent, HttpClientTestingModule, RouterModule.forRoot([])]
     })
     .compileComponents();
 
