@@ -16,16 +16,26 @@
       </div>
     </div>
 
-    <button
-      (click)="onToggleVisibility()"
-      class="chatbot-visibility-btn"
-      [title]="bot.isPublic ? 'Hide Chatbot' : 'Show Chatbot'"
-    >
-      <i
-        class="fa-solid"
-        [ngClass]="bot.isPublic ? 'fa-eye' : 'fa-eye-slash text-red-400'"
-      ></i>
-    </button>
+    <div class="chatbot-card-actions">
+      <button
+        (click)="onToggleVisibility()"
+        class="chatbot-visibility-btn"
+        [title]="bot.isPublic ? 'Hide Chatbot' : 'Show Chatbot'"
+      >
+        <i
+          class="fa-solid"
+          [ngClass]="bot.isPublic ? 'fa-eye' : 'fa-eye-slash text-red-400'"
+        ></i>
+      </button>
+
+      <button
+        (click)="onDelete()"
+        class="chatbot-delete-btn"
+        title="Delete Chatbot"
+      >
+        <i class="fa-solid fa-trash"></i>
+      </button>
+    </div>
   </div>
 
   <div class="chatbot-card-details">

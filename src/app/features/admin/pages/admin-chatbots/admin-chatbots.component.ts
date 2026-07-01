@@ -21,7 +21,7 @@ import { filterByQuery } from '../../../../shared/utils/filter.utils';
   styleUrls: ['./admin-chatbots.component.css'],
 })
 export class AdminChatbotsComponent implements OnInit {
-
+  
   chatbots: AdminChatbot[] = [];
   filteredChatbots: AdminChatbot[] = [];
 
@@ -36,8 +36,12 @@ export class AdminChatbotsComponent implements OnInit {
   pendingChatbots = 0;
   failedChatbots = 0;
 
+  showDeleteModal = false;
+  botPendingDelete: AdminChatbot | null = null;
+  deleteInProgress = false;
+
   constructor(private chatbotAdminService: ChatbotAdminService, private toastService: ToastService) {}
-  
+
   ngOnInit(): void {
     this.loadChatbots();
   }
@@ -128,6 +132,43 @@ export class AdminChatbotsComponent implements OnInit {
       error: () => {
         bot.isPublic = !newVisibility;
         this.toastService.error('Failed to update chatbot visibility');
+      },
+    });
+  }
+
+  requestDelete(bot: AdminChatbot): void {
+    this.botPendingDelete = bot;
+    this.showDeleteModal = true;
+  }
+
+  cancelDelete(): void {
+    this.showDeleteModal = false;
+    this.botPendingDelete = null;
+  }
+
+  confirmDelete(): void {
+    if (!this.botPendingDelete) {
+      return;
+    }
+
+    const bot = this.botPendingDelete;
+    this.deleteInProgress = true;
+
+    this.chatbotAdminService.deleteChatbot(bot.id).subscribe({
+      next: () => {
+        this.chatbots = this.chatbots.filter((c) => c.id !== bot.id);
+        this.calculateStats();
+        this.applyFilters();
+        this.toastService.success('Chatbot deleted successfully');
+        this.deleteInProgress = false;
+        this.showDeleteModal = false;
+        this.botPendingDelete = null;
+      },
+      error: () => {
+        this.toastService.error('Failed to delete chatbot');
+        this.deleteInProgress = false;
+        this.showDeleteModal = false;
+        this.botPendingDelete = null;
       },
     });
   }

@@ -33,6 +33,43 @@
       *ngFor="let bot of filteredChatbots; trackBy: trackById"
       [bot]="bot"
       (visibilityToggle)="toggleVisibility($event)"
+      (deleteChatbot)="requestDelete($event)"
     ></app-admin-chatbot-card>
   </div>
+
+  <app-modal
+    [show]="showDeleteModal"
+    title="Delete Chatbot"
+    maxWidth="max-w-md"
+    (closeModal)="cancelDelete()"
+  >
+    <div modal-body *ngIf="botPendingDelete">
+      <p class="delete-modal-text">
+        This will permanently remove
+        <strong>{{ botPendingDelete.chatbotName }}</strong>
+        and all related data, and demote
+        <strong>{{ botPendingDelete.influencerUsername }}</strong>
+        to a normal user.
+      </p>
+      <p class="delete-modal-warning">This action cannot be undone.</p>
+    </div>
+
+    <div style="display: flex;" modal-footer>
+      <app-button
+        variant="secondary"
+        [disabled]="deleteInProgress"
+        (click)="cancelDelete()"
+      >
+        Cancel
+      </app-button>
+
+      <app-button
+        variant="danger"
+        [disabled]="deleteInProgress"
+        (click)="confirmDelete()"
+      >
+        Delete
+      </app-button>
+    </div>
+  </app-modal>
 </app-dashboard-page>
